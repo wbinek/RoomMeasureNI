@@ -126,13 +126,13 @@
     <Compile Include="GUI\ctrlResults.Designer.cs">
       <DependentUpon>ctrlResults.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\acousticParameters.cs" />
-    <Compile Include="Sources\ButterworthFilterDesign\Biquad.cs" />
-    <Compile Include="Sources\ButterworthFilterDesign\BiquadChain.cs" />
-    <Compile Include="Sources\ButterworthFilterDesign\Butterworth.cs" />
-    <Compile Include="Sources\CardConfig.cs" />
-    <Compile Include="Sources\Enums.cs" />
-    <Compile Include="Sources\FuncionGenerator.cs" />
+    <Compile Include="Sources\Results\acousticParameters.cs" />
+    <Compile Include="Sources\Dependencies\ButterworthFilterDesign\Biquad.cs" />
+    <Compile Include="Sources\Dependencies\ButterworthFilterDesign\BiquadChain.cs" />
+    <Compile Include="Sources\Dependencies\ButterworthFilterDesign\Butterworth.cs" />
+    <Compile Include="Sources\Measurement\CardConfig.cs" />
+    <Compile Include="Sources\Dependencies\Enums.cs" />
+    <Compile Include="Sources\Measurement\FuncionGenerator.cs" />
     <Compile Include="GUI\ctrlCardConfig.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -175,18 +175,18 @@
     <Compile Include="GUI\main_window.Designer.cs">
       <DependentUpon>main_window.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\MeasurementExecutioner.cs" />
-    <Compile Include="Sources\nc_curves.cs" />
-    <Compile Include="Sources\ProjectBasicInfo.cs" />
-    <Compile Include="Sources\MeasurementConfig.cs" />
-    <Compile Include="Sources\MeasurementResult.cs" />
-    <Compile Include="Sources\Project.cs" />
+    <Compile Include="Sources\Measurement\MeasurementExecutioner.cs" />
+    <Compile Include="Sources\Dependencies\nc_curves.cs" />
+    <Compile Include="Sources\Project\ProjectBasicInfo.cs" />
+    <Compile Include="Sources\Measurement\MeasurementConfig.cs" />
+    <Compile Include="Sources\Results\MeasurementResult.cs" />
+    <Compile Include="Sources\Project\Project.cs" />
     <Compile Include="Sources\main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sources\MeasurementPoint.cs" />
-    <Compile Include="Sources\aiaoDriver.cs" />
-    <Compile Include="Sources\usefulFunctions.cs" />
-    <Compile Include="Sources\windowType.cs" />
+    <Compile Include="Sources\Measurement\MeasurementPoint.cs" />
+    <Compile Include="Sources\Measurement\aiaoDriver.cs" />
+    <Compile Include="Sources\Dependencies\usefulFunctions.cs" />
+    <Compile Include="Sources\Results\windowType.cs" />
     <EmbeddedResource Include="GUI\ctrlAcceptResult.resx">
       <DependentUpon>ctrlAcceptResult.cs</DependentUpon>
     </EmbeddedResource>
