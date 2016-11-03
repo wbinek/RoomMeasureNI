@@ -113,7 +113,6 @@ namespace RoomMeasureNI
             }  
         }
 
-
         public void calculateDefaultParams(bool add=false)
         {
             if (parameters.Count == 0 || add)

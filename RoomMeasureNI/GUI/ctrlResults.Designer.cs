@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewMesurements = new System.Windows.Forms.DataGridView();
             this.contextMenuResults = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.calculateDefaultParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.averageSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,36 +40,18 @@
             this.confirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabMeasurementResults = new System.Windows.Forms.TabControl();
             this.tabOgolne = new System.Windows.Forms.TabPage();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.numericWindowLength = new System.Windows.Forms.NumericUpDown();
-            this.numericWindowStart = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboOkno = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.comboBoxFrequency = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxFilter = new System.Windows.Forms.ComboBox();
-            this.comboChart = new System.Windows.Forms.ComboBox();
-            this.comboYScale = new System.Windows.Forms.ComboBox();
             this.tabResultsCharts = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewResultsSets = new System.Windows.Forms.DataGridView();
             this.checkboxPlot = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.parametersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.measResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.checkedListParametersToPlot = new System.Windows.Forms.CheckedListBox();
             this.tabResultsTables = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dataGridParamSetData = new System.Windows.Forms.DataGridView();
-            this.dataGridParamSetName = new System.Windows.Forms.DataGridView();
+            this.dataGridResults = new System.Windows.Forms.DataGridView();
             this.tabInfo = new System.Windows.Forms.TabPage();
             this.oknoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parametersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,35 +63,44 @@
             this.fstopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.godzinapomiaruDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nazwaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nazwaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.groupWindowSettings = new System.Windows.Forms.GroupBox();
+            this.numericWindowLength = new System.Windows.Forms.NumericUpDown();
+            this.numericWindowStart = new System.Windows.Forms.NumericUpDown();
+            this.labWindowLength = new System.Windows.Forms.Label();
+            this.labWindowStart = new System.Windows.Forms.Label();
+            this.labWindow = new System.Windows.Forms.Label();
+            this.comboWindow = new System.Windows.Forms.ComboBox();
+            this.groupChartSettings = new System.Windows.Forms.GroupBox();
+            this.labChartType = new System.Windows.Forms.Label();
+            this.labFrequency = new System.Windows.Forms.Label();
+            this.labFilter = new System.Windows.Forms.Label();
+            this.comboFrequency = new System.Windows.Forms.ComboBox();
+            this.labScaleY = new System.Windows.Forms.Label();
+            this.comboFilter = new System.Windows.Forms.ComboBox();
+            this.comboChart = new System.Windows.Forms.ComboBox();
+            this.comboYScale = new System.Windows.Forms.ComboBox();
             this.projektBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ctrlPlotPanel1 = new RoomMeasureNI.ctrlPlotPanel();
-            this.ctrlPlotPanel2 = new RoomMeasureNI.ctrlPlotPanel();
+            this.ctrlPlotImpulse = new RoomMeasureNI.ctrlPlotPanel();
+            this.ctrlPlotAcousticParams = new RoomMeasureNI.ctrlPlotPanel();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nazwaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMesurements)).BeginInit();
             this.contextMenuResults.SuspendLayout();
             this.tabMeasurementResults.SuspendLayout();
             this.tabOgolne.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericWindowLength)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericWindowStart)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.tabResultsCharts.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResultsSets)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.parametersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.measResultsBindingSource)).BeginInit();
             this.tabResultsTables.SuspendLayout();
@@ -118,7 +109,15 @@
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridParamSetData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridParamSetName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridResults)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            this.groupWindowSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericWindowLength)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericWindowStart)).BeginInit();
+            this.groupChartSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.projektBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,7 +130,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridView1);
+            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewMesurements);
             // 
             // splitContainer1.Panel2
             // 
@@ -142,25 +141,25 @@
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 0;
             // 
-            // dataGridView1
+            // dataGridViewMesurements
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewMesurements.AllowUserToAddRows = false;
+            this.dataGridViewMesurements.AutoGenerateColumns = false;
+            this.dataGridViewMesurements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMesurements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nazwaDataGridViewTextBoxColumn});
-            this.dataGridView1.ContextMenuStrip = this.contextMenuResults;
-            this.dataGridView1.DataMember = "measResults";
-            this.dataGridView1.DataSource = this.projektBindingSource;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(296, 1000);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
+            this.dataGridViewMesurements.ContextMenuStrip = this.contextMenuResults;
+            this.dataGridViewMesurements.DataMember = "measResults";
+            this.dataGridViewMesurements.DataSource = this.projektBindingSource;
+            this.dataGridViewMesurements.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewMesurements.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewMesurements.Margin = new System.Windows.Forms.Padding(6);
+            this.dataGridViewMesurements.Name = "dataGridViewMesurements";
+            this.dataGridViewMesurements.ReadOnly = true;
+            this.dataGridViewMesurements.RowHeadersVisible = false;
+            this.dataGridViewMesurements.Size = new System.Drawing.Size(296, 1000);
+            this.dataGridViewMesurements.TabIndex = 0;
+            this.dataGridViewMesurements.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             // 
             // contextMenuResults
             // 
@@ -242,252 +241,6 @@
             this.tabOgolne.TabIndex = 0;
             this.tabOgolne.Text = "Ogólne";
             // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(6, 6);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(6);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.ctrlPlotPanel1);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.splitContainer2.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer2.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer2.Panel2MinSize = 200;
-            this.splitContainer2.Size = new System.Drawing.Size(568, 941);
-            this.splitContainer2.SplitterDistance = 557;
-            this.splitContainer2.SplitterWidth = 8;
-            this.splitContainer2.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.numericWindowLength);
-            this.groupBox2.Controls.Add(this.numericWindowStart);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.comboOkno);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(0, 204);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox2.Size = new System.Drawing.Size(568, 167);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Ustawienia okna";
-            // 
-            // numericWindowLength
-            // 
-            this.numericWindowLength.DecimalPlaces = 1;
-            this.numericWindowLength.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.numericWindowLength.Location = new System.Drawing.Point(242, 127);
-            this.numericWindowLength.Margin = new System.Windows.Forms.Padding(6);
-            this.numericWindowLength.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericWindowLength.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.numericWindowLength.Name = "numericWindowLength";
-            this.numericWindowLength.Size = new System.Drawing.Size(240, 31);
-            this.numericWindowLength.TabIndex = 2;
-            this.numericWindowLength.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.numericWindowLength.ValueChanged += new System.EventHandler(this.numericWindowLength_ValueChanged);
-            // 
-            // numericWindowStart
-            // 
-            this.numericWindowStart.DecimalPlaces = 1;
-            this.numericWindowStart.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numericWindowStart.Location = new System.Drawing.Point(242, 77);
-            this.numericWindowStart.Margin = new System.Windows.Forms.Padding(6);
-            this.numericWindowStart.Maximum = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            this.numericWindowStart.Name = "numericWindowStart";
-            this.numericWindowStart.Size = new System.Drawing.Size(240, 31);
-            this.numericWindowStart.TabIndex = 2;
-            this.numericWindowStart.ValueChanged += new System.EventHandler(this.numericWindowStart_ValueChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 131);
-            this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(127, 25);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Długość (s):";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 81);
-            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(138, 25);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Początek (s):";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 81);
-            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 25);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Typ okna:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 31);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 25);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Typ okna:";
-            // 
-            // comboOkno
-            // 
-            this.comboOkno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboOkno.FormattingEnabled = true;
-            this.comboOkno.Location = new System.Drawing.Point(242, 25);
-            this.comboOkno.Margin = new System.Windows.Forms.Padding(6);
-            this.comboOkno.Name = "comboOkno";
-            this.comboOkno.Size = new System.Drawing.Size(238, 33);
-            this.comboOkno.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.comboBoxFrequency);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.comboBoxFilter);
-            this.groupBox1.Controls.Add(this.comboChart);
-            this.groupBox1.Controls.Add(this.comboYScale);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Size = new System.Drawing.Size(568, 204);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Ustawienia wykresu";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 31);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Typ wykresu:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 160);
-            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(150, 25);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Częstotliwość:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 117);
-            this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(54, 25);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Filtr:";
-            // 
-            // comboBoxFrequency
-            // 
-            this.comboBoxFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxFrequency.FormattingEnabled = true;
-            this.comboBoxFrequency.Location = new System.Drawing.Point(242, 154);
-            this.comboBoxFrequency.Margin = new System.Windows.Forms.Padding(6);
-            this.comboBoxFrequency.Name = "comboBoxFrequency";
-            this.comboBoxFrequency.Size = new System.Drawing.Size(238, 33);
-            this.comboBoxFrequency.TabIndex = 0;
-            this.comboBoxFrequency.SelectedIndexChanged += new System.EventHandler(this.comboChart_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 73);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 25);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Skala Y:";
-            // 
-            // comboBoxFilter
-            // 
-            this.comboBoxFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxFilter.FormattingEnabled = true;
-            this.comboBoxFilter.Location = new System.Drawing.Point(242, 112);
-            this.comboBoxFilter.Margin = new System.Windows.Forms.Padding(6);
-            this.comboBoxFilter.Name = "comboBoxFilter";
-            this.comboBoxFilter.Size = new System.Drawing.Size(238, 33);
-            this.comboBoxFilter.TabIndex = 0;
-            this.comboBoxFilter.SelectedIndexChanged += new System.EventHandler(this.comboBoxFilter_SelectedIndexChanged);
-            // 
-            // comboChart
-            // 
-            this.comboChart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboChart.FormattingEnabled = true;
-            this.comboChart.Location = new System.Drawing.Point(242, 25);
-            this.comboChart.Margin = new System.Windows.Forms.Padding(6);
-            this.comboChart.Name = "comboChart";
-            this.comboChart.Size = new System.Drawing.Size(238, 33);
-            this.comboChart.TabIndex = 0;
-            this.comboChart.SelectedIndexChanged += new System.EventHandler(this.comboChart_SelectedIndexChanged);
-            // 
-            // comboYScale
-            // 
-            this.comboYScale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboYScale.FormattingEnabled = true;
-            this.comboYScale.Location = new System.Drawing.Point(242, 67);
-            this.comboYScale.Margin = new System.Windows.Forms.Padding(6);
-            this.comboYScale.Name = "comboYScale";
-            this.comboYScale.Size = new System.Drawing.Size(238, 33);
-            this.comboYScale.TabIndex = 0;
-            this.comboYScale.SelectedIndexChanged += new System.EventHandler(this.comboChart_SelectedIndexChanged);
-            // 
             // tabResultsCharts
             // 
             this.tabResultsCharts.Controls.Add(this.tableLayoutPanel1);
@@ -504,7 +257,7 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.ctrlPlotPanel2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.ctrlPlotAcousticParams, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.splitContainer3, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
@@ -525,33 +278,33 @@
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.dataGridView2);
+            this.splitContainer3.Panel1.Controls.Add(this.dataGridViewResultsSets);
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.checkedListBox1);
+            this.splitContainer3.Panel2.Controls.Add(this.checkedListParametersToPlot);
             this.splitContainer3.Size = new System.Drawing.Size(556, 359);
             this.splitContainer3.SplitterDistance = 280;
             this.splitContainer3.SplitterWidth = 8;
             this.splitContainer3.TabIndex = 1;
             // 
-            // dataGridView2
+            // dataGridViewResultsSets
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewResultsSets.AllowUserToAddRows = false;
+            this.dataGridViewResultsSets.AllowUserToDeleteRows = false;
+            this.dataGridViewResultsSets.AutoGenerateColumns = false;
+            this.dataGridViewResultsSets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewResultsSets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.checkboxPlot,
             this.nameDataGridViewTextBoxColumn});
-            this.dataGridView2.DataSource = this.parametersBindingSource;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(6);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.Size = new System.Drawing.Size(280, 359);
-            this.dataGridView2.TabIndex = 0;
+            this.dataGridViewResultsSets.DataSource = this.parametersBindingSource;
+            this.dataGridViewResultsSets.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewResultsSets.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewResultsSets.Margin = new System.Windows.Forms.Padding(6);
+            this.dataGridViewResultsSets.Name = "dataGridViewResultsSets";
+            this.dataGridViewResultsSets.RowHeadersVisible = false;
+            this.dataGridViewResultsSets.Size = new System.Drawing.Size(280, 359);
+            this.dataGridViewResultsSets.TabIndex = 0;
             // 
             // checkboxPlot
             // 
@@ -572,17 +325,17 @@
             this.measResultsBindingSource.DataMember = "measResults";
             this.measResultsBindingSource.DataSource = this.projektBindingSource;
             // 
-            // checkedListBox1
+            // checkedListParametersToPlot
             // 
-            this.checkedListBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(0, 0);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(6);
-            this.checkedListBox1.MinimumSize = new System.Drawing.Size(200, 0);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(268, 359);
-            this.checkedListBox1.TabIndex = 0;
+            this.checkedListParametersToPlot.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListParametersToPlot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkedListParametersToPlot.FormattingEnabled = true;
+            this.checkedListParametersToPlot.Location = new System.Drawing.Point(0, 0);
+            this.checkedListParametersToPlot.Margin = new System.Windows.Forms.Padding(6);
+            this.checkedListParametersToPlot.MinimumSize = new System.Drawing.Size(200, 4);
+            this.checkedListParametersToPlot.Name = "checkedListParametersToPlot";
+            this.checkedListParametersToPlot.Size = new System.Drawing.Size(268, 359);
+            this.checkedListParametersToPlot.TabIndex = 0;
             // 
             // tabResultsTables
             // 
@@ -609,7 +362,7 @@
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.dataGridParamSetName);
+            this.splitContainer4.Panel2.Controls.Add(this.dataGridResults);
             this.splitContainer4.Size = new System.Drawing.Size(580, 953);
             this.splitContainer4.SplitterDistance = 673;
             this.splitContainer4.SplitterWidth = 8;
@@ -629,24 +382,24 @@
             this.dataGridParamSetData.TabIndex = 0;
             this.dataGridParamSetData.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dataGridParamSetData_KeyUp);
             // 
-            // dataGridParamSetName
+            // dataGridResults
             // 
-            this.dataGridParamSetName.AutoGenerateColumns = false;
-            this.dataGridParamSetName.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridParamSetName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridResults.AutoGenerateColumns = false;
+            this.dataGridResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1});
-            this.dataGridParamSetName.DataSource = this.parametersBindingSource;
-            this.dataGridParamSetName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridParamSetName.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
-            this.dataGridParamSetName.Location = new System.Drawing.Point(0, 0);
-            this.dataGridParamSetName.Margin = new System.Windows.Forms.Padding(6);
-            this.dataGridParamSetName.MinimumSize = new System.Drawing.Size(0, 100);
-            this.dataGridParamSetName.Name = "dataGridParamSetName";
-            this.dataGridParamSetName.RowHeadersVisible = false;
-            this.dataGridParamSetName.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridParamSetName.Size = new System.Drawing.Size(580, 272);
-            this.dataGridParamSetName.TabIndex = 1;
-            this.dataGridParamSetName.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellContentClick);
+            this.dataGridResults.DataSource = this.parametersBindingSource;
+            this.dataGridResults.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridResults.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
+            this.dataGridResults.Location = new System.Drawing.Point(0, 0);
+            this.dataGridResults.Margin = new System.Windows.Forms.Padding(6);
+            this.dataGridResults.MinimumSize = new System.Drawing.Size(0, 100);
+            this.dataGridResults.Name = "dataGridResults";
+            this.dataGridResults.RowHeadersVisible = false;
+            this.dataGridResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridResults.Size = new System.Drawing.Size(580, 272);
+            this.dataGridResults.TabIndex = 1;
+            this.dataGridResults.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellContentClick);
             // 
             // tabInfo
             // 
@@ -719,36 +472,263 @@
             this.nazwaDataGridViewTextBoxColumn1.HeaderText = "nazwa";
             this.nazwaDataGridViewTextBoxColumn1.Name = "nazwaDataGridViewTextBoxColumn1";
             // 
-            // nazwaDataGridViewTextBoxColumn
+            // splitContainer2
             // 
-            this.nazwaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nazwaDataGridViewTextBoxColumn.DataPropertyName = "nazwa";
-            this.nazwaDataGridViewTextBoxColumn.HeaderText = "nazwa";
-            this.nazwaDataGridViewTextBoxColumn.Name = "nazwaDataGridViewTextBoxColumn";
-            this.nazwaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(6, 6);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(6);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.ctrlPlotImpulse);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.splitContainer2.Panel2.Controls.Add(this.groupWindowSettings);
+            this.splitContainer2.Panel2.Controls.Add(this.groupChartSettings);
+            this.splitContainer2.Panel2MinSize = 200;
+            this.splitContainer2.Size = new System.Drawing.Size(568, 941);
+            this.splitContainer2.SplitterDistance = 557;
+            this.splitContainer2.SplitterWidth = 8;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // groupWindowSettings
+            // 
+            this.groupWindowSettings.Controls.Add(this.numericWindowLength);
+            this.groupWindowSettings.Controls.Add(this.numericWindowStart);
+            this.groupWindowSettings.Controls.Add(this.labWindowLength);
+            this.groupWindowSettings.Controls.Add(this.labWindowStart);
+            this.groupWindowSettings.Controls.Add(this.labWindow);
+            this.groupWindowSettings.Controls.Add(this.comboWindow);
+            this.groupWindowSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupWindowSettings.Location = new System.Drawing.Point(0, 204);
+            this.groupWindowSettings.Margin = new System.Windows.Forms.Padding(6);
+            this.groupWindowSettings.Name = "groupWindowSettings";
+            this.groupWindowSettings.Padding = new System.Windows.Forms.Padding(6);
+            this.groupWindowSettings.Size = new System.Drawing.Size(568, 167);
+            this.groupWindowSettings.TabIndex = 3;
+            this.groupWindowSettings.TabStop = false;
+            this.groupWindowSettings.Text = "Ustawienia okna";
+            // 
+            // numericWindowLength
+            // 
+            this.numericWindowLength.DecimalPlaces = 1;
+            this.numericWindowLength.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.numericWindowLength.Location = new System.Drawing.Point(242, 127);
+            this.numericWindowLength.Margin = new System.Windows.Forms.Padding(6);
+            this.numericWindowLength.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericWindowLength.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.numericWindowLength.Name = "numericWindowLength";
+            this.numericWindowLength.Size = new System.Drawing.Size(240, 31);
+            this.numericWindowLength.TabIndex = 2;
+            this.numericWindowLength.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.numericWindowLength.ValueChanged += new System.EventHandler(this.numericWindowLength_ValueChanged);
+            // 
+            // numericWindowStart
+            // 
+            this.numericWindowStart.DecimalPlaces = 1;
+            this.numericWindowStart.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numericWindowStart.Location = new System.Drawing.Point(242, 77);
+            this.numericWindowStart.Margin = new System.Windows.Forms.Padding(6);
+            this.numericWindowStart.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.numericWindowStart.Name = "numericWindowStart";
+            this.numericWindowStart.Size = new System.Drawing.Size(240, 31);
+            this.numericWindowStart.TabIndex = 2;
+            this.numericWindowStart.ValueChanged += new System.EventHandler(this.numericWindowStart_ValueChanged);
+            // 
+            // labWindowLength
+            // 
+            this.labWindowLength.AutoSize = true;
+            this.labWindowLength.Location = new System.Drawing.Point(12, 131);
+            this.labWindowLength.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labWindowLength.Name = "labWindowLength";
+            this.labWindowLength.Size = new System.Drawing.Size(127, 25);
+            this.labWindowLength.TabIndex = 1;
+            this.labWindowLength.Text = "Długość (s):";
+            // 
+            // labWindowStart
+            // 
+            this.labWindowStart.AutoSize = true;
+            this.labWindowStart.Location = new System.Drawing.Point(12, 81);
+            this.labWindowStart.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labWindowStart.Name = "labWindowStart";
+            this.labWindowStart.Size = new System.Drawing.Size(138, 25);
+            this.labWindowStart.TabIndex = 1;
+            this.labWindowStart.Text = "Początek (s):";
+            // 
+            // labWindow
+            // 
+            this.labWindow.AutoSize = true;
+            this.labWindow.Location = new System.Drawing.Point(12, 31);
+            this.labWindow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labWindow.Name = "labWindow";
+            this.labWindow.Size = new System.Drawing.Size(107, 25);
+            this.labWindow.TabIndex = 1;
+            this.labWindow.Text = "Typ okna:";
+            // 
+            // comboWindow
+            // 
+            this.comboWindow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboWindow.FormattingEnabled = true;
+            this.comboWindow.Location = new System.Drawing.Point(242, 25);
+            this.comboWindow.Margin = new System.Windows.Forms.Padding(6);
+            this.comboWindow.Name = "comboWindow";
+            this.comboWindow.Size = new System.Drawing.Size(238, 33);
+            this.comboWindow.TabIndex = 0;
+            // 
+            // groupChartSettings
+            // 
+            this.groupChartSettings.Controls.Add(this.labChartType);
+            this.groupChartSettings.Controls.Add(this.labFrequency);
+            this.groupChartSettings.Controls.Add(this.labFilter);
+            this.groupChartSettings.Controls.Add(this.comboFrequency);
+            this.groupChartSettings.Controls.Add(this.labScaleY);
+            this.groupChartSettings.Controls.Add(this.comboFilter);
+            this.groupChartSettings.Controls.Add(this.comboChart);
+            this.groupChartSettings.Controls.Add(this.comboYScale);
+            this.groupChartSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupChartSettings.Location = new System.Drawing.Point(0, 0);
+            this.groupChartSettings.Margin = new System.Windows.Forms.Padding(6);
+            this.groupChartSettings.Name = "groupChartSettings";
+            this.groupChartSettings.Padding = new System.Windows.Forms.Padding(6);
+            this.groupChartSettings.Size = new System.Drawing.Size(568, 204);
+            this.groupChartSettings.TabIndex = 2;
+            this.groupChartSettings.TabStop = false;
+            this.groupChartSettings.Text = "Ustawienia wykresu";
+            // 
+            // labChartType
+            // 
+            this.labChartType.AutoSize = true;
+            this.labChartType.Location = new System.Drawing.Point(12, 31);
+            this.labChartType.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labChartType.Name = "labChartType";
+            this.labChartType.Size = new System.Drawing.Size(139, 25);
+            this.labChartType.TabIndex = 1;
+            this.labChartType.Text = "Typ wykresu:";
+            // 
+            // labFrequency
+            // 
+            this.labFrequency.AutoSize = true;
+            this.labFrequency.Location = new System.Drawing.Point(12, 160);
+            this.labFrequency.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labFrequency.Name = "labFrequency";
+            this.labFrequency.Size = new System.Drawing.Size(150, 25);
+            this.labFrequency.TabIndex = 1;
+            this.labFrequency.Text = "Częstotliwość:";
+            // 
+            // labFilter
+            // 
+            this.labFilter.AutoSize = true;
+            this.labFilter.Location = new System.Drawing.Point(12, 117);
+            this.labFilter.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labFilter.Name = "labFilter";
+            this.labFilter.Size = new System.Drawing.Size(54, 25);
+            this.labFilter.TabIndex = 1;
+            this.labFilter.Text = "Filtr:";
+            // 
+            // comboFrequency
+            // 
+            this.comboFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFrequency.FormattingEnabled = true;
+            this.comboFrequency.Location = new System.Drawing.Point(242, 154);
+            this.comboFrequency.Margin = new System.Windows.Forms.Padding(6);
+            this.comboFrequency.Name = "comboFrequency";
+            this.comboFrequency.Size = new System.Drawing.Size(238, 33);
+            this.comboFrequency.TabIndex = 0;
+            this.comboFrequency.SelectedIndexChanged += new System.EventHandler(this.comboChart_SelectedIndexChanged);
+            // 
+            // labScaleY
+            // 
+            this.labScaleY.AutoSize = true;
+            this.labScaleY.Location = new System.Drawing.Point(12, 73);
+            this.labScaleY.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labScaleY.Name = "labScaleY";
+            this.labScaleY.Size = new System.Drawing.Size(93, 25);
+            this.labScaleY.TabIndex = 1;
+            this.labScaleY.Text = "Skala Y:";
+            // 
+            // comboFilter
+            // 
+            this.comboFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFilter.FormattingEnabled = true;
+            this.comboFilter.Location = new System.Drawing.Point(242, 112);
+            this.comboFilter.Margin = new System.Windows.Forms.Padding(6);
+            this.comboFilter.Name = "comboFilter";
+            this.comboFilter.Size = new System.Drawing.Size(238, 33);
+            this.comboFilter.TabIndex = 0;
+            this.comboFilter.SelectedIndexChanged += new System.EventHandler(this.comboBoxFilter_SelectedIndexChanged);
+            // 
+            // comboChart
+            // 
+            this.comboChart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboChart.FormattingEnabled = true;
+            this.comboChart.Location = new System.Drawing.Point(242, 25);
+            this.comboChart.Margin = new System.Windows.Forms.Padding(6);
+            this.comboChart.Name = "comboChart";
+            this.comboChart.Size = new System.Drawing.Size(238, 33);
+            this.comboChart.TabIndex = 0;
+            this.comboChart.SelectedIndexChanged += new System.EventHandler(this.comboChart_SelectedIndexChanged);
+            // 
+            // comboYScale
+            // 
+            this.comboYScale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboYScale.FormattingEnabled = true;
+            this.comboYScale.Location = new System.Drawing.Point(242, 67);
+            this.comboYScale.Margin = new System.Windows.Forms.Padding(6);
+            this.comboYScale.Name = "comboYScale";
+            this.comboYScale.Size = new System.Drawing.Size(238, 33);
+            this.comboYScale.TabIndex = 0;
+            this.comboYScale.SelectedIndexChanged += new System.EventHandler(this.comboChart_SelectedIndexChanged);
             // 
             // projektBindingSource
             // 
             this.projektBindingSource.DataSource = typeof(RoomMeasureNI.Project);
             // 
-            // ctrlPlotPanel1
+            // ctrlPlotImpulse
             // 
-            this.ctrlPlotPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ctrlPlotPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrlPlotPanel1.Location = new System.Drawing.Point(0, 0);
-            this.ctrlPlotPanel1.Margin = new System.Windows.Forms.Padding(12);
-            this.ctrlPlotPanel1.Name = "ctrlPlotPanel1";
-            this.ctrlPlotPanel1.Size = new System.Drawing.Size(568, 557);
-            this.ctrlPlotPanel1.TabIndex = 0;
+            this.ctrlPlotImpulse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ctrlPlotImpulse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlPlotImpulse.Location = new System.Drawing.Point(0, 0);
+            this.ctrlPlotImpulse.Margin = new System.Windows.Forms.Padding(12);
+            this.ctrlPlotImpulse.Name = "ctrlPlotImpulse";
+            this.ctrlPlotImpulse.Size = new System.Drawing.Size(568, 557);
+            this.ctrlPlotImpulse.TabIndex = 0;
             // 
-            // ctrlPlotPanel2
+            // ctrlPlotAcousticParams
             // 
-            this.ctrlPlotPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrlPlotPanel2.Location = new System.Drawing.Point(12, 12);
-            this.ctrlPlotPanel2.Margin = new System.Windows.Forms.Padding(12);
-            this.ctrlPlotPanel2.Name = "ctrlPlotPanel2";
-            this.ctrlPlotPanel2.Size = new System.Drawing.Size(544, 546);
-            this.ctrlPlotPanel2.TabIndex = 0;
+            this.ctrlPlotAcousticParams.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlPlotAcousticParams.Location = new System.Drawing.Point(12, 12);
+            this.ctrlPlotAcousticParams.Margin = new System.Windows.Forms.Padding(12);
+            this.ctrlPlotAcousticParams.Name = "ctrlPlotAcousticParams";
+            this.ctrlPlotAcousticParams.Size = new System.Drawing.Size(544, 546);
+            this.ctrlPlotAcousticParams.TabIndex = 0;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -764,6 +744,14 @@
             this.dataGridViewTextBoxColumn1.HeaderText = "Nazwa zestawu wyników";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
+            // nazwaDataGridViewTextBoxColumn
+            // 
+            this.nazwaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nazwaDataGridViewTextBoxColumn.DataPropertyName = "nazwa";
+            this.nazwaDataGridViewTextBoxColumn.HeaderText = "Nazwa pomiaru";
+            this.nazwaDataGridViewTextBoxColumn.Name = "nazwaDataGridViewTextBoxColumn";
+            this.nazwaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // ctrlResults
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -777,27 +765,17 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMesurements)).EndInit();
             this.contextMenuResults.ResumeLayout(false);
             this.tabMeasurementResults.ResumeLayout(false);
             this.tabOgolne.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericWindowLength)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericWindowStart)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabResultsCharts.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResultsSets)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.parametersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.measResultsBindingSource)).EndInit();
             this.tabResultsTables.ResumeLayout(false);
@@ -806,7 +784,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridParamSetData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridParamSetName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridResults)).EndInit();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.groupWindowSettings.ResumeLayout(false);
+            this.groupWindowSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericWindowLength)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericWindowStart)).EndInit();
+            this.groupChartSettings.ResumeLayout(false);
+            this.groupChartSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.projektBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -818,35 +806,34 @@
         private System.Windows.Forms.TabControl tabMeasurementResults;
         private System.Windows.Forms.TabPage tabOgolne;
         private System.Windows.Forms.TabPage tabResultsCharts;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewMesurements;
         private System.Windows.Forms.BindingSource projektBindingSource;
         private System.Windows.Forms.TabPage tabResultsTables;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private ctrlPlotPanel ctrlPlotPanel1;
-        private System.Windows.Forms.Label label1;
+        private ctrlPlotPanel ctrlPlotImpulse;
+        private System.Windows.Forms.Label labChartType;
         private System.Windows.Forms.ComboBox comboChart;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labScaleY;
         private System.Windows.Forms.ComboBox comboYScale;
         private System.Windows.Forms.ContextMenuStrip contextMenuResults;
         private System.Windows.Forms.ToolStripMenuItem saveImpulseAsWavToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem averageSelectedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem confirmToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboOkno;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupWindowSettings;
+        private System.Windows.Forms.Label labWindow;
+        private System.Windows.Forms.ComboBox comboWindow;
+        private System.Windows.Forms.GroupBox groupChartSettings;
         private System.Windows.Forms.NumericUpDown numericWindowLength;
         private System.Windows.Forms.NumericUpDown numericWindowStart;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBoxFrequency;
-        private System.Windows.Forms.ComboBox comboBoxFilter;
+        private System.Windows.Forms.Label labWindowLength;
+        private System.Windows.Forms.Label labWindowStart;
+        private System.Windows.Forms.Label labFrequency;
+        private System.Windows.Forms.Label labFilter;
+        private System.Windows.Forms.ComboBox comboFrequency;
+        private System.Windows.Forms.ComboBox comboFilter;
         private System.Windows.Forms.TabPage tabInfo;
-        private ctrlPlotPanel ctrlPlotPanel2;
+        private ctrlPlotPanel ctrlPlotAcousticParams;
         private System.Windows.Forms.DataGridViewTextBoxColumn oknoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn parametersDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn kanalDataGridViewTextBoxColumn;
@@ -860,8 +847,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.DataGridViewTextBoxColumn lengthDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nazwaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridViewResultsSets;
         private System.Windows.Forms.BindingSource measResultsBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn oknoDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn kanalDataGridViewTextBoxColumn1;
@@ -874,13 +860,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nazwaDataGridViewTextBoxColumn2;
         private System.Windows.Forms.BindingSource parametersBindingSource;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.DataGridView dataGridParamSetName;
+        private System.Windows.Forms.DataGridView dataGridResults;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn checkboxPlot;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridView dataGridParamSetData;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox checkedListParametersToPlot;
         private System.Windows.Forms.ToolStripMenuItem calculateDefaultParamsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadImpulseFromWavToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nazwaDataGridViewTextBoxColumn;
     }
 }

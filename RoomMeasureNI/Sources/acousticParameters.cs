@@ -420,7 +420,7 @@ namespace RoomMeasureNI
             {
                 try {
                     parameters.Rows.Find(freqSTI[i].GetDescription())["STI"] = MTIk[i];
-                } catch(NullReferenceException e)
+                } catch(NullReferenceException)
                 {
                     MessageBox.Show("Row for freq " + freqSTI[i].GetDescription() + "Hz not found");
                 }
@@ -452,6 +452,16 @@ namespace RoomMeasureNI
                             -1,
                             sti);
 
+        }
+
+        public double[] getParameterByName(string parameterName)
+        {
+            double[] param = new double[parameters.Rows.Count];
+            for (int i = 0; i < parameters.Rows.Count; i++)
+            {
+                param[i] = ((double)parameters.Rows[i]["parameterName"]);
+            }
+            return param;
         }
     }
 }

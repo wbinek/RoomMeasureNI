@@ -3,7 +3,6 @@ using System.Windows.Forms;
 
 namespace RoomMeasureNI.GUI
 {
-    [Serializable]
     public partial class ctrlPunktyPom : UserControl
     {
         private Project proj = Project.Instance;

@@ -19,10 +19,10 @@ namespace RoomMeasureNI.GUI
             projektBindingSource.DataSource = proj;
             comboChart.DataSource = Enum.GetValues(typeof(chartType));
             comboYScale.DataSource = Enum.GetValues(typeof(yAxis));
-            comboOkno.DataSource = Enum.GetValues(typeof(windowType));
-            comboBoxFilter.DataSource = Enum.GetValues(typeof(FilterBank));
-            checkedListBox1.DataSource = Enum.GetValues(typeof(acousticParams));
-            comboBoxFrequency.Enabled = false;
+            comboWindow.DataSource = Enum.GetValues(typeof(windowType));
+            comboFilter.DataSource = Enum.GetValues(typeof(FilterBank));
+            checkedListParametersToPlot.DataSource = Enum.GetValues(typeof(acousticParams));
+            comboFrequency.Enabled = false;
         }
 
         public void Odswiez()
@@ -33,7 +33,7 @@ namespace RoomMeasureNI.GUI
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            currentMeasurement = (MeasurementResult)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+            currentMeasurement = (MeasurementResult)dataGridViewMesurements.Rows[e.RowIndex].DataBoundItem;
             currentMeasurement.calculateDefaultParams();
             setData(currentMeasurement);
             numericWindowStart.Value = (decimal)currentMeasurement.getWindowStart();
@@ -56,7 +56,7 @@ namespace RoomMeasureNI.GUI
             double[] data;
 
             if ((chartType)comboChart.SelectedItem == chartType.Czas)
-                data = pomiar.getFilteredResult((FilterBank)comboBoxFilter.SelectedItem, (Enum)comboBoxFrequency.SelectedItem);
+                data = pomiar.getFilteredResult((FilterBank)comboFilter.SelectedItem, (Enum)comboFrequency.SelectedItem);
             else
                 data = pomiar.getWindowedSignal();
 
@@ -64,25 +64,25 @@ namespace RoomMeasureNI.GUI
             {
                 case chartType.Czas:
                     if ((yAxis)comboYScale.SelectedItem == yAxis.Logarytmiczna)
-                        ctrlPlotPanel1.setData(usefulFunctions.getTimeVector(data.Length, pomiar.Fs), usefulFunctions.getResultdB(data));
+                        ctrlPlotImpulse.setData(usefulFunctions.getTimeVector(data.Length, pomiar.Fs), usefulFunctions.getResultdB(data));
                     else
-                        ctrlPlotPanel1.setData(usefulFunctions.getTimeVector(data.Length, pomiar.Fs), data);
-                    if((FilterBank)comboBoxFilter.SelectedItem==FilterBank.None) ctrlPlotPanel1.addSeries(usefulFunctions.getTimeVector(pomiar.wynik_pomiaru.Length, pomiar.Fs), pomiar.getWindow());
+                        ctrlPlotImpulse.setData(usefulFunctions.getTimeVector(data.Length, pomiar.Fs), data);
+                    if((FilterBank)comboFilter.SelectedItem==FilterBank.None) ctrlPlotImpulse.addSeries(usefulFunctions.getTimeVector(pomiar.wynik_pomiaru.Length, pomiar.Fs), pomiar.getWindow());
                     break;
 
                 case chartType.Czestotliwosc:
                     if ((yAxis)comboYScale.SelectedItem == yAxis.Logarytmiczna)
-                        ctrlPlotPanel1.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getSpectrumdB(data, pomiar.Fs));
+                        ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getSpectrumdB(data, pomiar.Fs));
                     else
-                        ctrlPlotPanel1.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getSpectrum(data, pomiar.Fs));
-                    ctrlPlotPanel1.setXlog(true);
-                    ctrlPlotPanel1.setXlimits(20, pomiar.Fs / 2);
+                        ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getSpectrum(data, pomiar.Fs));
+                    ctrlPlotImpulse.setXlog(true);
+                    ctrlPlotImpulse.setXlimits(20, pomiar.Fs / 2);
                     break;
 
                 case chartType.PowerSpectrum:
-                    ctrlPlotPanel1.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getPowerSpectrum(data, pomiar.Fs));
-                    ctrlPlotPanel1.setXlog(true);
-                    ctrlPlotPanel1.setXlimits(20, pomiar.Fs / 2);
+                    ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getPowerSpectrum(data, pomiar.Fs));
+                    ctrlPlotImpulse.setXlog(true);
+                    ctrlPlotImpulse.setXlimits(20, pomiar.Fs / 2);
                     break;
             }   
         }
@@ -97,7 +97,7 @@ namespace RoomMeasureNI.GUI
 
         private void averageSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView1.SelectedRows.Count; i++)
+            for (int i = 0; i < dataGridViewMesurements.SelectedRows.Count; i++)
             {
                 //dataGridView1.SelectedRows[i].DataBoundItem;
             }
@@ -124,18 +124,18 @@ namespace RoomMeasureNI.GUI
 
         private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch ((FilterBank)comboBoxFilter.SelectedItem)
+            switch ((FilterBank)comboFilter.SelectedItem)
             {
                 case (FilterBank.None):
-                    comboBoxFrequency.Enabled = false;
+                    comboFrequency.Enabled = false;
                     break;
                 case (FilterBank.Octave):
-                    comboBoxFrequency.Enabled = true;
-                    comboBoxFrequency.DataSource = Enum.GetValues(typeof(CenterFreqO));
+                    comboFrequency.Enabled = true;
+                    comboFrequency.DataSource = Enum.GetValues(typeof(CenterFreqO));
                     break;
                 case (FilterBank.Third_octave):
-                    comboBoxFrequency.Enabled = true;
-                    comboBoxFrequency.DataSource = Enum.GetValues(typeof(CenterFreqTO));
+                    comboFrequency.Enabled = true;
+                    comboFrequency.DataSource = Enum.GetValues(typeof(CenterFreqTO));
                     break;
             }
                 
@@ -155,7 +155,7 @@ namespace RoomMeasureNI.GUI
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             dataGridParamSetData.DataSource = "null";
-            dataGridParamSetData.DataSource = ((acousticParameters)dataGridParamSetName.Rows[e.RowIndex].DataBoundItem).parameters;
+            dataGridParamSetData.DataSource = ((acousticParameters)dataGridResults.Rows[e.RowIndex].DataBoundItem).parameters;
             dataGridParamSetData.DefaultCellStyle.Format = "N2";
             //dataGridParamSetData.Sort(dataGridParamSetData.Columns["freqidx"], ListSortDirection.Ascending);
             //dataGridParamSetData.Columns[0].DefaultCellStyle.Format  ="#";
@@ -203,21 +203,21 @@ namespace RoomMeasureNI.GUI
         ///////////////////////////////////////Context menu//////////////////////////////////////////////////////////////
         private void calculateDefaultParamsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IList rows = dataGridView1.SelectedCells;
+            IList rows = dataGridViewMesurements.SelectedCells;
 
             foreach(var row in rows){
-                ((MeasurementResult)(dataGridView1.Rows[((DataGridViewCell)row).RowIndex].DataBoundItem)).calculateDefaultParams(true);
+                ((MeasurementResult)(dataGridViewMesurements.Rows[((DataGridViewCell)row).RowIndex].DataBoundItem)).calculateDefaultParams(true);
             }
             Odswiez();
         }
 
         private void saveImpulseAsWavToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IList rows = dataGridView1.SelectedCells;
+            IList rows = dataGridViewMesurements.SelectedCells;
 
             foreach (var row in rows)
             {
-                ((MeasurementResult)(dataGridView1.Rows[((DataGridViewCell)row).RowIndex].DataBoundItem)).exportResultAsWave();
+                ((MeasurementResult)(dataGridViewMesurements.Rows[((DataGridViewCell)row).RowIndex].DataBoundItem)).exportResultAsWave();
             }
         }
 
