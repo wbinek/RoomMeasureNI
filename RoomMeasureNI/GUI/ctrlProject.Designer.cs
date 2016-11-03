@@ -57,32 +57,35 @@
             this.tableProjektInfo.Controls.Add(this.textOpis, 1, 5);
             this.tableProjektInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableProjektInfo.Location = new System.Drawing.Point(0, 0);
+            this.tableProjektInfo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tableProjektInfo.Name = "tableProjektInfo";
             this.tableProjektInfo.RowCount = 6;
             this.tableProjektInfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableProjektInfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableProjektInfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableProjektInfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableProjektInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableProjektInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 14F));
-            this.tableProjektInfo.Size = new System.Drawing.Size(351, 330);
+            this.tableProjektInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableProjektInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableProjektInfo.Size = new System.Drawing.Size(702, 635);
             this.tableProjektInfo.TabIndex = 0;
             // 
             // textAdres
             // 
             this.textAdres.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textAdres.Location = new System.Drawing.Point(89, 55);
+            this.textAdres.Location = new System.Drawing.Point(174, 92);
+            this.textAdres.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.textAdres.Name = "textAdres";
-            this.textAdres.Size = new System.Drawing.Size(259, 20);
+            this.textAdres.Size = new System.Drawing.Size(522, 31);
             this.textAdres.TabIndex = 3;
             this.textAdres.TextChanged += new System.EventHandler(this.textAdres_TextChanged);
             // 
             // textZleceniodawca
             // 
             this.textZleceniodawca.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textZleceniodawca.Location = new System.Drawing.Point(89, 29);
+            this.textZleceniodawca.Location = new System.Drawing.Point(174, 49);
+            this.textZleceniodawca.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.textZleceniodawca.Name = "textZleceniodawca";
-            this.textZleceniodawca.Size = new System.Drawing.Size(259, 20);
+            this.textZleceniodawca.Size = new System.Drawing.Size(522, 31);
             this.textZleceniodawca.TabIndex = 2;
             this.textZleceniodawca.TextChanged += new System.EventHandler(this.textZleceniodawca_TextChanged);
             // 
@@ -90,18 +93,20 @@
             // 
             this.lblNazwa.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblNazwa.AutoSize = true;
-            this.lblNazwa.Location = new System.Drawing.Point(23, 6);
+            this.lblNazwa.Location = new System.Drawing.Point(45, 9);
+            this.lblNazwa.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblNazwa.Name = "lblNazwa";
-            this.lblNazwa.Size = new System.Drawing.Size(40, 13);
+            this.lblNazwa.Size = new System.Drawing.Size(77, 25);
             this.lblNazwa.TabIndex = 0;
             this.lblNazwa.Text = "Nazwa";
             // 
             // textNazwa
             // 
             this.textNazwa.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textNazwa.Location = new System.Drawing.Point(89, 3);
+            this.textNazwa.Location = new System.Drawing.Point(174, 6);
+            this.textNazwa.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.textNazwa.Name = "textNazwa";
-            this.textNazwa.Size = new System.Drawing.Size(259, 20);
+            this.textNazwa.Size = new System.Drawing.Size(522, 31);
             this.textNazwa.TabIndex = 1;
             this.textNazwa.TextChanged += new System.EventHandler(this.textNazwa_TextChanged);
             // 
@@ -109,9 +114,10 @@
             // 
             this.lblZleceniodawca.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblZleceniodawca.AutoSize = true;
-            this.lblZleceniodawca.Location = new System.Drawing.Point(3, 32);
+            this.lblZleceniodawca.Location = new System.Drawing.Point(6, 52);
+            this.lblZleceniodawca.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblZleceniodawca.Name = "lblZleceniodawca";
-            this.lblZleceniodawca.Size = new System.Drawing.Size(80, 13);
+            this.lblZleceniodawca.Size = new System.Drawing.Size(156, 25);
             this.lblZleceniodawca.TabIndex = 0;
             this.lblZleceniodawca.Text = "Zleceniodawca";
             // 
@@ -119,9 +125,10 @@
             // 
             this.lblAdres.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAdres.AutoSize = true;
-            this.lblAdres.Location = new System.Drawing.Point(26, 58);
+            this.lblAdres.Location = new System.Drawing.Point(50, 98);
+            this.lblAdres.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAdres.Name = "lblAdres";
-            this.lblAdres.Size = new System.Drawing.Size(34, 13);
+            this.lblAdres.Size = new System.Drawing.Size(68, 25);
             this.lblAdres.TabIndex = 0;
             this.lblAdres.Text = "Adres";
             // 
@@ -129,29 +136,32 @@
             // 
             this.lblOpis.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblOpis.AutoSize = true;
-            this.lblOpis.Location = new System.Drawing.Point(29, 197);
+            this.lblOpis.Location = new System.Drawing.Point(56, 373);
+            this.lblOpis.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblOpis.Name = "lblOpis";
-            this.lblOpis.Size = new System.Drawing.Size(28, 13);
+            this.lblOpis.Size = new System.Drawing.Size(56, 25);
             this.lblOpis.TabIndex = 0;
             this.lblOpis.Text = "Opis";
             // 
             // textOpis
             // 
             this.textOpis.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textOpis.Location = new System.Drawing.Point(89, 81);
+            this.textOpis.Location = new System.Drawing.Point(174, 142);
+            this.textOpis.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.textOpis.Multiline = true;
             this.textOpis.Name = "textOpis";
-            this.textOpis.Size = new System.Drawing.Size(259, 246);
+            this.textOpis.Size = new System.Drawing.Size(522, 487);
             this.textOpis.TabIndex = 4;
             this.textOpis.TextChanged += new System.EventHandler(this.textOpis_TextChanged);
             // 
             // ctrlProject
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableProjektInfo);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "ctrlProject";
-            this.Size = new System.Drawing.Size(351, 330);
+            this.Size = new System.Drawing.Size(702, 635);
             this.tableProjektInfo.ResumeLayout(false);
             this.tableProjektInfo.PerformLayout();
             this.ResumeLayout(false);

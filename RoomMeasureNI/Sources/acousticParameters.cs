@@ -163,9 +163,10 @@ namespace RoomMeasureNI
                 to = impulse.Count() - maxIdx - from;
             }
 
-            Array.Copy(impulse, maxIdx+from, impulse, 0, to);
+            double[] trimmedImpulse = new double[to];
+            Array.Copy(impulse, maxIdx+from, trimmedImpulse, 0, to);
 
-            return Array.ConvertAll(impulse, p => Math.Pow(p,2)).Sum();
+            return Array.ConvertAll(trimmedImpulse, p => Math.Pow(p,2)).Sum();
         }
 
         private double[] getSchroederCurve(double[] impulse)
@@ -212,7 +213,7 @@ namespace RoomMeasureNI
 
         private double D50(int Fs, int maxIdx, double[] impulse)
         {
-            return Math.Log10(getTimeRange(Fs, maxIdx, impulse, 0, 50)) / Math.Log10(getTimeRange(Fs, maxIdx, impulse));
+            return getTimeRange(Fs, maxIdx, impulse, 0, 50) / getTimeRange(Fs, maxIdx, impulse);
         }
 
         private double T20(int Fs, int maxIdx, double[] impulse)
