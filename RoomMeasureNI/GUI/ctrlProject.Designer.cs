@@ -57,7 +57,7 @@
             this.tableProjektInfo.Controls.Add(this.textOpis, 1, 5);
             this.tableProjektInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableProjektInfo.Location = new System.Drawing.Point(0, 0);
-            this.tableProjektInfo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tableProjektInfo.Margin = new System.Windows.Forms.Padding(6);
             this.tableProjektInfo.Name = "tableProjektInfo";
             this.tableProjektInfo.RowCount = 6;
             this.tableProjektInfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -73,7 +73,7 @@
             // 
             this.textAdres.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textAdres.Location = new System.Drawing.Point(174, 92);
-            this.textAdres.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textAdres.Margin = new System.Windows.Forms.Padding(6);
             this.textAdres.Name = "textAdres";
             this.textAdres.Size = new System.Drawing.Size(522, 31);
             this.textAdres.TabIndex = 3;
@@ -83,7 +83,7 @@
             // 
             this.textZleceniodawca.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textZleceniodawca.Location = new System.Drawing.Point(174, 49);
-            this.textZleceniodawca.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textZleceniodawca.Margin = new System.Windows.Forms.Padding(6);
             this.textZleceniodawca.Name = "textZleceniodawca";
             this.textZleceniodawca.Size = new System.Drawing.Size(522, 31);
             this.textZleceniodawca.TabIndex = 2;
@@ -104,7 +104,7 @@
             // 
             this.textNazwa.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textNazwa.Location = new System.Drawing.Point(174, 6);
-            this.textNazwa.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textNazwa.Margin = new System.Windows.Forms.Padding(6);
             this.textNazwa.Name = "textNazwa";
             this.textNazwa.Size = new System.Drawing.Size(522, 31);
             this.textNazwa.TabIndex = 1;
@@ -147,7 +147,7 @@
             // 
             this.textOpis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textOpis.Location = new System.Drawing.Point(174, 142);
-            this.textOpis.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textOpis.Margin = new System.Windows.Forms.Padding(6);
             this.textOpis.Multiline = true;
             this.textOpis.Name = "textOpis";
             this.textOpis.Size = new System.Drawing.Size(522, 487);
@@ -159,7 +159,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableProjektInfo);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "ctrlProject";
             this.Size = new System.Drawing.Size(702, 635);
             this.tableProjektInfo.ResumeLayout(false);
