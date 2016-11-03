@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DCCCDD2A-019D-47E4-A8C0-D654923E1C1B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RoomMeasureNI</RootNamespace>
+    <AssemblyName>RoomMeasureNI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=3.13.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.13.1\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NationalInstruments.Common, Version=15.1.40.49152, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL" />
+    <Reference Include="NationalInstruments.DAQmx, Version=15.5.45.109, Culture=neutral, PublicKeyToken=4febd62461bf11a4, processorArchitecture=x86" />
+    <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OxyPlot.WindowsForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.WindowsForms.1.0.0\lib\net45\OxyPlot.WindowsForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GUI\ctrlAcceptResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ctrlAcceptResult.Designer.cs">
+      <DependentUpon>ctrlAcceptResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ctrlPlotPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\ctrlPlotPanel.Designer.cs">
+      <DependentUpon>ctrlPlotPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ctrlResults.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\ctrlResults.Designer.cs">
+      <DependentUpon>ctrlResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\acousticParameters.cs" />
+    <Compile Include="Sources\ButterworthFilterDesign\Biquad.cs" />
+    <Compile Include="Sources\ButterworthFilterDesign\BiquadChain.cs" />
+    <Compile Include="Sources\ButterworthFilterDesign\Butterworth.cs" />
+    <Compile Include="Sources\CardConfig.cs" />
+    <Compile Include="Sources\Enums.cs" />
+    <Compile Include="Sources\FuncionGenerator.cs" />
+    <Compile Include="GUI\ctrlCardConfig.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\ctrlCardConfig.Designer.cs">
+      <DependentUpon>ctrlCardConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ctrlMeasureConfig.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\ctrlMeasureConfig.Designer.cs">
+      <DependentUpon>ctrlMeasureConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ctrlPomiar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\ctrlPomiar.Designer.cs">
+      <DependentUpon>ctrlPomiar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ctrlProject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\ctrlProject.Designer.cs">
+      <DependentUpon>ctrlProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ctrlPunktyPom.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\ctrlPunktyPom.Designer.cs">
+      <DependentUpon>ctrlPunktyPom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\imgPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\imgPanel.Designer.cs">
+      <DependentUpon>imgPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\main_window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\main_window.Designer.cs">
+      <DependentUpon>main_window.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\MeasurementExecutioner.cs" />
+    <Compile Include="Sources\nc_curves.cs" />
+    <Compile Include="Sources\ProjectBasicInfo.cs" />
+    <Compile Include="Sources\MeasurementConfig.cs" />
+    <Compile Include="Sources\MeasurementResult.cs" />
+    <Compile Include="Sources\Projekt.cs" />
+    <Compile Include="Sources\main.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sources\PunktyPomiarowe.cs" />
+    <Compile Include="Sources\aiaoDriver.cs" />
+    <Compile Include="Sources\usefulFunctions.cs" />
+    <Compile Include="Sources\windowType.cs" />
+    <EmbeddedResource Include="GUI\ctrlAcceptResult.resx">
+      <DependentUpon>ctrlAcceptResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ctrlCardConfig.resx">
+      <DependentUpon>ctrlCardConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ctrlMeasureConfig.resx">
+      <DependentUpon>ctrlMeasureConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ctrlPlotPanel.resx">
+      <DependentUpon>ctrlPlotPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ctrlPomiar.resx">
+      <DependentUpon>ctrlPomiar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ctrlProject.resx">
+      <DependentUpon>ctrlProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ctrlPunktyPom.resx">
+      <DependentUpon>ctrlPunktyPom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ctrlResults.resx">
+      <DependentUpon>ctrlResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\imgPanel.resx">
+      <DependentUpon>imgPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\main_window.resx">
+      <DependentUpon>main_window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\acousticParameters.datasource" />
+    <None Include="Properties\DataSources\MeasurementConfig.datasource" />
+    <None Include="Properties\DataSources\MeasurementResult.datasource" />
+    <None Include="Properties\DataSources\Projekt.datasource" />
+    <None Include="Properties\DataSources\PunktyPomiarowe.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
