@@ -6,7 +6,7 @@ namespace RoomMeasureNI.GUI
 {
     public partial class ctrlCardConfig : UserControl
     {
-        Projekt proj = Projekt.Instance;
+        Project proj = Project.Instance;
         public ctrlCardConfig()
         {
             InitializeComponent();

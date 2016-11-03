@@ -11,7 +11,7 @@ namespace RoomMeasureNI.GUI
 
     public partial class ctrlResults : UserControl
     {
-        private Projekt proj = Projekt.Instance;
+        private Project proj = Project.Instance;
         private MeasurementResult currentMeasurement;
         public ctrlResults()
         {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace RoomMeasureNI
 {
     [Serializable]
-    public class PunktPomiarowy
+    public class MeasurementPoint
     {
         private string _nazwa;
         private double _X;
@@ -22,17 +22,17 @@ namespace RoomMeasureNI
     [Serializable]
     public class PunktyPomiarowe
     {
-        public List<PunktPomiarowy> listaPunktow {get; set;}
+        public List<MeasurementPoint> listaPunktow {get; set;}
 
         public PunktyPomiarowe()
         {
-            listaPunktow = new List<PunktPomiarowy>();
+            listaPunktow = new List<MeasurementPoint>();
         }
 
         public int getNumActive()
         {
             int count = 0;
-            foreach (PunktPomiarowy punkt in listaPunktow)
+            foreach (MeasurementPoint punkt in listaPunktow)
             {
                 if (punkt.Aktywny)
                     count++;
@@ -42,7 +42,7 @@ namespace RoomMeasureNI
 
         public string getNameFromChannel(string channel)
         {
-            foreach (PunktPomiarowy punkt in listaPunktow)
+            foreach (MeasurementPoint punkt in listaPunktow)
             {
                 if (punkt.Aktywny && punkt.Kanal == channel)
                     return punkt.Nazwa;

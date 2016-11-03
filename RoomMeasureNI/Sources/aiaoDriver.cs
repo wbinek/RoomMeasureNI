@@ -20,7 +20,7 @@ namespace RoomMeasureNI
         private DataColumn[] dataColumn;
         private NationalInstruments.DAQmx.Task runningTask;
 
-        private Projekt proj = Projekt.Instance;
+        private Project proj = Project.Instance;
 
         private double no_cycles;
         private int no_samples;

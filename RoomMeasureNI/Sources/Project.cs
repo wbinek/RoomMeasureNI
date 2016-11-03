@@ -7,9 +7,9 @@ using System.Windows.Forms;
 namespace RoomMeasureNI
 {
     [Serializable]
-    public sealed class Projekt
+    public sealed class Project
     {
-        private static Projekt m_oInstance = null;
+        private static Project m_oInstance = null;
         private static readonly object m_oPadLock = new object();
 
         public ObservableCollection<MeasurementResult> measResults { get; set; }
@@ -22,7 +22,7 @@ namespace RoomMeasureNI
         private string path;
 
         //Konstruktor domyślny
-        private Projekt()
+        private Project()
         {
             punktyPomiarowe = new PunktyPomiarowe();
             measResults = new ObservableCollection<MeasurementResult>();
@@ -31,7 +31,7 @@ namespace RoomMeasureNI
         }
         
         //Signleton
-        public static Projekt Instance
+        public static Project Instance
         {
             get
             {
@@ -39,7 +39,7 @@ namespace RoomMeasureNI
                 {
                     if (m_oInstance == null)
                     {
-                        m_oInstance = new Projekt();
+                        m_oInstance = new Project();
                     }
                     return m_oInstance;
                 }
@@ -72,7 +72,7 @@ namespace RoomMeasureNI
         }
 
         //Przypisz wczytane dane do projektu
-        private void assign(Projekt proj)
+        private void assign(Project proj)
         {
             this.path = proj.path;
             this.measResults = proj.measResults;
@@ -114,14 +114,14 @@ namespace RoomMeasureNI
         //Wczytaj plik projektu
         public void loadFile()
         {
-            Projekt proj = Projekt.Instance;
+            Project proj = Project.Instance;
             bool load=showLoadDialog();
             if (load)
             {
                 using (Stream stream = File.Open(path, FileMode.Open))
                 {
                     var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                    proj = (Projekt)binaryFormatter.Deserialize(stream);
+                    proj = (Project)binaryFormatter.Deserialize(stream);
                     assign(proj);
                     return;
                 }

@@ -28,7 +28,7 @@ namespace RoomMeasureNI
         {
             var myModel = new PlotModel();
             LineSeries data= new LineSeries();
-            data.MinimumSegmentLength = 5;
+            data.MinimumSegmentLength = 15;
             data.StrokeThickness = 1;
 
             for(int i=0; i<input.Rows.Count; i++)

@@ -7,7 +7,7 @@ namespace RoomMeasureNI.GUI
     [Serializable]
     public partial class imgPanel : UserControl
     {
-        Projekt proj = Projekt.Instance;
+        Project proj = Project.Instance;
         ctrlPomiar parent;
         double ratio;
 
@@ -64,7 +64,7 @@ namespace RoomMeasureNI.GUI
                 Pen pedzel_red = new Pen(Color.Red);
                 pedzel_red.Width = 2;
 
-                foreach (PunktPomiarowy pkt in proj.punktyPomiarowe.listaPunktow)
+                foreach (MeasurementPoint pkt in proj.punktyPomiarowe.listaPunktow)
                 {
                     if (pkt.Aktywny)
                     {
@@ -88,7 +88,7 @@ namespace RoomMeasureNI.GUI
                 coordinates.X = (int)(coordinates.X / ratio);
                 coordinates.Y = (int)(coordinates.Y / ratio);
 
-                PunktPomiarowy ppom = new PunktPomiarowy();
+                MeasurementPoint ppom = new MeasurementPoint();
                 ppom.X = coordinates.X;
                 ppom.Y = coordinates.Y;
                 ppom.Nazwa = "Punkt " + coordinates.X.ToString() + coordinates.Y.ToString() ;

@@ -142,7 +142,7 @@
             // 
             // projektBindingSource
             // 
-            this.projektBindingSource.DataSource = typeof(RoomMeasureNI.Projekt);
+            this.projektBindingSource.DataSource = typeof(RoomMeasureNI.Project);
             // 
             // dataGridView1
             // 

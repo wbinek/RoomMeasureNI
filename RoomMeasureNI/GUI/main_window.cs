@@ -5,7 +5,7 @@ namespace RoomMeasureNI
 {
     public partial class main_window : Form
     {
-        private Projekt proj = Projekt.Instance;
+        private Project proj = Project.Instance;
         public main_window()
         {
             InitializeComponent();

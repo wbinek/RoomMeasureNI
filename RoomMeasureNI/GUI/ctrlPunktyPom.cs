@@ -6,7 +6,7 @@ namespace RoomMeasureNI.GUI
     [Serializable]
     public partial class ctrlPunktyPom : UserControl
     {
-        private Projekt proj = Projekt.Instance;
+        private Project proj = Project.Instance;
         ctrlPomiar parent;
 
         public ctrlPunktyPom()

@@ -10,7 +10,7 @@ namespace RoomMeasureNI
 {
     public class MeasurementExecutioner
     {
-        private Projekt proj = Projekt.Instance;
+        private Project proj = Project.Instance;
         private aiaoDriver recorder;
 
         private List<DataTable> dane = new List<DataTable>();
