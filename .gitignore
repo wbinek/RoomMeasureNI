@@ -5,4 +5,6 @@
 /RoomMeasureNI/bin/x86/Debug
 /RoomMeasureNI/bin/*
 /RoomMeasureNI/obj/*
-/.vs/
+/.vs/*
+/UnitTests/obj/*
+/UnitTests/bin/*
