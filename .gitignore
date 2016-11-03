@@ -3,3 +3,5 @@
 ################################################################################
 
 /RoomMeasureNI/bin/x86/Debug
+/RoomMeasureNI/bin/*
+/RoomMeasureNI/obj/*

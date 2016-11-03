@@ -1,2 +1,0 @@
-c:\users\wojtek\documents\visual studio 2013\Projects\RoomMeasureNI\RoomMeasureNI\bin\Release\RoomMeasureNI.exe.config
-D:\Wojtek\Programy\RoomMeasureNI\RoomMeasureNI\bin\Release\RoomMeasureNI.exe.config
