@@ -8,7 +8,7 @@ namespace RoomMeasureNI.GUI
     public partial class imgPanel : UserControl
     {
         Project proj = Project.Instance;
-        ctrlPomiar parent;
+        ctrlMeasurement parent;
         double ratio;
 
         public imgPanel()
@@ -16,7 +16,7 @@ namespace RoomMeasureNI.GUI
             InitializeComponent();
         }
 
-        public void setParent(ctrlPomiar _parent)
+        public void setParent(ctrlMeasurement _parent)
         {
             parent = _parent;
         }

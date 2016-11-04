@@ -75,18 +75,20 @@
             // timingRateLabel
             // 
             this.timingRateLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.timingRateLabel.Location = new System.Drawing.Point(8, 24);
+            this.timingRateLabel.Location = new System.Drawing.Point(16, 46);
+            this.timingRateLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.timingRateLabel.Name = "timingRateLabel";
-            this.timingRateLabel.Size = new System.Drawing.Size(104, 16);
+            this.timingRateLabel.Size = new System.Drawing.Size(208, 31);
             this.timingRateLabel.TabIndex = 0;
             this.timingRateLabel.Text = "Rate [Hz]:";
             // 
             // timingSamplesLabel
             // 
             this.timingSamplesLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.timingSamplesLabel.Location = new System.Drawing.Point(8, 48);
+            this.timingSamplesLabel.Location = new System.Drawing.Point(16, 92);
+            this.timingSamplesLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.timingSamplesLabel.Name = "timingSamplesLabel";
-            this.timingSamplesLabel.Size = new System.Drawing.Size(104, 16);
+            this.timingSamplesLabel.Size = new System.Drawing.Size(208, 31);
             this.timingSamplesLabel.TabIndex = 0;
             this.timingSamplesLabel.Text = "Samples to Read:";
             // 
@@ -97,9 +99,11 @@
             this.timingParametersGroupBox.Controls.Add(this.timingRateLabel);
             this.timingParametersGroupBox.Controls.Add(this.timingSamplesLabel);
             this.timingParametersGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.timingParametersGroupBox.Location = new System.Drawing.Point(190, 3);
+            this.timingParametersGroupBox.Location = new System.Drawing.Point(380, 6);
+            this.timingParametersGroupBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.timingParametersGroupBox.Name = "timingParametersGroupBox";
-            this.timingParametersGroupBox.Size = new System.Drawing.Size(240, 80);
+            this.timingParametersGroupBox.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.timingParametersGroupBox.Size = new System.Drawing.Size(480, 154);
             this.timingParametersGroupBox.TabIndex = 2;
             this.timingParametersGroupBox.TabStop = false;
             this.timingParametersGroupBox.Text = "Timing Parameters";
@@ -115,9 +119,10 @@
             "10240",
             "5120",
             "2560"});
-            this.comboSamplesToRead.Location = new System.Drawing.Point(121, 46);
+            this.comboSamplesToRead.Location = new System.Drawing.Point(242, 88);
+            this.comboSamplesToRead.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.comboSamplesToRead.Name = "comboSamplesToRead";
-            this.comboSamplesToRead.Size = new System.Drawing.Size(112, 21);
+            this.comboSamplesToRead.Size = new System.Drawing.Size(220, 33);
             this.comboSamplesToRead.TabIndex = 5;
             this.comboSamplesToRead.SelectionChangeCommitted += new System.EventHandler(this.comboSamplesToRead_SelectedIndexChanged);
             // 
@@ -129,9 +134,10 @@
             "102400",
             "51200",
             "25600"});
-            this.comboTimingRate.Location = new System.Drawing.Point(121, 19);
+            this.comboTimingRate.Location = new System.Drawing.Point(242, 37);
+            this.comboTimingRate.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.comboTimingRate.Name = "comboTimingRate";
-            this.comboTimingRate.Size = new System.Drawing.Size(112, 21);
+            this.comboTimingRate.Size = new System.Drawing.Size(220, 33);
             this.comboTimingRate.TabIndex = 5;
             this.comboTimingRate.SelectionChangeCommitted += new System.EventHandler(this.comboTimingRate_SelectedIndexChanged);
             // 
@@ -157,10 +163,11 @@
             this.dataGridView1.DataSource = this.chConfigBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Left;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(184, 368);
+            this.dataGridView1.Size = new System.Drawing.Size(368, 708);
             this.dataGridView1.TabIndex = 3;
             // 
             // chNameDataGridViewTextBoxColumn
@@ -170,7 +177,7 @@
             this.chNameDataGridViewTextBoxColumn.HeaderText = "Nazwa";
             this.chNameDataGridViewTextBoxColumn.MinimumWidth = 70;
             this.chNameDataGridViewTextBoxColumn.Name = "chNameDataGridViewTextBoxColumn";
-            this.chNameDataGridViewTextBoxColumn.Width = 70;
+            this.chNameDataGridViewTextBoxColumn.Width = 122;
             // 
             // chActiveDataGridViewCheckBoxColumn
             // 
@@ -179,7 +186,7 @@
             this.chActiveDataGridViewCheckBoxColumn.HeaderText = "Aktywny";
             this.chActiveDataGridViewCheckBoxColumn.MinimumWidth = 40;
             this.chActiveDataGridViewCheckBoxColumn.Name = "chActiveDataGridViewCheckBoxColumn";
-            this.chActiveDataGridViewCheckBoxColumn.Width = 53;
+            this.chActiveDataGridViewCheckBoxColumn.Width = 98;
             // 
             // chSensDataGridViewTextBoxColumn
             // 
@@ -187,7 +194,7 @@
             this.chSensDataGridViewTextBoxColumn.DataPropertyName = "chSens";
             this.chSensDataGridViewTextBoxColumn.HeaderText = "Czułość";
             this.chSensDataGridViewTextBoxColumn.Name = "chSensDataGridViewTextBoxColumn";
-            this.chSensDataGridViewTextBoxColumn.Width = 71;
+            this.chSensDataGridViewTextBoxColumn.Width = 134;
             // 
             // chConfigBindingSource
             // 
@@ -205,9 +212,11 @@
             this.channelParametersGroupBox.Controls.Add(this.maximumPressureNumeric);
             this.channelParametersGroupBox.Controls.Add(this.maximumPressureLabel);
             this.channelParametersGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.channelParametersGroupBox.Location = new System.Drawing.Point(190, 89);
+            this.channelParametersGroupBox.Location = new System.Drawing.Point(380, 171);
+            this.channelParametersGroupBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.channelParametersGroupBox.Name = "channelParametersGroupBox";
-            this.channelParametersGroupBox.Size = new System.Drawing.Size(240, 135);
+            this.channelParametersGroupBox.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.channelParametersGroupBox.Size = new System.Drawing.Size(480, 260);
             this.channelParametersGroupBox.TabIndex = 4;
             this.channelParametersGroupBox.TabStop = false;
             this.channelParametersGroupBox.Text = "Channel Parameters";
@@ -215,9 +224,10 @@
             // currentNumeric
             // 
             this.currentNumeric.DecimalPlaces = 3;
-            this.currentNumeric.Location = new System.Drawing.Point(121, 106);
+            this.currentNumeric.Location = new System.Drawing.Point(242, 204);
+            this.currentNumeric.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.currentNumeric.Name = "currentNumeric";
-            this.currentNumeric.Size = new System.Drawing.Size(112, 20);
+            this.currentNumeric.Size = new System.Drawing.Size(224, 31);
             this.currentNumeric.TabIndex = 5;
             this.currentNumeric.Value = new decimal(new int[] {
             2,
@@ -229,59 +239,65 @@
             // inputTerminalComboBox
             // 
             this.inputTerminalComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.inputTerminalComboBox.Location = new System.Drawing.Point(121, 49);
+            this.inputTerminalComboBox.Location = new System.Drawing.Point(242, 94);
+            this.inputTerminalComboBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.inputTerminalComboBox.Name = "inputTerminalComboBox";
-            this.inputTerminalComboBox.Size = new System.Drawing.Size(112, 21);
+            this.inputTerminalComboBox.Size = new System.Drawing.Size(220, 33);
             this.inputTerminalComboBox.TabIndex = 2;
             this.inputTerminalComboBox.SelectionChangeCommitted += new System.EventHandler(this.inputTerminalComboBox_SelectedIndexChanged);
             // 
             // inputTerminalLabel
             // 
             this.inputTerminalLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.inputTerminalLabel.Location = new System.Drawing.Point(6, 52);
+            this.inputTerminalLabel.Location = new System.Drawing.Point(12, 100);
+            this.inputTerminalLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.inputTerminalLabel.Name = "inputTerminalLabel";
-            this.inputTerminalLabel.Size = new System.Drawing.Size(104, 16);
+            this.inputTerminalLabel.Size = new System.Drawing.Size(208, 31);
             this.inputTerminalLabel.TabIndex = 0;
             this.inputTerminalLabel.Text = "Input Terminal:";
             // 
             // excitationLabel
             // 
             this.excitationLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.excitationLabel.Location = new System.Drawing.Point(6, 80);
+            this.excitationLabel.Location = new System.Drawing.Point(12, 154);
+            this.excitationLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.excitationLabel.Name = "excitationLabel";
-            this.excitationLabel.Size = new System.Drawing.Size(104, 16);
+            this.excitationLabel.Size = new System.Drawing.Size(208, 31);
             this.excitationLabel.TabIndex = 0;
             this.excitationLabel.Text = "IEPE Excitation:";
             // 
             // excitationComboBox
             // 
             this.excitationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.excitationComboBox.Location = new System.Drawing.Point(121, 77);
+            this.excitationComboBox.Location = new System.Drawing.Point(242, 148);
+            this.excitationComboBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.excitationComboBox.Name = "excitationComboBox";
-            this.excitationComboBox.Size = new System.Drawing.Size(112, 21);
+            this.excitationComboBox.Size = new System.Drawing.Size(220, 33);
             this.excitationComboBox.TabIndex = 4;
             this.excitationComboBox.SelectionChangeCommitted += new System.EventHandler(this.excitationComboBox_SelectionChangeCommitted);
             // 
             // currentLabel
             // 
             this.currentLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.currentLabel.Location = new System.Drawing.Point(6, 108);
+            this.currentLabel.Location = new System.Drawing.Point(12, 208);
+            this.currentLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.currentLabel.Name = "currentLabel";
-            this.currentLabel.Size = new System.Drawing.Size(104, 16);
+            this.currentLabel.Size = new System.Drawing.Size(208, 31);
             this.currentLabel.TabIndex = 0;
             this.currentLabel.Text = "IEPE Current [A]:";
             // 
             // maximumPressureNumeric
             // 
             this.maximumPressureNumeric.DecimalPlaces = 2;
-            this.maximumPressureNumeric.Location = new System.Drawing.Point(121, 23);
+            this.maximumPressureNumeric.Location = new System.Drawing.Point(242, 44);
+            this.maximumPressureNumeric.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.maximumPressureNumeric.Maximum = new decimal(new int[] {
             2000,
             0,
             0,
             0});
             this.maximumPressureNumeric.Name = "maximumPressureNumeric";
-            this.maximumPressureNumeric.Size = new System.Drawing.Size(112, 20);
+            this.maximumPressureNumeric.Size = new System.Drawing.Size(224, 31);
             this.maximumPressureNumeric.TabIndex = 1;
             this.maximumPressureNumeric.Value = new decimal(new int[] {
             120,
@@ -293,9 +309,10 @@
             // maximumPressureLabel
             // 
             this.maximumPressureLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.maximumPressureLabel.Location = new System.Drawing.Point(6, 25);
+            this.maximumPressureLabel.Location = new System.Drawing.Point(12, 48);
+            this.maximumPressureLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.maximumPressureLabel.Name = "maximumPressureLabel";
-            this.maximumPressureLabel.Size = new System.Drawing.Size(128, 16);
+            this.maximumPressureLabel.Size = new System.Drawing.Size(256, 31);
             this.maximumPressureLabel.TabIndex = 0;
             this.maximumPressureLabel.Text = "Maximum Pressure [db]:";
             // 
@@ -308,9 +325,11 @@
             this.outputChanGroupBox.Controls.Add(this.outputMaxValNumeric);
             this.outputChanGroupBox.Controls.Add(this.outputChanLabel);
             this.outputChanGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.outputChanGroupBox.Location = new System.Drawing.Point(190, 230);
+            this.outputChanGroupBox.Location = new System.Drawing.Point(380, 442);
+            this.outputChanGroupBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.outputChanGroupBox.Name = "outputChanGroupBox";
-            this.outputChanGroupBox.Size = new System.Drawing.Size(240, 135);
+            this.outputChanGroupBox.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.outputChanGroupBox.Size = new System.Drawing.Size(480, 260);
             this.outputChanGroupBox.TabIndex = 5;
             this.outputChanGroupBox.TabStop = false;
             this.outputChanGroupBox.Text = "Channel Parameters - Output";
@@ -319,9 +338,10 @@
             // 
             this.outputChannelComboBox.DataSource = this.aoChannelAvalibleBindingSource;
             this.outputChannelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.outputChannelComboBox.Location = new System.Drawing.Point(121, 23);
+            this.outputChannelComboBox.Location = new System.Drawing.Point(242, 44);
+            this.outputChannelComboBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.outputChannelComboBox.Name = "outputChannelComboBox";
-            this.outputChannelComboBox.Size = new System.Drawing.Size(112, 21);
+            this.outputChannelComboBox.Size = new System.Drawing.Size(220, 33);
             this.outputChannelComboBox.TabIndex = 1;
             this.outputChannelComboBox.SelectionChangeCommitted += new System.EventHandler(this.outputChannelComboBox_SelectionChangeCommitted);
             // 
@@ -333,7 +353,8 @@
             // outputMinValNumeric
             // 
             this.outputMinValNumeric.DecimalPlaces = 2;
-            this.outputMinValNumeric.Location = new System.Drawing.Point(121, 80);
+            this.outputMinValNumeric.Location = new System.Drawing.Point(242, 154);
+            this.outputMinValNumeric.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.outputMinValNumeric.Maximum = new decimal(new int[] {
             0,
             0,
@@ -345,7 +366,7 @@
             0,
             -2147483648});
             this.outputMinValNumeric.Name = "outputMinValNumeric";
-            this.outputMinValNumeric.Size = new System.Drawing.Size(112, 20);
+            this.outputMinValNumeric.Size = new System.Drawing.Size(224, 31);
             this.outputMinValNumeric.TabIndex = 5;
             this.outputMinValNumeric.Value = new decimal(new int[] {
             1,
@@ -357,32 +378,35 @@
             // outputMaxValLabel
             // 
             this.outputMaxValLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.outputMaxValLabel.Location = new System.Drawing.Point(16, 54);
+            this.outputMaxValLabel.Location = new System.Drawing.Point(32, 104);
+            this.outputMaxValLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.outputMaxValLabel.Name = "outputMaxValLabel";
-            this.outputMaxValLabel.Size = new System.Drawing.Size(96, 16);
+            this.outputMaxValLabel.Size = new System.Drawing.Size(192, 31);
             this.outputMaxValLabel.TabIndex = 2;
             this.outputMaxValLabel.Text = "Maximum Value:";
             // 
             // outputMinValLabel
             // 
             this.outputMinValLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.outputMinValLabel.Location = new System.Drawing.Point(16, 82);
+            this.outputMinValLabel.Location = new System.Drawing.Point(32, 158);
+            this.outputMinValLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.outputMinValLabel.Name = "outputMinValLabel";
-            this.outputMinValLabel.Size = new System.Drawing.Size(96, 16);
+            this.outputMinValLabel.Size = new System.Drawing.Size(192, 31);
             this.outputMinValLabel.TabIndex = 4;
             this.outputMinValLabel.Text = "Minimum Value:";
             // 
             // outputMaxValNumeric
             // 
             this.outputMaxValNumeric.DecimalPlaces = 2;
-            this.outputMaxValNumeric.Location = new System.Drawing.Point(121, 52);
+            this.outputMaxValNumeric.Location = new System.Drawing.Point(242, 100);
+            this.outputMaxValNumeric.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.outputMaxValNumeric.Maximum = new decimal(new int[] {
             3,
             0,
             0,
             0});
             this.outputMaxValNumeric.Name = "outputMaxValNumeric";
-            this.outputMaxValNumeric.Size = new System.Drawing.Size(112, 20);
+            this.outputMaxValNumeric.Size = new System.Drawing.Size(224, 31);
             this.outputMaxValNumeric.TabIndex = 3;
             this.outputMaxValNumeric.Value = new decimal(new int[] {
             1,
@@ -394,22 +418,24 @@
             // outputChanLabel
             // 
             this.outputChanLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.outputChanLabel.Location = new System.Drawing.Point(16, 26);
+            this.outputChanLabel.Location = new System.Drawing.Point(32, 50);
+            this.outputChanLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.outputChanLabel.Name = "outputChanLabel";
-            this.outputChanLabel.Size = new System.Drawing.Size(96, 16);
+            this.outputChanLabel.Size = new System.Drawing.Size(192, 31);
             this.outputChanLabel.TabIndex = 0;
             this.outputChanLabel.Text = "Output Channel:";
             // 
             // ctrlCardConfig
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.outputChanGroupBox);
             this.Controls.Add(this.channelParametersGroupBox);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.timingParametersGroupBox);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "ctrlCardConfig";
-            this.Size = new System.Drawing.Size(447, 368);
+            this.Size = new System.Drawing.Size(894, 708);
             this.timingParametersGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.channelConfigBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.projektBindingSource)).EndInit();

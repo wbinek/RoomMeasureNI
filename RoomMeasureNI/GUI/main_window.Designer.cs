@@ -38,7 +38,7 @@
             this.tabProjekt = new System.Windows.Forms.TabPage();
             this.ctrlProjekt1 = new RoomMeasureNI.GUI.ctrlProject();
             this.tabPomiar = new System.Windows.Forms.TabPage();
-            this.ctrlPomiar1 = new RoomMeasureNI.GUI.ctrlPomiar();
+            this.ctrlPomiar1 = new RoomMeasureNI.GUI.ctrlMeasurement();
             this.tabWyniki = new System.Windows.Forms.TabPage();
             this.ctrlResults1 = new RoomMeasureNI.GUI.ctrlResults();
             this.menuStrip1.SuspendLayout();
@@ -202,7 +202,7 @@
         private System.Windows.Forms.TabPage tabPomiar;
         private System.Windows.Forms.TabPage tabWyniki;
         private GUI.ctrlProject ctrlProjekt1;
-        private GUI.ctrlPomiar ctrlPomiar1;
+        private GUI.ctrlMeasurement ctrlPomiar1;
         private System.Windows.Forms.ToolStripMenuItem zapiszJakoToolStripMenuItem;
         private GUI.ctrlResults ctrlResults1;
     }

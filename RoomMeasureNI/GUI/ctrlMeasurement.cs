@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace RoomMeasureNI.GUI
 {
-    public partial class ctrlPomiar : UserControl
+    public partial class ctrlMeasurement : UserControl
     {
         private MeasurementExecutioner measExec;
         
-        public ctrlPomiar()
+        public ctrlMeasurement()
         {
             InitializeComponent();
             imgPanel1.setParent(this);

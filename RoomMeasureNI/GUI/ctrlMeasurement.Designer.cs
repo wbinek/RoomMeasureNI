@@ -1,6 +1,6 @@
 ﻿namespace RoomMeasureNI.GUI
 {
-    partial class ctrlPomiar
+    partial class ctrlMeasurement
     {
         /// <summary> 
         /// Required designer variable.

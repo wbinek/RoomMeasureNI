@@ -17,12 +17,9 @@ namespace RoomMeasureNI.GUI
         {
             InitializeComponent();
             projektBindingSource.DataSource = proj;
-            comboChart.DataSource = Enum.GetValues(typeof(chartType));
-            comboYScale.DataSource = Enum.GetValues(typeof(yAxis));
-            comboWindow.DataSource = Enum.GetValues(typeof(windowType));
-            comboFilter.DataSource = Enum.GetValues(typeof(FilterBank));
             checkedListParametersToPlot.DataSource = Enum.GetValues(typeof(acousticParams));
-            comboFrequency.Enabled = false;
+
+            ctrlMainPlotPanel1.setParent(this);
         }
 
         public void Odswiez()
@@ -35,114 +32,14 @@ namespace RoomMeasureNI.GUI
         {
             currentMeasurement = (MeasurementResult)dataGridViewMesurements.Rows[e.RowIndex].DataBoundItem;
             currentMeasurement.calculateDefaultParams();
-            setData(currentMeasurement);
-            numericWindowStart.Value = (decimal)currentMeasurement.getWindowStart();
-            numericWindowLength.Value = (decimal)currentMeasurement.getWindowLength();
+            setData();
+            ctrlMainPlotPanel1.setWindowParams();
             Odswiez();
         }
 
-        public void setData(MeasurementResult pomiar)
+        public void setData()
         {
-            updateChart(pomiar);
-        }
-
-        ///////////////////////////////////////Tab Ogólne/////////////////////////////////////////////////////////////////
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pomiar"></param>
-        private void updateChart(MeasurementResult pomiar)
-        {
-            double[] data;
-
-            if ((chartType)comboChart.SelectedItem == chartType.Czas)
-                data = pomiar.getFilteredResult((FilterBank)comboFilter.SelectedItem, (Enum)comboFrequency.SelectedItem);
-            else
-                data = pomiar.getWindowedSignal();
-
-            switch ((chartType) comboChart.SelectedItem)
-            {
-                case chartType.Czas:
-                    if ((yAxis)comboYScale.SelectedItem == yAxis.Logarytmiczna)
-                        ctrlPlotImpulse.setData(usefulFunctions.getTimeVector(data.Length, pomiar.Fs), usefulFunctions.getResultdB(data));
-                    else
-                        ctrlPlotImpulse.setData(usefulFunctions.getTimeVector(data.Length, pomiar.Fs), data);
-                    if((FilterBank)comboFilter.SelectedItem==FilterBank.None) ctrlPlotImpulse.addSeries(usefulFunctions.getTimeVector(pomiar.wynik_pomiaru.Length, pomiar.Fs), pomiar.getWindow());
-                    break;
-
-                case chartType.Czestotliwosc:
-                    if ((yAxis)comboYScale.SelectedItem == yAxis.Logarytmiczna)
-                        ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getSpectrumdB(data, pomiar.Fs));
-                    else
-                        ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getSpectrum(data, pomiar.Fs));
-                    ctrlPlotImpulse.setXlog(true);
-                    ctrlPlotImpulse.setXlimits(20, pomiar.Fs / 2);
-                    break;
-
-                case chartType.PowerSpectrum:
-                    ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getPowerSpectrum(data, pomiar.Fs));
-                    ctrlPlotImpulse.setXlog(true);
-                    ctrlPlotImpulse.setXlimits(20, pomiar.Fs / 2);
-                    break;
-            }   
-        }
-
-        private void comboChart_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (currentMeasurement != null)
-            {
-                updateChart(currentMeasurement);
-            }
-        }
-
-        private void averageSelectedToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < dataGridViewMesurements.SelectedRows.Count; i++)
-            {
-                //dataGridView1.SelectedRows[i].DataBoundItem;
-            }
-                
-        }
-
-        private void numericWindowStart_ValueChanged(object sender, EventArgs e)
-        {
-            if (currentMeasurement != null)
-            {
-                currentMeasurement.setWindowStart((double)numericWindowStart.Value);
-                updateChart(currentMeasurement);
-            }
-        }
-
-        private void numericWindowLength_ValueChanged(object sender, EventArgs e)
-        {
-            if (currentMeasurement != null)
-            {
-                currentMeasurement.setWindowLength((double)numericWindowLength.Value);
-                updateChart(currentMeasurement);
-            }
-        }
-
-        private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch ((FilterBank)comboFilter.SelectedItem)
-            {
-                case (FilterBank.None):
-                    comboFrequency.Enabled = false;
-                    break;
-                case (FilterBank.Octave):
-                    comboFrequency.Enabled = true;
-                    comboFrequency.DataSource = Enum.GetValues(typeof(CenterFreqO));
-                    break;
-                case (FilterBank.Third_octave):
-                    comboFrequency.Enabled = true;
-                    comboFrequency.DataSource = Enum.GetValues(typeof(CenterFreqTO));
-                    break;
-            }
-                
-            if (currentMeasurement != null)
-            {
-                updateChart(currentMeasurement);
-            }
+            ctrlMainPlotPanel1.updateChart();
         }
 
         ///////////////////////////////////////Tab tabele///////////////////////////////////////////////////////////////
@@ -231,6 +128,21 @@ namespace RoomMeasureNI.GUI
                 proj.measResults.Add(result);
             }
             Odswiez();
+        }
+
+        private void averageSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridViewMesurements.SelectedRows.Count; i++)
+            {
+                //dataGridView1.SelectedRows[i].DataBoundItem;
+            }
+
+        }
+
+        ////////////////////////////////////// OTHER Methods ////////////////////////////////////////
+        public MeasurementResult getCurrentMeadurement()
+        {
+            return currentMeasurement;
         }
     }
 }

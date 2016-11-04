@@ -108,16 +108,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\ctrlAcceptResult.cs">
+    <Compile Include="GUI\subMeasurement\ctrlAcceptResult.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\ctrlAcceptResult.Designer.cs">
+    <Compile Include="GUI\subMeasurement\ctrlAcceptResult.Designer.cs">
       <DependentUpon>ctrlAcceptResult.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\ctrlPlotPanel.cs">
+    <Compile Include="GUI\subResults\ctrlMainPlotPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\ctrlPlotPanel.Designer.cs">
+    <Compile Include="GUI\subResults\ctrlMainPlotPanel.Designer.cs">
+      <DependentUpon>ctrlMainPlotPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\shared\ctrlPlotPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\shared\ctrlPlotPanel.Designer.cs">
       <DependentUpon>ctrlPlotPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\ctrlResults.cs">
@@ -133,23 +139,23 @@
     <Compile Include="Sources\Measurement\CardConfig.cs" />
     <Compile Include="Sources\Dependencies\Enums.cs" />
     <Compile Include="Sources\Measurement\FuncionGenerator.cs" />
-    <Compile Include="GUI\ctrlCardConfig.cs">
+    <Compile Include="GUI\subMeasurement\ctrlCardConfig.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\ctrlCardConfig.Designer.cs">
+    <Compile Include="GUI\subMeasurement\ctrlCardConfig.Designer.cs">
       <DependentUpon>ctrlCardConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\ctrlMeasureConfig.cs">
+    <Compile Include="GUI\subMeasurement\ctrlMeasureConfig.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\ctrlMeasureConfig.Designer.cs">
+    <Compile Include="GUI\subMeasurement\ctrlMeasureConfig.Designer.cs">
       <DependentUpon>ctrlMeasureConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\ctrlPomiar.cs">
+    <Compile Include="GUI\ctrlMeasurement.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\ctrlPomiar.Designer.cs">
-      <DependentUpon>ctrlPomiar.cs</DependentUpon>
+    <Compile Include="GUI\ctrlMeasurement.Designer.cs">
+      <DependentUpon>ctrlMeasurement.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\ctrlProject.cs">
       <SubType>UserControl</SubType>
@@ -157,16 +163,16 @@
     <Compile Include="GUI\ctrlProject.Designer.cs">
       <DependentUpon>ctrlProject.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\ctrlPunktyPom.cs">
+    <Compile Include="GUI\subMeasurement\ctrlPunktyPom.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\ctrlPunktyPom.Designer.cs">
+    <Compile Include="GUI\subMeasurement\ctrlPunktyPom.Designer.cs">
       <DependentUpon>ctrlPunktyPom.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\imgPanel.cs">
+    <Compile Include="GUI\subMeasurement\imgPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\imgPanel.Designer.cs">
+    <Compile Include="GUI\subMeasurement\imgPanel.Designer.cs">
       <DependentUpon>imgPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\main_window.cs">
@@ -187,31 +193,34 @@
     <Compile Include="Sources\Measurement\aiaoDriver.cs" />
     <Compile Include="Sources\Dependencies\usefulFunctions.cs" />
     <Compile Include="Sources\Results\windowType.cs" />
-    <EmbeddedResource Include="GUI\ctrlAcceptResult.resx">
+    <EmbeddedResource Include="GUI\subMeasurement\ctrlAcceptResult.resx">
       <DependentUpon>ctrlAcceptResult.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\ctrlCardConfig.resx">
+    <EmbeddedResource Include="GUI\subMeasurement\ctrlCardConfig.resx">
       <DependentUpon>ctrlCardConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\ctrlMeasureConfig.resx">
+    <EmbeddedResource Include="GUI\subResults\ctrlMainPlotPanel.resx">
+      <DependentUpon>ctrlMainPlotPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\subMeasurement\ctrlMeasureConfig.resx">
       <DependentUpon>ctrlMeasureConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\ctrlPlotPanel.resx">
+    <EmbeddedResource Include="GUI\shared\ctrlPlotPanel.resx">
       <DependentUpon>ctrlPlotPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\ctrlPomiar.resx">
-      <DependentUpon>ctrlPomiar.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\ctrlMeasurement.resx">
+      <DependentUpon>ctrlMeasurement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ctrlProject.resx">
       <DependentUpon>ctrlProject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\ctrlPunktyPom.resx">
+    <EmbeddedResource Include="GUI\subMeasurement\ctrlPunktyPom.resx">
       <DependentUpon>ctrlPunktyPom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ctrlResults.resx">
       <DependentUpon>ctrlResults.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\imgPanel.resx">
+    <EmbeddedResource Include="GUI\subMeasurement\imgPanel.resx">
       <DependentUpon>imgPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\main_window.resx">
@@ -232,7 +241,7 @@
     <None Include="Properties\DataSources\acousticParameters.datasource" />
     <None Include="Properties\DataSources\MeasurementConfig.datasource" />
     <None Include="Properties\DataSources\MeasurementResult.datasource" />
-    <None Include="Properties\DataSources\Projekt.datasource" />
+    <None Include="Properties\DataSources\Project.datasource" />
     <None Include="Properties\DataSources\PunktyPomiarowe.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

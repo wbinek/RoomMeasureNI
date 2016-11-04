@@ -6,7 +6,7 @@ namespace RoomMeasureNI.GUI
     public partial class ctrlPunktyPom : UserControl
     {
         private Project proj = Project.Instance;
-        ctrlPomiar parent;
+        ctrlMeasurement parent;
 
         public ctrlPunktyPom()
         {
@@ -15,7 +15,7 @@ namespace RoomMeasureNI.GUI
             getActiveChannels();
         }
 
-        public void setParent(ctrlPomiar _parent)
+        public void setParent(ctrlMeasurement _parent)
         {
             parent=_parent;
         }
