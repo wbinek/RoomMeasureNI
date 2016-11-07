@@ -25,6 +25,7 @@ namespace RoomMeasureNI.GUI
         public void Odswiez()
         {
             projektBindingSource.ResetBindings(false);
+            measResultsBindingSource.ResetBindings(false);
             //ctrlPlotPanel1.setData();
         }
 
@@ -32,6 +33,8 @@ namespace RoomMeasureNI.GUI
         {
             currentMeasurement = (MeasurementResult)dataGridViewMesurements.Rows[e.RowIndex].DataBoundItem;
             currentMeasurement.calculateDefaultParams();
+            measResultsBindingSource.DataSource = currentMeasurement;
+
             setData();
             ctrlMainPlotPanel1.setWindowParams();
             Odswiez();
