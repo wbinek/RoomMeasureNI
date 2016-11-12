@@ -38,24 +38,15 @@
             this.loadImpulseFromWavToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.confirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projektBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabMeasurementResults = new System.Windows.Forms.TabControl();
             this.tabOgolne = new System.Windows.Forms.TabPage();
-            this.ctrlMainPlotPanel1 = new RoomMeasureNI.GUI.ctrlMainPlotPanel();
             this.tabResultsCharts = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.dataGridViewResultsSets = new System.Windows.Forms.DataGridView();
-            this.checkboxPlot = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parametersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.measResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.checkedListParametersToPlot = new System.Windows.Forms.CheckedListBox();
             this.tabResultsTables = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dataGridParamSetData = new System.Windows.Forms.DataGridView();
             this.dataGridResults = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parametersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.measResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabInfo = new System.Windows.Forms.TabPage();
             this.oknoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parametersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,7 +58,10 @@
             this.fstopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.godzinapomiaruDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nazwaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.measResultsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.ctrlMainPlotPanel1 = new RoomMeasureNI.GUI.ctrlMainPlotPanel();
+            this.ctrlCharts1 = new RoomMeasureNI.GUI.subResults.ctrlCharts();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.projektBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -75,18 +69,9 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMesurements)).BeginInit();
             this.contextMenuResults.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.projektBindingSource)).BeginInit();
             this.tabMeasurementResults.SuspendLayout();
             this.tabOgolne.SuspendLayout();
             this.tabResultsCharts.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResultsSets)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.parametersBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.measResultsBindingSource)).BeginInit();
             this.tabResultsTables.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
@@ -94,7 +79,9 @@
             this.splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridParamSetData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridResults)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.measResultsBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.parametersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.measResultsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.projektBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -125,7 +112,7 @@
             this.dataGridViewMesurements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2});
             this.dataGridViewMesurements.ContextMenuStrip = this.contextMenuResults;
-            this.dataGridViewMesurements.DataSource = this.measResultsBindingSource1;
+            this.dataGridViewMesurements.DataSource = this.measResultsBindingSource;
             this.dataGridViewMesurements.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewMesurements.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewMesurements.Margin = new System.Windows.Forms.Padding(6);
@@ -190,10 +177,6 @@
             this.confirmToolStripMenuItem.Size = new System.Drawing.Size(201, 38);
             this.confirmToolStripMenuItem.Text = "Confirm";
             // 
-            // projektBindingSource
-            // 
-            this.projektBindingSource.DataSource = typeof(RoomMeasureNI.Project);
-            // 
             // tabMeasurementResults
             // 
             this.tabMeasurementResults.Controls.Add(this.tabOgolne);
@@ -220,17 +203,9 @@
             this.tabOgolne.TabIndex = 0;
             this.tabOgolne.Text = "Ogólne";
             // 
-            // ctrlMainPlotPanel1
-            // 
-            this.ctrlMainPlotPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrlMainPlotPanel1.Location = new System.Drawing.Point(6, 6);
-            this.ctrlMainPlotPanel1.Name = "ctrlMainPlotPanel1";
-            this.ctrlMainPlotPanel1.Size = new System.Drawing.Size(568, 941);
-            this.ctrlMainPlotPanel1.TabIndex = 0;
-            // 
             // tabResultsCharts
             // 
-            this.tabResultsCharts.Controls.Add(this.tableLayoutPanel1);
+            this.tabResultsCharts.Controls.Add(this.ctrlCharts1);
             this.tabResultsCharts.Location = new System.Drawing.Point(8, 39);
             this.tabResultsCharts.Margin = new System.Windows.Forms.Padding(6);
             this.tabResultsCharts.Name = "tabResultsCharts";
@@ -239,96 +214,6 @@
             this.tabResultsCharts.TabIndex = 1;
             this.tabResultsCharts.Text = "Wykresy";
             this.tabResultsCharts.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.splitContainer3, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 371F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(568, 941);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // splitContainer3
-            // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(6, 576);
-            this.splitContainer3.Margin = new System.Windows.Forms.Padding(6);
-            this.splitContainer3.Name = "splitContainer3";
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.dataGridViewResultsSets);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.checkedListParametersToPlot);
-            this.splitContainer3.Size = new System.Drawing.Size(556, 359);
-            this.splitContainer3.SplitterDistance = 280;
-            this.splitContainer3.SplitterWidth = 8;
-            this.splitContainer3.TabIndex = 1;
-            // 
-            // dataGridViewResultsSets
-            // 
-            this.dataGridViewResultsSets.AllowUserToAddRows = false;
-            this.dataGridViewResultsSets.AllowUserToDeleteRows = false;
-            this.dataGridViewResultsSets.AutoGenerateColumns = false;
-            this.dataGridViewResultsSets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewResultsSets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.checkboxPlot,
-            this.nameDataGridViewTextBoxColumn});
-            this.dataGridViewResultsSets.DataSource = this.parametersBindingSource;
-            this.dataGridViewResultsSets.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewResultsSets.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewResultsSets.Margin = new System.Windows.Forms.Padding(6);
-            this.dataGridViewResultsSets.Name = "dataGridViewResultsSets";
-            this.dataGridViewResultsSets.RowHeadersVisible = false;
-            this.dataGridViewResultsSets.Size = new System.Drawing.Size(280, 359);
-            this.dataGridViewResultsSets.TabIndex = 0;
-            // 
-            // checkboxPlot
-            // 
-            this.checkboxPlot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.checkboxPlot.HeaderText = "";
-            this.checkboxPlot.MinimumWidth = 21;
-            this.checkboxPlot.Name = "checkboxPlot";
-            this.checkboxPlot.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.checkboxPlot.Width = 21;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Nazwa zestawu wyników";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // parametersBindingSource
-            // 
-            this.parametersBindingSource.DataMember = "parameters";
-            this.parametersBindingSource.DataSource = this.measResultsBindingSource;
-            // 
-            // measResultsBindingSource
-            // 
-            this.measResultsBindingSource.DataMember = "measResults";
-            this.measResultsBindingSource.DataSource = this.projektBindingSource;
-            // 
-            // checkedListParametersToPlot
-            // 
-            this.checkedListParametersToPlot.BackColor = System.Drawing.SystemColors.Control;
-            this.checkedListParametersToPlot.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListParametersToPlot.FormattingEnabled = true;
-            this.checkedListParametersToPlot.Location = new System.Drawing.Point(0, 0);
-            this.checkedListParametersToPlot.Margin = new System.Windows.Forms.Padding(6);
-            this.checkedListParametersToPlot.MinimumSize = new System.Drawing.Size(200, 4);
-            this.checkedListParametersToPlot.Name = "checkedListParametersToPlot";
-            this.checkedListParametersToPlot.Size = new System.Drawing.Size(268, 359);
-            this.checkedListParametersToPlot.TabIndex = 0;
             // 
             // tabResultsTables
             // 
@@ -394,12 +279,15 @@
             this.dataGridResults.TabIndex = 1;
             this.dataGridResults.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellContentClick);
             // 
-            // dataGridViewTextBoxColumn1
+            // parametersBindingSource
             // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "name";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Nazwa zestawu wyników";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.parametersBindingSource.DataMember = "parameters";
+            this.parametersBindingSource.DataSource = this.measResultsBindingSource;
+            // 
+            // measResultsBindingSource
+            // 
+            this.measResultsBindingSource.DataMember = "measResults";
+            this.measResultsBindingSource.DataSource = this.projektBindingSource;
             // 
             // tabInfo
             // 
@@ -472,10 +360,32 @@
             this.nazwaDataGridViewTextBoxColumn1.HeaderText = "nazwa";
             this.nazwaDataGridViewTextBoxColumn1.Name = "nazwaDataGridViewTextBoxColumn1";
             // 
-            // measResultsBindingSource1
+            // ctrlMainPlotPanel1
             // 
-            this.measResultsBindingSource1.DataMember = "measResults";
-            this.measResultsBindingSource1.DataSource = this.projektBindingSource;
+            this.ctrlMainPlotPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlMainPlotPanel1.Location = new System.Drawing.Point(6, 6);
+            this.ctrlMainPlotPanel1.Name = "ctrlMainPlotPanel1";
+            this.ctrlMainPlotPanel1.Size = new System.Drawing.Size(568, 941);
+            this.ctrlMainPlotPanel1.TabIndex = 0;
+            // 
+            // ctrlCharts1
+            // 
+            this.ctrlCharts1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlCharts1.Location = new System.Drawing.Point(6, 6);
+            this.ctrlCharts1.Name = "ctrlCharts1";
+            this.ctrlCharts1.Size = new System.Drawing.Size(568, 941);
+            this.ctrlCharts1.TabIndex = 0;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "name";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Nazwa zestawu wyników";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // projektBindingSource
+            // 
+            this.projektBindingSource.DataSource = typeof(RoomMeasureNI.Project);
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -500,18 +410,9 @@
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMesurements)).EndInit();
             this.contextMenuResults.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.projektBindingSource)).EndInit();
             this.tabMeasurementResults.ResumeLayout(false);
             this.tabOgolne.ResumeLayout(false);
             this.tabResultsCharts.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResultsSets)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.parametersBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.measResultsBindingSource)).EndInit();
             this.tabResultsTables.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
             this.splitContainer4.Panel2.ResumeLayout(false);
@@ -519,7 +420,9 @@
             this.splitContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridParamSetData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridResults)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.measResultsBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.parametersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.measResultsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.projektBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -550,10 +453,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fstopDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn godzinapomiaruDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nazwaDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.DataGridViewTextBoxColumn lengthDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridView dataGridViewResultsSets;
         private System.Windows.Forms.BindingSource measResultsBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn oknoDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn kanalDataGridViewTextBoxColumn1;
@@ -568,15 +468,12 @@
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.DataGridView dataGridResults;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn checkboxPlot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridView dataGridParamSetData;
-        private System.Windows.Forms.CheckedListBox checkedListParametersToPlot;
         private System.Windows.Forms.ToolStripMenuItem calculateDefaultParamsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadImpulseFromWavToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn nazwaDataGridViewTextBoxColumn;
         private ctrlMainPlotPanel ctrlMainPlotPanel1;
+        private subResults.ctrlCharts ctrlCharts1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.BindingSource measResultsBindingSource1;
     }
 }

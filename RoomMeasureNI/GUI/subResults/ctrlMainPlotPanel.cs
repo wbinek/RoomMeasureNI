@@ -13,7 +13,7 @@ namespace RoomMeasureNI.GUI
 {
     public partial class ctrlMainPlotPanel : UserControl
     {
-        ctrlResults parent;
+        MeasurementResult result; 
 
         public ctrlMainPlotPanel()
         {
@@ -25,62 +25,65 @@ namespace RoomMeasureNI.GUI
             comboFrequency.Enabled = false;
         }
 
-        public void setParent(ctrlResults _parent)
+        public void setResult(MeasurementResult _result)
         {
-            parent = _parent;
+            result = _result;
         }
 
         public void setWindowParams()
         {
-            numericWindowStart.Value = (decimal)parent.getCurrentMeadurement().getWindowStart();
-            numericWindowLength.Value = (decimal)parent.getCurrentMeadurement().getWindowLength();
+            numericWindowStart.Value = (decimal)result.getWindowStart();
+            numericWindowLength.Value = (decimal)result.getWindowLength();
         }
 
         ///////////////////////////////////////Tab Ogólne/////////////////////////////////////////////////////////////////
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pomiar"></param>
+        /// <param name="result"></param>
         public void updateChart()
         {
-            if (parent == null)
+            if (result == null)
                 return;
-
-            if (parent.getCurrentMeadurement() == null)
-                return;
-
-            MeasurementResult pomiar = parent.getCurrentMeadurement();
 
             double[] data;
 
             if ((chartType)comboChart.SelectedItem == chartType.Czas)
-                data = pomiar.getFilteredResult((FilterBank)comboFilter.SelectedItem, (Enum)comboFrequency.SelectedItem);
+                data = result.getFilteredResult((FilterBank)comboFilter.SelectedItem, (Enum)comboFrequency.SelectedItem);
             else
-                data = pomiar.getWindowedSignal();
+                data = result.getWindowedSignal();
 
             switch ((chartType)comboChart.SelectedItem)
             {
                 case chartType.Czas:
                     if ((yAxis)comboYScale.SelectedItem == yAxis.Logarytmiczna)
-                        ctrlPlotImpulse.setData(usefulFunctions.getTimeVector(data.Length, pomiar.Fs), usefulFunctions.getResultdB(data));
+                    {
+                        data = usefulFunctions.getResultdB(data);
+                        ctrlPlotImpulse.setData(usefulFunctions.getTimeVector(data.Length, result.Fs), data);
+                        ctrlPlotImpulse.setYlimits((int) data.Max()-70,(int) data.Max()+5);
+                    }
                     else
-                        ctrlPlotImpulse.setData(usefulFunctions.getTimeVector(data.Length, pomiar.Fs), data);
-                    if ((FilterBank)comboFilter.SelectedItem == FilterBank.None) ctrlPlotImpulse.addSeries(usefulFunctions.getTimeVector(pomiar.wynik_pomiaru.Length, pomiar.Fs), pomiar.getWindow());
+                        ctrlPlotImpulse.setData(usefulFunctions.getTimeVector(data.Length, result.Fs), data);
+                    if ((FilterBank)comboFilter.SelectedItem == FilterBank.None) ctrlPlotImpulse.addSeries(usefulFunctions.getTimeVector(result.wynik_pomiaru.Length, result.Fs), result.getWindow(data.Max()));
                     break;
 
                 case chartType.Czestotliwosc:
                     if ((yAxis)comboYScale.SelectedItem == yAxis.Logarytmiczna)
-                        ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getSpectrumdB(data, pomiar.Fs));
+                    {
+                        data = usefulFunctions.getSpectrumdB(data, result.Fs);
+                        ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, result.Fs), data);
+                        ctrlPlotImpulse.setYlimits((int)data.Max() - 70, (int)data.Max()+5);
+                    }
                     else
-                        ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getSpectrum(data, pomiar.Fs));
+                        ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, result.Fs), usefulFunctions.getSpectrum(data, result.Fs));
                     ctrlPlotImpulse.setXlog(true);
-                    ctrlPlotImpulse.setXlimits(20, pomiar.Fs / 2);
+                    ctrlPlotImpulse.setXlimits(20, result.Fs / 2);
                     break;
 
                 case chartType.PowerSpectrum:
-                    ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, pomiar.Fs), usefulFunctions.getPowerSpectrum(data, pomiar.Fs));
+                    ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, result.Fs), usefulFunctions.getPowerSpectrum(data, result.Fs));
                     ctrlPlotImpulse.setXlog(true);
-                    ctrlPlotImpulse.setXlimits(20, pomiar.Fs / 2);
+                    ctrlPlotImpulse.setXlimits(20, result.Fs / 2);
                     break;
             }
         }
@@ -92,18 +95,18 @@ namespace RoomMeasureNI.GUI
 
         private void numericWindowStart_ValueChanged(object sender, EventArgs e)
         {
-            if (parent.getCurrentMeadurement() != null)
+            if (result != null)
             {
-                parent.getCurrentMeadurement().setWindowStart((double)numericWindowStart.Value);
+                result.setWindowStart((double)numericWindowStart.Value);
                 updateChart();
             }
         }
 
         private void numericWindowLength_ValueChanged(object sender, EventArgs e)
         {
-            if (parent.getCurrentMeadurement() != null)
+            if (result != null)
             {
-                parent.getCurrentMeadurement().setWindowLength((double)numericWindowLength.Value);
+                result.setWindowLength((double)numericWindowLength.Value);
                 updateChart();
             }
         }

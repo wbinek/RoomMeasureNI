@@ -13,19 +13,18 @@ namespace RoomMeasureNI.GUI
     {
         private Project proj = Project.Instance;
         private MeasurementResult currentMeasurement;
+
         public ctrlResults()
         {
             InitializeComponent();
             projektBindingSource.DataSource = proj;
-            checkedListParametersToPlot.DataSource = Enum.GetValues(typeof(acousticParams));
-
-            ctrlMainPlotPanel1.setParent(this);
         }
 
         public void Odswiez()
         {
             projektBindingSource.ResetBindings(false);
             measResultsBindingSource.ResetBindings(false);
+            ctrlCharts1.refresh();
             //ctrlPlotPanel1.setData();
         }
 
@@ -33,7 +32,9 @@ namespace RoomMeasureNI.GUI
         {
             currentMeasurement = (MeasurementResult)dataGridViewMesurements.Rows[e.RowIndex].DataBoundItem;
             currentMeasurement.calculateDefaultParams();
-            measResultsBindingSource.DataSource = currentMeasurement;
+            //measResultsBindingSource.DataSource = currentMeasurement;
+            ctrlCharts1.setResult(currentMeasurement);
+            ctrlMainPlotPanel1.setResult(currentMeasurement);
 
             setData();
             ctrlMainPlotPanel1.setWindowParams();
@@ -139,11 +140,12 @@ namespace RoomMeasureNI.GUI
             {
                 //dataGridView1.SelectedRows[i].DataBoundItem;
             }
+            throw new NotImplementedException();
 
         }
 
         ////////////////////////////////////// OTHER Methods ////////////////////////////////////////
-        public MeasurementResult getCurrentMeadurement()
+        public MeasurementResult getCurrentMeasurement()
         {
             return currentMeasurement;
         }

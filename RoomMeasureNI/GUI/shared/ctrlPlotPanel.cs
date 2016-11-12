@@ -54,6 +54,16 @@ namespace RoomMeasureNI
             data.Points.AddRange(XYpoint);
             myModel.Series.Add(data);
 
+            LinearAxis osX = new LinearAxis();
+            LinearAxis osY = new LinearAxis();
+
+            osX.Position = AxisPosition.Bottom;
+            osY.Position = AxisPosition.Left;
+
+            myModel.Axes.Clear();
+            myModel.Axes.Add(osX);
+            myModel.Axes.Add(osY);
+
             this.plot1.Model = myModel;
         }
 

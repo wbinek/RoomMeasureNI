@@ -114,6 +114,12 @@
     <Compile Include="GUI\subMeasurement\ctrlAcceptResult.Designer.cs">
       <DependentUpon>ctrlAcceptResult.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\subResults\ctrlCharts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\subResults\ctrlCharts.Designer.cs">
+      <DependentUpon>ctrlCharts.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\subResults\ctrlMainPlotPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\subMeasurement\ctrlCardConfig.resx">
       <DependentUpon>ctrlCardConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\subResults\ctrlCharts.resx">
+      <DependentUpon>ctrlCharts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\subResults\ctrlMainPlotPanel.resx">
       <DependentUpon>ctrlMainPlotPanel.cs</DependentUpon>

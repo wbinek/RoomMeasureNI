@@ -61,13 +61,13 @@ namespace RoomMeasureNI
             return okno.getWindowedSignal(wynik_pomiaru);
         }
 
-        public double[] getWindow()
+        public double[] getWindow(double scale = 1)
         {
-            double max = wynik_pomiaru.Max();
+            //double max = wynik_pomiaru.Max();
             double[] window = okno.getWindow(wynik_pomiaru.Length);
 
             int i = 0;
-            Array.ForEach(window, (x) => { window[i++] = x * max; });
+            Array.ForEach(window, (x) => { window[i++] = x * scale; });
             return window;
         }
 
