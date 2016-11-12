@@ -10,7 +10,10 @@ namespace RoomMeasureNI
     public partial class ctrlPlotPanel : UserControl
     {
         private OxyPlot.WindowsForms.PlotView plot1;
-
+        
+        /// <summary>
+        /// Default constructor for ctrlPlotPanel 
+        /// </summary>
         public ctrlPlotPanel()
         {
             InitializeComponent();
@@ -24,6 +27,12 @@ namespace RoomMeasureNI
             this.plot1.Model = myModel;
         }
 
+        /// <summary>
+        /// Sets data to plot
+        /// </summary>
+        /// <param name="input">Input dataTable</param>
+        /// <param name="x_name">x parameter column name</param>
+        /// <param name="y_name">y parameter column name</param>
         public void setData(DataTable input,string x_name,string y_name)
         {
             var myModel = new PlotModel();
@@ -41,6 +50,11 @@ namespace RoomMeasureNI
             this.plot1.Model = myModel;
         }
 
+        /// <summary>
+        /// Sets data to plot from two arrays
+        /// </summary>
+        /// <param name="X">Array of x values</param>
+        /// <param name="Y">Array of y values</param>
         public void setData(double[] X, double[] Y)
         {
             var myModel = new PlotModel { };
@@ -67,6 +81,11 @@ namespace RoomMeasureNI
             this.plot1.Model = myModel;
         }
 
+        /// <summary>
+        /// Adds series to existing plot
+        /// </summary>
+        /// <param name="X">Array of X values to add</param>
+        /// <param name="Y">Array of Y values to add</param>
         public void addSeries(double[] X, double[] Y)
         {
             LineSeries data = new LineSeries();
@@ -81,6 +100,10 @@ namespace RoomMeasureNI
             this.plot1.Model.Series.Add(data);
         }
 
+        /// <summary>
+        /// Sets X axis to log scale.
+        /// </summary>
+        /// <param name="clear">If true removes old axis</param>
         public void setXlog(bool clear)
         {
             LogarithmicAxis os = new LogarithmicAxis();
@@ -89,6 +112,10 @@ namespace RoomMeasureNI
             plot1.Model.Axes.Add(os);
         }
 
+        /// <summary>
+        /// Sets Y axis to log scale
+        /// </summary>
+        /// <param name="clear">If true removes old axis</param>
         public void setYlog(bool clear)
         {
             LogarithmicAxis os = new LogarithmicAxis();
@@ -97,6 +124,10 @@ namespace RoomMeasureNI
             plot1.Model.Axes.Add(os);
         }
 
+        /// <summary>
+        /// Sets X and Y axes to log scale.
+        /// </summary>
+        /// <param name="clear">If true removes old axes</param>
         public void setXYlog(bool clear)
         {
             LogarithmicAxis osX = new LogarithmicAxis();
@@ -110,18 +141,31 @@ namespace RoomMeasureNI
             plot1.Model.Axes.Add(osY);
         }
 
+        /// <summary>
+        /// Sets X axis limits.
+        /// </summary>
+        /// <param name="Min">Min axis value</param>
+        /// <param name="Max">Max axis value</param>
         public void setXlimits(int Min, int Max)
         {
             plot1.Model.Axes[0].Minimum = Min;
             plot1.Model.Axes[0].Maximum = Max;
         }
 
+        /// <summary>
+        /// Sets Y axis limits.
+        /// </summary>
+        /// <param name="Min">Min axis value</param>
+        /// <param name="Max">Max axis value</param>
         public void setYlimits(int Min, int Max)
         {
             plot1.Model.Axes[1].Minimum = Min;
             plot1.Model.Axes[1].Maximum = Max;
         }
 
+        /// <summary>
+        /// Adds grid to plot.
+        /// </summary>
         public void showGrid()
         {
             plot1.Model.Axes[0].MajorGridlineStyle = LineStyle.Dash;

@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace RoomMeasureNI
 {
+    /// <summary>
+    /// Enum containing list of acoustic parameters to calculate
+    /// </summary>
     enum acousticParams
     {
         EDT, T20, T30,
@@ -17,13 +20,16 @@ namespace RoomMeasureNI
     [Serializable]
     public class acousticParameters
     {
-        public DataTable parameters { get; set; }
-        public string name { get; set; }
-        public NC_Curves nc_curve;
-        public Speaker speaker;
+        public DataTable parameters { get; set; }       //Table containing acoustics parameters
+        public string name { get; set; }                //Result set name
+        public NC_Curves nc_curve;                      //Used Noise Curve (STI calculation)
+        public Speaker speaker;                         //Used speaker type (STI calculation)
 
         Object lockMe = new Object();
 
+        /// <summary>
+        /// Default creator
+        /// </summary>
         public acousticParameters()
         {
             parameters = new DataTable();
@@ -46,11 +52,17 @@ namespace RoomMeasureNI
             parameters.PrimaryKey = new DataColumn[] { parameters.Columns["Frequency"] };
         }
 
-        internal void calcParams(double[] wynik, FilterBank filter, int Fs)
+        /// <summary>
+        /// Main function for acoustic parameters calculation
+        /// </summary>
+        /// <param name="impulseResponse">Input impulse response</param>
+        /// <param name="filter">Type of filter bank to use</param>
+        /// <param name="Fs">IR sampling frequency</param>
+        internal void calcParams(double[] impulseResponse, FilterBank filter, int Fs)
         {
             //find maximum
-            double maxVal = wynik.Select(x => Math.Abs(x)).Max();
-            int maxIdx = Array.FindIndex(wynik, item => Math.Abs(item) == maxVal);
+            double maxVal = impulseResponse.Select(x => Math.Abs(x)).Max();
+            int maxIdx = Array.FindIndex(impulseResponse, item => Math.Abs(item) == maxVal);
 
 
             //switch sellecting filter bank
@@ -65,7 +77,7 @@ namespace RoomMeasureNI
                     Parallel.ForEach((CenterFreqO[])Enum.GetValues(typeof(CenterFreqO)), freq =>
                     {
                         double[] filteredResult;
-                        filteredResult=Butterworth.filterResult(FilterBank.Octave, freq, wynik, Fs);
+                        filteredResult=Butterworth.filterResult(FilterBank.Octave, freq, impulseResponse, Fs);
 
                         double edt = 0;
                         double t20 = 0;
@@ -111,7 +123,7 @@ namespace RoomMeasureNI
                     Parallel.ForEach((CenterFreqTO[])Enum.GetValues(typeof(CenterFreqTO)), freq =>
                     {
                         double[] filteredResult;
-                        filteredResult = Butterworth.filterResult(FilterBank.Third_octave, freq, wynik, Fs);
+                        filteredResult = Butterworth.filterResult(FilterBank.Third_octave, freq, impulseResponse, Fs);
 
                         double edt = EDT(Fs, maxIdx, filteredResult);
                         double t20 = T20(Fs, maxIdx, filteredResult);
@@ -145,10 +157,17 @@ namespace RoomMeasureNI
             parameters = dv.ToTable();
         }
 
+        /// <summary>
+        /// Calculates p^2 sum in specified time range
+        /// </summary>
+        /// <param name="Fs">IR sampling frequency</param>
+        /// <param name="maxIdx">Index of max value</param>
+        /// <param name="impulse">Array with impulse response</param>
+        /// <param name="from">Start time (ms)</param>
+        /// <param name="to">End time (ms)</param>
+        /// <returns>Squared pressure sum over specified range</returns>
         private double getTimeRange(int Fs, int maxIdx, double[] impulse, int from = 0, int to = 0)
         {
-            
-
             if (from != 0)
                 from = (int)(from * 0.001 * Fs);
 
@@ -169,6 +188,11 @@ namespace RoomMeasureNI
             return Array.ConvertAll(trimmedImpulse, p => Math.Pow(p,2)).Sum();
         }
 
+        /// <summary>
+        /// Calculates Schroeder Curve
+        /// </summary>
+        /// <param name="impulse">Input impulse</param>
+        /// <returns>Schroeder Curve for input impulse</returns>
         private double[] getSchroederCurve(double[] impulse)
         {
             double[] result = new double[impulse.Length];
@@ -182,6 +206,15 @@ namespace RoomMeasureNI
             return Array.ConvertAll(result, p2=>10*Math.Log10(p2/Math.Pow(2e-5,2)));
         }
 
+        /// <summary>
+        /// Calculates reverberation time
+        /// </summary>
+        /// <param name="Fs">IR sampling frequency</param>
+        /// <param name="maxIdx">IR max value index</param>
+        /// <param name="impulse">Array containing impulse response</param>
+        /// <param name="dbStart">Approximation start value (dB)</param>
+        /// <param name="dbStop">Approximation end value (dB)</param>
+        /// <returns>Reverberation time</returns>
         private double RT(int Fs, int maxIdx, double[] impulse, int dbStart, int dbStop)
         {
             double[] schroeder = getSchroederCurve(impulse);
@@ -201,36 +234,87 @@ namespace RoomMeasureNI
             return (-60 - b)/a;
         }
 
+        /// <summary>
+        /// Calculates C80 parameter
+        /// </summary>
+        /// <param name="Fs">IR sampling rate</param>
+        /// <param name="maxIdx">IR max value index</param>
+        /// <param name="impulse">Array containing impulse response</param>
+        /// <returns>C80 value</returns>
         private double C80(int Fs, int maxIdx, double[] impulse)
         {
             return 10 * Math.Log10(getTimeRange(Fs, maxIdx, impulse, 0, 80) / getTimeRange(Fs, maxIdx, impulse, 80));
         }
 
+        /// <summary>
+        /// Calculates C50 parameter
+        /// </summary>
+        /// <param name="Fs">IR sampling rate</param>
+        /// <param name="maxIdx">IR max value index</param>
+        /// <param name="impulse">Array containing impulse response</param>
+        /// <returns>Returns C50 value</returns>
         private double C50(int Fs, int maxIdx, double[] impulse)
         {
             return 10 * Math.Log10(getTimeRange(Fs, maxIdx, impulse, 0, 50) / getTimeRange(Fs, maxIdx, impulse, 50));
         }
 
+        /// <summary>
+        /// Calculates D50 parameter
+        /// </summary>
+        /// <param name="Fs">IR sampling rate</param>
+        /// <param name="maxIdx">IR max value index</param>
+        /// <param name="impulse">Array containing impulse response</param>
+        /// <returns>Returns D50 value</returns>
         private double D50(int Fs, int maxIdx, double[] impulse)
         {
             return getTimeRange(Fs, maxIdx, impulse, 0, 50) / getTimeRange(Fs, maxIdx, impulse);
         }
 
+        /// <summary>
+        /// Calculates T20 reverberation time
+        /// </summary>
+        /// <param name="Fs">IR sampling rate</param>
+        /// <param name="maxIdx">IR max value index</param>
+        /// <param name="impulse">Array containing impulse response</param>
+        /// <returns>Returns T20</returns>
         private double T20(int Fs, int maxIdx, double[] impulse)
         {
             return RT(Fs, maxIdx, impulse, -5,-20);
         }
 
+        /// <summary>
+        /// Calculates T30 reverberation time
+        /// </summary>
+        /// <param name="Fs">IR sampling rate</param>
+        /// <param name="maxIdx">IR max value index</param>
+        /// <param name="impulse">Array containing impulse response</param>
+        /// <returns>Returns T30</returns>
         private double T30(int Fs, int maxIdx, double[] impulse)
         {
             return RT(Fs, maxIdx, impulse, -5, -30);
         }
 
+        /// <summary>
+        /// Calculates EDT reverberation time
+        /// </summary>
+        /// <param name="Fs">IR sampling rate</param>
+        /// <param name="maxIdx">IR max value index</param>
+        /// <param name="impulse">Array containing impulse response</param>
+        /// <returns>Returns EDT</returns>
         private double EDT(int Fs, int maxIdx, double[] impulse)
         {
             return RT(Fs, maxIdx, impulse, 0, -10);
         }
 
+        /// <summary>
+        /// Calculates STI parameter
+        /// </summary>
+        /// <param name="Fs">IR sampling rate</param>
+        /// <param name="maxIdx">IR max value index</param>
+        /// <param name="inputData">Array of filtered results</param>
+        /// <param name="NC_curve">Noise Curve used for STI calculation</param>
+        /// <param name="gen">Speaker gender</param>
+        /// <returns>Transmission index value</returns>
         private double STI(int Fs, int maxIdx, double[][] inputData, NC_Curves NC_curve, Speaker gen)
         {
             //tab_wj=p^2 !!!
@@ -429,6 +513,12 @@ namespace RoomMeasureNI
             return STI;
         }
 
+        /// <summary>
+        /// Calculates average parameter value
+        /// </summary>
+        /// <param name="Fs">IR sampling rate</param>
+        /// <param name="maxIdx">IR max value index</param>
+        /// <param name="STI_input_array">Array of transmission indexes for STI calculation</param>
         private void AverageParameters(int Fs, int maxIdx, double[][] STI_input_array)
         {
             DataRow row500 = parameters.Rows.Find(CenterFreqO.f500.GetDescription());
@@ -454,6 +544,11 @@ namespace RoomMeasureNI
 
         }
 
+        /// <summary>
+        /// Returns values of parameter with given name
+        /// </summary>
+        /// <param name="parameterName"></param>
+        /// <returns>Parameter values</returns>
         public double[] getParameterByName(string parameterName)
         {
             double[] param = new double[parameters.Rows.Count];

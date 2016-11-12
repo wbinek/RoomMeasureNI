@@ -17,31 +17,31 @@ namespace RoomMeasureNI.GUI
         //Update project.info fileds on text changed
         private void textNazwa_TextChanged(object sender, EventArgs e)
         {
-            proj.info.nazwa = (sender as TextBox).Text;
+            proj.info.projectName = (sender as TextBox).Text;
         }
 
         private void textZleceniodawca_TextChanged(object sender, EventArgs e)
         {
-            proj.info.zleceniodawca = (sender as TextBox).Text;
+            proj.info.projectClient = (sender as TextBox).Text;
         }
 
         private void textAdres_TextChanged(object sender, EventArgs e)
         {
-            proj.info.adres = (sender as TextBox).Text;
+            proj.info.projectAdress = (sender as TextBox).Text;
         }
 
         private void textOpis_TextChanged(object sender, EventArgs e)
         {
-            proj.info.opis = (sender as TextBox).Text;
+            proj.info.projectDescription = (sender as TextBox).Text;
         }
 
         //Refresh - called when project changed (ex. loaded)
         public void Odswiez()
         {
-            this.textNazwa.Text = proj.info.nazwa;
-            this.textZleceniodawca.Text = proj.info.zleceniodawca;
-            this.textAdres.Text = proj.info.adres;
-            this.textOpis.Text = proj.info.opis;
+            this.textNazwa.Text = proj.info.projectName;
+            this.textZleceniodawca.Text = proj.info.projectClient;
+            this.textAdres.Text = proj.info.projectAdress;
+            this.textOpis.Text = proj.info.projectDescription;
         }
     }
 }

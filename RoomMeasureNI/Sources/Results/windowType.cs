@@ -35,8 +35,7 @@ namespace RoomMeasureNI
         {
             throw new NotImplementedException();
         }
-
-
+        
         public double[] getWindowShort()
         {
             switch (type)

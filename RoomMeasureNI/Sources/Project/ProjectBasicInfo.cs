@@ -5,9 +5,9 @@ namespace RoomMeasureNI
     [Serializable]
     public class ProjectBasicInfo
     {
-        public string nazwa { get; set; }
-        public string zleceniodawca { get; set; }
-        public string adres { get; set; }
-        public string opis { get; set; }
+        public string projectName { get; set; }
+        public string projectClient { get; set; }
+        public string projectAdress { get; set; }
+        public string projectDescription { get; set; }
     }
 }

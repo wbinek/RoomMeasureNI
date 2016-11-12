@@ -12,16 +12,18 @@ namespace RoomMeasureNI
         private static Project m_oInstance = null;
         private static readonly object m_oPadLock = new object();
 
-        public ObservableCollection<MeasurementResult> measResults { get; set; }
-        public PunktyPomiarowe punktyPomiarowe {get;set;}
-        public MeasurementConfig measConfig { get; set; }
-        public ProjectBasicInfo info=new ProjectBasicInfo();
-        public Image rysPlan;
-        public CardConfig cardConfig { get; set; }
+        public ObservableCollection<MeasurementResult> measResults { get; set; }    //Collection of measurement results
+        public PunktyPomiarowe punktyPomiarowe {get;set;}                           //Class containing measurement points
+        public MeasurementConfig measConfig { get; set; }                           //Measurement configuration
+        public ProjectBasicInfo info=new ProjectBasicInfo();                        //Basic project information
+        public Image drawingSchema;                                                 //Container for schematic image of the room
+        public CardConfig cardConfig { get; set; }                                  //Measurement card configuration
 
         private string path;
 
-        //Konstruktor domyślny
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         private Project()
         {
             punktyPomiarowe = new PunktyPomiarowe();
@@ -30,7 +32,9 @@ namespace RoomMeasureNI
             measConfig = new MeasurementConfig();
         }
         
-        //Signleton
+        /// <summary>
+        /// Singleton
+        /// </summary>
         public static Project Instance
         {
             get
@@ -46,8 +50,10 @@ namespace RoomMeasureNI
             }
         }
 
-        //..........Metody klasy.................
-        //Pokaż okno zapsiu
+        //..........Clas methods.................
+        /// <summary>
+        /// Shows project save dialog
+        /// </summary>
         private void showSaveDialog(){
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "RoomMeasureNI Project File|*.rmp";
@@ -56,7 +62,10 @@ namespace RoomMeasureNI
             path=saveFileDialog1.FileName;
         }
         
-        //Pokaż okno wczytywania
+        /// <summary>
+        /// Shows load dialog
+        /// </summary>
+        /// <returns>Returns true if file was opened</returns>
         private bool showLoadDialog()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -71,19 +80,24 @@ namespace RoomMeasureNI
             return false;
         }
 
-        //Przypisz wczytane dane do projektu
+        /// <summary>
+        /// Assign loaded data to current project
+        /// </summary>
+        /// <param name="proj"></param>
         private void assign(Project proj)
         {
             this.path = proj.path;
             this.measResults = proj.measResults;
             this.punktyPomiarowe = proj.punktyPomiarowe;
             this.info = proj.info;
-            this.rysPlan = proj.rysPlan;
+            this.drawingSchema = proj.drawingSchema;
             //this.cardConfig = proj.cardConfig; /dont load to prevent issues when different/no card connected;s
             this.measConfig = proj.measConfig;
         }
 
-        //Zapisz jako
+        /// <summary>
+        /// Save project as
+        /// </summary>
         public void saveAs()
         {
             showSaveDialog();
@@ -100,7 +114,9 @@ namespace RoomMeasureNI
             saveFile();
         }
 
-        //Zapisz plik
+        /// <summary>
+        /// Save project file
+        /// </summary>
         public void saveFile()
         {
             bool append = false;
@@ -111,7 +127,9 @@ namespace RoomMeasureNI
             }
         }
 
-        //Wczytaj plik projektu
+       /// <summary>
+       /// Load project file
+       /// </summary>
         public void loadFile()
         {
             Project proj = Project.Instance;

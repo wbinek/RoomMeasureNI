@@ -48,16 +48,16 @@ namespace RoomMeasureNI.GUI
 
             if (openFileDialog1.FileName != "")
             {
-                proj.rysPlan = Image.FromFile(openFileDialog1.FileName, true);
+                proj.drawingSchema = Image.FromFile(openFileDialog1.FileName, true);
             }
             this.Refresh();
         }
 
         private void imgPanel_Paint(object sender, PaintEventArgs e)
         {
-            if (proj.rysPlan != null)
+            if (proj.drawingSchema != null)
             {
-                e.Graphics.DrawImage(ScaleImage(proj.rysPlan, this.Width, this.Height), new Point(0, 0));
+                e.Graphics.DrawImage(ScaleImage(proj.drawingSchema, this.Width, this.Height), new Point(0, 0));
 
                 Pen pedzel_green=new Pen(Color.Green);
                 pedzel_green.Width = 2;
@@ -80,7 +80,7 @@ namespace RoomMeasureNI.GUI
 
         private void imgPanel_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (proj.rysPlan != null)
+            if (proj.drawingSchema != null)
             {
                 MouseEventArgs me = (MouseEventArgs)e;
                 Point coordinates = me.Location;
