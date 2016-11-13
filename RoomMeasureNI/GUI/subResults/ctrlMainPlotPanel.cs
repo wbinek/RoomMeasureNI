@@ -64,7 +64,7 @@ namespace RoomMeasureNI.GUI
                     }
                     else
                         ctrlPlotImpulse.setData(usefulFunctions.getTimeVector(data.Length, result.Fs), data);
-                    if ((FilterBank)comboFilter.SelectedItem == FilterBank.None) ctrlPlotImpulse.addSeries(usefulFunctions.getTimeVector(result.wynik_pomiaru.Length, result.Fs), result.getWindow(data.Max()));
+                    if ((FilterBank)comboFilter.SelectedItem == FilterBank.None) ctrlPlotImpulse.addSeries(usefulFunctions.getTimeVector(result.wynik_pomiaru.Length, result.Fs), result.getWindow(data.Max()),null,OxyPlot.LineStyle.Dash);
                     break;
 
                 case chartType.Czestotliwosc:

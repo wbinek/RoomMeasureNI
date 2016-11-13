@@ -217,7 +217,8 @@ namespace RoomMeasureNI
         /// <returns>Reverberation time</returns>
         private double RT(int Fs, int maxIdx, double[] impulse, int dbStart, int dbStop)
         {
-            double[] schroeder = getSchroederCurve(impulse);
+            double[] envelope = usefulFunctions.calculateEnvelopeFunction(impulse);
+            double[] schroeder = getSchroederCurve(envelope);
             double maxdb = schroeder[maxIdx];
 
             schroeder = Array.ConvertAll(schroeder, p => p - maxdb);
@@ -532,7 +533,7 @@ namespace RoomMeasureNI
 
             parameters.Rows.Add(
                             null,
-                            parameters.Rows.Count,
+                            100,
                             "Średnia",
                             edt,
                             t20,
@@ -551,10 +552,30 @@ namespace RoomMeasureNI
         /// <returns>Parameter values</returns>
         public double[] getParameterByName(string parameterName)
         {
-            double[] param = new double[parameters.Rows.Count];
-            for (int i = 0; i < parameters.Rows.Count; i++)
+            double[] param = new double[parameters.Rows.Count-1];
+            for (int i = 0; i < parameters.Rows.Count-1; i++)
             {
-                param[i] = ((double)parameters.Rows[i]["parameterName"]);
+                param[i] = ((double)parameters.Rows[i][parameterName]);
+            }
+            return param;
+        }
+
+        public double[] getIndexes()
+        {
+            double[] param = new double[parameters.Rows.Count-1];
+            for (int i = 0; i < parameters.Rows.Count-1; i++)
+            {
+                param[i] = ((int)parameters.Rows[i]["freqidx"]);
+            }
+            return param;
+        }
+
+        public string[] getFrequencies()
+        {
+            string[] param = new string[parameters.Rows.Count-1];
+            for (int i = 0; i < parameters.Rows.Count - 1; i++)
+            {
+                param[i] = ((string)parameters.Rows[i]["Frequency"]);
             }
             return param;
         }

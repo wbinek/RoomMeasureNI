@@ -143,7 +143,7 @@ namespace RoomMeasureNI
                 WaveFormat format = new WaveFormat(Fs, 24, 1);
                 WaveFileWriter writer = new WaveFileWriter(path, format);
 
-                float[] responseFloat = getWindowedSignal().Select(s => (float)s/10).ToArray();
+                float[] responseFloat = wynik_pomiaru.Select(s => (float)s/10).ToArray();
                 writer.WriteSamples(responseFloat, 0, responseFloat.Length);
                 writer.Close();
             }           

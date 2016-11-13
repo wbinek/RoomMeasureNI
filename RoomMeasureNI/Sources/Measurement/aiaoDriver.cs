@@ -205,13 +205,13 @@ namespace RoomMeasureNI
             }
         }
 
-        public void stopMeasurement()
+        public void stopMeasurement(bool kill = false)
         {
             if (runningTask != null)
             {
                 // Dispose of the task
                 runningTask = null;
-                StopTask();
+                StopTask(kill);
             }
         }
 
@@ -220,13 +220,13 @@ namespace RoomMeasureNI
             runningTask = inputTask;
         }
 
-        private void StopTask()
+        private void StopTask(bool kill = false)
         {
             runningTask = null;
             inputTask.Dispose();
             outputTask.Dispose();
 
-            if (this.MeasurementFinished != null)
+            if (this.MeasurementFinished != null && !kill)
                 this.MeasurementFinished(this, EventArgs.Empty);
         }
 

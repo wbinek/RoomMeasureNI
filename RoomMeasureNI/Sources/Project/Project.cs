@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 
 namespace RoomMeasureNI
@@ -122,7 +123,7 @@ namespace RoomMeasureNI
             bool append = false;
             using (Stream stream = File.Open(path, append ? FileMode.Append : FileMode.Create))
             {
-                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                var binaryFormatter = new BinaryFormatter();
                 binaryFormatter.Serialize(stream, this);
             }
         }

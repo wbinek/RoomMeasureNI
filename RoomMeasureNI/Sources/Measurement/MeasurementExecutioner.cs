@@ -48,7 +48,7 @@ namespace RoomMeasureNI
         }
 
         public void stopMeasurement(){
-            recorder.stopMeasurement();
+            recorder.stopMeasurement(true);
         }
 
         public void generateOutput()

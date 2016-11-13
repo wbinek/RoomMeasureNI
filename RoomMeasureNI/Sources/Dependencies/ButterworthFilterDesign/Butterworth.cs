@@ -82,25 +82,25 @@ namespace RoomMeasureNI.Sources.ButterworthFilterDesign
     public enum CenterFreqO
     {
         [Description("31")]
-        f31,
+        f31=1,
         [Description("63")]
-        f63,
+        f63=4,
         [Description("125")]
-        f125,
+        f125=7,
         [Description("250")]
-        f250,
+        f250=10,
         [Description("500")]
-        f500,
+        f500=13,
         [Description("1000")]
-        f1000,
+        f1000=16,
         [Description("2000")]
-        f2000,
+        f2000=19,
         [Description("4000")]
-        f4000,
+        f4000=22,
         [Description("8000")]
-        f8000,
+        f8000=25,
         [Description("16000")]
-        f16000,
+        f16000=28,
     };
 
     public enum FilterBank
@@ -185,6 +185,7 @@ namespace RoomMeasureNI.Sources.ButterworthFilterDesign
                     break;
                 case (FilterBank.Third_octave):
                     omega = 1.02676;
+                    //filterOrder += -4;
                     break;
                 case (FilterBank.None):
                     return false;                  

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using OxyPlot;
 using OxyPlot.Series;
 using OxyPlot.Axes;
+using RoomMeasureNI.Sources.ButterworthFilterDesign;
 
 namespace RoomMeasureNI
 {
@@ -55,7 +56,7 @@ namespace RoomMeasureNI
         /// </summary>
         /// <param name="X">Array of x values</param>
         /// <param name="Y">Array of y values</param>
-        public void setData(double[] X, double[] Y)
+        public void setData(double[] X, double[] Y, string label = null)
         {
             var myModel = new PlotModel { };
             LineSeries data = new LineSeries();
@@ -66,6 +67,7 @@ namespace RoomMeasureNI
                 XYpoint[i] = new DataPoint(X[i], Y[i]);
             }
             data.Points.AddRange(XYpoint);
+            data.Title = label;
             myModel.Series.Add(data);
 
             LinearAxis osX = new LinearAxis();
@@ -86,10 +88,9 @@ namespace RoomMeasureNI
         /// </summary>
         /// <param name="X">Array of X values to add</param>
         /// <param name="Y">Array of Y values to add</param>
-        public void addSeries(double[] X, double[] Y)
+        public void addSeries(double[] X, double[] Y, string label=null, LineStyle style = LineStyle.Automatic)
         {
-            LineSeries data = new LineSeries();
-            data.LineStyle = LineStyle.Dash;
+            LineSeries data = new LineSeries();          
             DataPoint[] XYpoint = new DataPoint[X.Length];
 
             for (int i = 0; i < X.Length; i++)
@@ -97,6 +98,9 @@ namespace RoomMeasureNI
                 XYpoint[i] = new DataPoint(X[i], Y[i]);
             }
             data.Points.AddRange(XYpoint);
+            data.LineStyle = style;
+            data.Title = label;
+            
             this.plot1.Model.Series.Add(data);
         }
 
@@ -170,6 +174,43 @@ namespace RoomMeasureNI
         {
             plot1.Model.Axes[0].MajorGridlineStyle = LineStyle.Dash;
             plot1.Model.Axes[1].MajorGridlineStyle = LineStyle.Dash;
+        }
+
+        public void addCustomLabelAxis(string[] labels)
+        {
+            CategoryAxis categoryAxis = new CategoryAxis();
+            LinearAxis osY = new LinearAxis();
+
+            categoryAxis.Position = AxisPosition.Bottom;
+            categoryAxis.Angle = -90;
+            osY.Position = AxisPosition.Left;
+
+            foreach (string s in labels)
+            {
+                categoryAxis.ActualLabels.Add(s);
+            }
+
+            plot1.Model.Axes.Clear();
+            plot1.Model.Axes.Add(categoryAxis);
+            plot1.Model.Axes.Add(osY);
+        }
+
+        public void setThirdOctaveAxis()
+        {
+            int i = 0;
+            string[] labels = new string[Enum.GetNames(typeof(CenterFreqTO)).Length];
+            foreach (CenterFreqTO freq in Enum.GetValues(typeof(CenterFreqTO)))
+            {
+                labels[i++] = freq.GetDescription();
+            }
+
+            addCustomLabelAxis(labels);
+        }
+
+        public void Reset()
+        {
+            var myModel = new PlotModel { };
+            plot1.Model = myModel;
         }
     }
 }

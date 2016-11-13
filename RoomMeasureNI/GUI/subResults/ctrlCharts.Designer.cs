@@ -32,19 +32,20 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewResultsSets = new System.Windows.Forms.DataGridView();
-            this.checkedListParametersToPlot = new System.Windows.Forms.CheckedListBox();
-            this.measurementResultBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.parametersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.checkboxPlot = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.parametersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.checkedListParametersToPlot = new System.Windows.Forms.CheckedListBox();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.measurementResultBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ctrlPlotPanel1 = new RoomMeasureNI.ctrlPlotPanel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResultsSets)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.measurementResultBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.parametersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.measurementResultBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -52,6 +53,7 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.splitContainer3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.ctrlPlotPanel1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6);
@@ -99,6 +101,20 @@
             this.dataGridViewResultsSets.Size = new System.Drawing.Size(261, 234);
             this.dataGridViewResultsSets.TabIndex = 0;
             // 
+            // checkboxPlot
+            // 
+            this.checkboxPlot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.checkboxPlot.HeaderText = "";
+            this.checkboxPlot.MinimumWidth = 21;
+            this.checkboxPlot.Name = "checkboxPlot";
+            this.checkboxPlot.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.checkboxPlot.Width = 21;
+            // 
+            // parametersBindingSource
+            // 
+            this.parametersBindingSource.DataMember = "parameters";
+            this.parametersBindingSource.DataSource = this.measurementResultBindingSource;
+            // 
             // checkedListParametersToPlot
             // 
             this.checkedListParametersToPlot.BackColor = System.Drawing.SystemColors.Control;
@@ -110,24 +126,7 @@
             this.checkedListParametersToPlot.Name = "checkedListParametersToPlot";
             this.checkedListParametersToPlot.Size = new System.Drawing.Size(251, 234);
             this.checkedListParametersToPlot.TabIndex = 0;
-            // 
-            // measurementResultBindingSource
-            // 
-            this.measurementResultBindingSource.DataSource = typeof(RoomMeasureNI.MeasurementResult);
-            // 
-            // parametersBindingSource
-            // 
-            this.parametersBindingSource.DataMember = "parameters";
-            this.parametersBindingSource.DataSource = this.measurementResultBindingSource;
-            // 
-            // checkboxPlot
-            // 
-            this.checkboxPlot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.checkboxPlot.HeaderText = "";
-            this.checkboxPlot.MinimumWidth = 21;
-            this.checkboxPlot.Name = "checkboxPlot";
-            this.checkboxPlot.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.checkboxPlot.Width = 21;
+            this.checkedListParametersToPlot.SelectedIndexChanged += new System.EventHandler(this.checkedListParametersToPlot_SelectedIndexChanged);
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -135,6 +134,19 @@
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
             this.nameDataGridViewTextBoxColumn.HeaderText = "name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // measurementResultBindingSource
+            // 
+            this.measurementResultBindingSource.DataSource = typeof(RoomMeasureNI.MeasurementResult);
+            // 
+            // ctrlPlotPanel1
+            // 
+            this.ctrlPlotPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlPlotPanel1.Location = new System.Drawing.Point(6, 6);
+            this.ctrlPlotPanel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ctrlPlotPanel1.Name = "ctrlPlotPanel1";
+            this.ctrlPlotPanel1.Size = new System.Drawing.Size(520, 459);
+            this.ctrlPlotPanel1.TabIndex = 2;
             // 
             // ctrlCharts
             // 
@@ -149,8 +161,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResultsSets)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.measurementResultBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.parametersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.measurementResultBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -165,5 +177,6 @@
         private System.Windows.Forms.BindingSource parametersBindingSource;
         private System.Windows.Forms.BindingSource measurementResultBindingSource;
         private System.Windows.Forms.CheckedListBox checkedListParametersToPlot;
+        private ctrlPlotPanel ctrlPlotPanel1;
     }
 }
