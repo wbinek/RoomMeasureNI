@@ -1,53 +1,51 @@
-﻿using NationalInstruments;
-using NationalInstruments.DAQmx;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
-//using System.Threading.Tasks;
+using System.Linq;
+using System.Text;
+using System.Windows;
 using System.Windows.Forms;
+using NationalInstruments;
+using NationalInstruments.DAQmx;
 
-
-namespace RoomMeasureNI
+namespace RoomMeasureNI.Sources.Measurement
 {
-    class aiaoDriver
+    internal class aiaoDriver : IDisposable
     {
+        private int cycle;
+        private DataColumn[] dataColumn;
+        private DataTable dataTable;
         private Task inputTask;
+
+        private int sampleToRead;
+        private double no_cycles;
+        private int no_samples;
         private Task outputTask;
+        private Task runningTask;
+        private int sampleCount;
+
+        private AsyncCallback soundCallback;
         private AnalogMultiChannelReader soundReader;
         private AnalogSingleChannelWriter writer;
 
-        private AsyncCallback soundCallback;
-        private DataTable dataTable;
-        private DataColumn[] dataColumn;
-        private NationalInstruments.DAQmx.Task runningTask;
-
-        private Project proj = Project.Instance;
-
-        private double no_cycles;
-        private int no_samples;
-
-        private int cycle;
-        private int sampleCount=0;
-        public event EventHandler MeasurementFinished;
-
         public aiaoDriver()
         {
-            dataTable=new DataTable();
+            dataTable = new DataTable();
         }
 
-        public void startMeasurement(double[] output, double measLength, CardConfig cardConfig)
+        public event EventHandler MeasurementFinished;
+
+        public void startMeasurement(double[] output, int noSamples, CardConfig cardConfig)
         {
             if (runningTask == null)
             {
-                no_samples = (int)(measLength * cardConfig.chSmplRate);
+                no_samples = noSamples;
                 no_cycles = (double)no_samples / cardConfig.chSmplToRead;
+                sampleToRead = cardConfig.chSmplToRead;
 
-                if (no_cycles % 1 != 0 && no_cycles!=0)
-                {
+                if (no_cycles % 1 != 0 && no_cycles != 0)
                     MessageBox.Show("Measurement time and sampling settings doesnt match");
-
-                }
                 else
-                {
                     try
                     {
                         // Create a new task
@@ -60,21 +58,19 @@ namespace RoomMeasureNI
 
                         // Create the channel
 
-                        foreach (ChannelConfig channel in cardConfig.chConfig)
-                        {
+                        foreach (var channel in cardConfig.chConfig)
                             if (channel.chActive)
-                            {
-                                inputTask.AIChannels.CreateMicrophoneChannel(channel.chName, "soundChannel" + channel.chName.Replace('/', '_'),
+                                inputTask.AIChannels.CreateMicrophoneChannel(channel.chName,
+                                    "soundChannel" + channel.chName.Replace('/', '_'),
                                     channel.chSens, cardConfig.chMaxPress,
-                                    cardConfig.terminalConfig, cardConfig.excitationSource, cardConfig.chIEPEVal, AISoundPressureUnits.Pascals);
-                            }
-                        }
+                                    cardConfig.terminalConfig, cardConfig.excitationSource, cardConfig.chIEPEVal,
+                                    AISoundPressureUnits.Pascals);
 
-                        outputTask.AOChannels.CreateVoltageChannel(cardConfig.aoChannelSellected,
-                        "",
-                        (double) proj.cardConfig.aoMin,
-                        (double) proj.cardConfig.aoMax,
-                        AOVoltageUnits.Volts);
+                        outputTask.AOChannels.CreateVoltageChannel(cardConfig.aoChannelSelected,
+                            "",
+                            (double)cardConfig.aoMin,
+                            (double)cardConfig.aoMax,
+                            AOVoltageUnits.Volts);
 
 
                         // Configure the timing parameters
@@ -89,9 +85,10 @@ namespace RoomMeasureNI
                         outputTask.Control(TaskAction.Verify);
 
                         // Set up the start trigger
-                        string deviceName = inputTask.AIChannels[0].PhysicalName.Split('/')[0];
-                        string terminalNameBase = "/" + GetDeviceName(deviceName) + "/";
-                        outputTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(terminalNameBase + "ai/StartTrigger",
+                        var deviceName = inputTask.AIChannels[0].PhysicalName.Split('/')[0];
+                        var terminalNameBase = "/" + GetDeviceName(deviceName) + "/";
+                        outputTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(
+                            terminalNameBase + "ai/StartTrigger",
                             DigitalEdgeStartTriggerEdge.Rising);
 
                         // Initialize the data table
@@ -110,7 +107,7 @@ namespace RoomMeasureNI
 
                         // Create the analog input sound reader
                         soundReader = new AnalogMultiChannelReader(inputTask.Stream);
-                        soundCallback = new AsyncCallback(SoundCallback);
+                        soundCallback = SoundCallback;
 
                         // Use SynchronizeCallbacks to specify that the object 
                         // marshals callbacks across threads appropriately.
@@ -120,15 +117,13 @@ namespace RoomMeasureNI
 
                         cycle = 1;
                         sampleCount = 0;
-
                     }
                     catch (DaqException exception)
                     {
                         // Display Errors
                         MessageBox.Show(exception.Message);
-                        StopTask();
+                        StopTask(true);
                     }
-                }
             }
         }
 
@@ -139,7 +134,7 @@ namespace RoomMeasureNI
                 if (runningTask != null && runningTask == ar.AsyncState)
                 {
                     // Read the available data from the channels
-                    AnalogWaveform<double>[] data = soundReader.EndReadWaveform(ar);
+                    var data = soundReader.EndReadWaveform(ar);
 
                     // Plot your data here
                     dataToDataTable(data, ref dataTable);
@@ -148,7 +143,7 @@ namespace RoomMeasureNI
                     if (cycle != no_cycles)
                     {
                         // Set up a new callback
-                        soundReader.BeginMemoryOptimizedReadWaveform(proj.cardConfig.chSmplToRead,
+                        soundReader.BeginMemoryOptimizedReadWaveform(sampleToRead,
                             soundCallback, inputTask, data);
                         cycle++;
                     }
@@ -169,13 +164,11 @@ namespace RoomMeasureNI
         private void dataToDataTable(AnalogWaveform<double>[] sourceArray, ref DataTable dataTable)
         {
             // Iterate over channels
-            int currentLineIndex = 0;
-            foreach (AnalogWaveform<double> waveform in sourceArray)
+            var currentLineIndex = 0;
+            foreach (var waveform in sourceArray)
             {
-                for (int sample = 0; sample < waveform.Samples.Count; ++sample)
-                {
+                for (var sample = 0; sample < waveform.Samples.Count; ++sample)
                     dataTable.Rows[sample + sampleCount][currentLineIndex] = waveform.Samples[sample].Value;
-                }
                 currentLineIndex++;
             }
             sampleCount += sourceArray[0].SampleCount;
@@ -183,13 +176,13 @@ namespace RoomMeasureNI
 
         public void InitializeDataTable(AIChannelCollection channelCollection, ref DataTable data)
         {
-            int numOfChannels = channelCollection.Count;
+            var numOfChannels = channelCollection.Count;
             data.Rows.Clear();
             data.Columns.Clear();
             dataColumn = new DataColumn[numOfChannels];
-            int numOfRows = no_samples;      //dlugosc sygnalu
+            var numOfRows = no_samples; //dlugosc sygnalu
 
-            for (int currentChannelIndex = 0; currentChannelIndex < numOfChannels; currentChannelIndex++)
+            for (var currentChannelIndex = 0; currentChannelIndex < numOfChannels; currentChannelIndex++)
             {
                 dataColumn[currentChannelIndex] = new DataColumn();
                 dataColumn[currentChannelIndex].DataType = typeof(double);
@@ -198,9 +191,9 @@ namespace RoomMeasureNI
 
             data.Columns.AddRange(dataColumn);
 
-            for (int currentDataIndex = 0; currentDataIndex < numOfRows; currentDataIndex++)
+            for (var currentDataIndex = 0; currentDataIndex < numOfRows; currentDataIndex++)
             {
-                object[] rowArr = new object[numOfChannels];
+                var rowArr = new object[numOfChannels];
                 data.Rows.Add(rowArr);
             }
         }
@@ -226,8 +219,8 @@ namespace RoomMeasureNI
             inputTask.Dispose();
             outputTask.Dispose();
 
-            if (this.MeasurementFinished != null && !kill)
-                this.MeasurementFinished(this, EventArgs.Empty);
+            if (MeasurementFinished != null && !kill)
+                MeasurementFinished(this, EventArgs.Empty);
         }
 
         public DataTable getDataTable()
@@ -235,14 +228,64 @@ namespace RoomMeasureNI
             return dataTable;
         }
 
-        public static string GetDeviceName(string deviceName)
+        public List<double[]> getDataAsList()
         {
-            Device device = DaqSystem.Local.LoadDevice(deviceName);
-            if (device.BusType != DeviceBusType.CompactDaq)
-                return deviceName;
-            else
-                return device.CompactDaqChassisDeviceName;
+            List<double[]> results = new List<double[]>();
+            foreach (DataColumn col in dataTable.Columns)
+            {
+                results.Add(dataTable.AsEnumerable().Select(r => r.Field<double>(col.ColumnName)).ToArray());
+            }
+            return results;
         }
 
+        public List<string> getChannelNames()
+        {
+            List<string> channelNames = new List<string>();
+            foreach(DataColumn col in dataTable.Columns)
+            {
+                channelNames.Add(col.ColumnName);
+            }
+            return channelNames;
+        }
+
+        public static string GetDeviceName(string deviceName)
+        {
+            var device = DaqSystem.Local.LoadDevice(deviceName);
+            if (device.BusType != DeviceBusType.CompactDaq)
+                return deviceName;
+            return device.CompactDaqChassisDeviceName;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true); //I am calling you from Dispose, it's safe
+        }
+
+        protected void Dispose(Boolean itIsSafeToAlsoFreeManagedObjects)
+        {
+            if (itIsSafeToAlsoFreeManagedObjects)
+            {
+                if (this.inputTask != null)
+                {
+                    this.inputTask.Dispose();
+                    this.inputTask = null;
+                }
+                if (this.outputTask != null)
+                {
+                    this.outputTask.Dispose();
+                    this.outputTask = null;
+                }
+                if (this.outputTask != null)
+                {
+                    this.dataTable.Dispose();
+                    this.dataTable = null;
+                }
+            }
+        }
+
+        ~aiaoDriver()
+        {
+            Dispose(false); //I am *not* calling you from Dispose, it's *not* safe
+        }
     }
 }

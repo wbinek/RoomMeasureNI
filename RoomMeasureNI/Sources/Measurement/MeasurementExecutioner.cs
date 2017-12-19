@@ -1,108 +1,125 @@
-﻿using MathNet.Numerics.IntegralTransforms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using MathNet.Numerics.IntegralTransforms;
+using RoomMeasureNI.GUI.subMeasurement;
+using RoomMeasureNI.Sources.Dependencies;
+using RoomMeasureNI.Sources.Results;
 
-namespace RoomMeasureNI
+namespace RoomMeasureNI.Sources.Measurement
 {
     public class MeasurementExecutioner
     {
-        private Project proj = Project.Instance;
-        private aiaoDriver recorder;
-
-        private List<DataTable> dane = new List<DataTable>();
+        private readonly Project.Project proj = Project.Project.Instance;
+        private readonly CardConfig cardConfig;
+        private readonly MeasurementConfig measConfig;
+        private readonly aiaoDriver recorder;
+        private readonly object thisLock = new object();
         private double[] output = new double[0];
-        private int count;
-        private Object thisLock = new Object();
 
         public MeasurementExecutioner()
         {
             recorder = new aiaoDriver();
-            recorder.MeasurementFinished += this.OnMeasurementFinished;
+            recorder.MeasurementFinished += OnMeasurementFinished;
+            cardConfig = proj.cardConfig;
+            measConfig = proj.measConfig;
         }
 
         private void OnMeasurementFinished(object sender, EventArgs args)
         {
-            dane.Add(recorder.getDataTable());
-            if (count < proj.measConfig.averages)
-            {
-                recorder.startMeasurement(output, proj.measConfig.measLength, proj.cardConfig);
-            }
-            else
-            {
-                postprocess();
-            }
-            count++;
+            List<double[]> dane = recorder.getDataAsList();
+            List<string> channelNames = recorder.getChannelNames();
 
+            recorder.Dispose();
+
+            switch (measConfig.measMethod)
+            {
+                case MeasurementMethods.SweepSine:
+                    postprocess(dane, channelNames);
+                    break;
+                case MeasurementMethods.ImpulseRecording:
+                    showAcceptanceWindow(dane, channelNames);
+                    break;
+            }
         }
 
         public void startMeasurement()
         {
-            count = 1;
             preprocess();
             generateOutput();
-            recorder.startMeasurement(output, proj.measConfig.measLength, proj.cardConfig);
+            recorder.startMeasurement(output, output.Length, cardConfig);
         }
 
-        public void stopMeasurement(){
+        public void stopMeasurement()
+        {
             recorder.stopMeasurement(true);
         }
 
         public void generateOutput()
         {
-            switch (proj.measConfig.measMethod)
+            switch (measConfig.measMethod)
             {
-                case measurementMethods.Rejestracja_impulsu:
-                    output = FunctionGenerator.generateZeros((int)(proj.cardConfig.chSmplRate * proj.measConfig.measLength));
+                case MeasurementMethods.Calibrate:
+                    output = FunctionGenerator.generateByEnum(measConfig.genMethod,
+                                            (int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate,
+                                            measConfig.fmin, measConfig.fmax, (int)measConfig.breakLength * cardConfig.chSmplRate, measConfig.averages + 1);
                     break;
-                case measurementMethods.Sweep_sine:
-                    output = FunctionGenerator.generateByEnum(proj.measConfig.genMethod, (int)(proj.cardConfig.chSmplRate * proj.measConfig.measLength), proj.cardConfig.chSmplRate, proj.measConfig.fmin, proj.measConfig.fmax);
+                case MeasurementMethods.SweepSine:
+                    output = FunctionGenerator.generateByEnum(measConfig.genMethod,
+                        (int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate,
+                        measConfig.fmin, measConfig.fmax, (int)measConfig.breakLength * cardConfig.chSmplRate, measConfig.averages + 1);
+                    break;
+                case MeasurementMethods.ImpulseRecording:
+                    output = FunctionGenerator.generateByEnum(generatorMethods.Silence,
+                        (int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate,
+                        measConfig.fmin, measConfig.fmax, (int)measConfig.breakLength * cardConfig.chSmplRate, measConfig.averages + 1);
                     break;
             }
 
-            int i = 0;
-            Array.ForEach(output, (x) => { output[i++] = x * (double)proj.cardConfig.aoMax; });
+            var i = 0;
+            Array.ForEach(output, x => { output[i++] = x * (double)cardConfig.aoMax; });
         }
 
-        private void postprocess()
+        private void postprocess(List<double[]> dane, List<string> channelNames)
         {
-            DataTable wynik = calculateImpulseResp();
-            showAcceptanceWindow(wynik);
+            List<double[]> impulseResponses = new List<double[]>();
+            foreach (double[] response in dane) {
+                impulseResponses.Add(calculateImpulseResp(response));
+            }
+
+            showAcceptanceWindow(impulseResponses, channelNames);
         }
 
-        private void showAcceptanceWindow(DataTable wynik)
+        private void showAcceptanceWindow(List<double[]> impulseResponses, List<string> channelNames)
         {
-            foreach (DataColumn datacolumn in wynik.Columns)
+            for(int i=0;i<impulseResponses.Count();i++)
             {
-                int length = datacolumn.Table.Rows.Count;
-                int Fs = proj.cardConfig.chSmplRate;
+                double[] result = impulseResponses[i];
+                string channelName = channelNames[i];
 
-                double[] timevector = usefulFunctions.getTimeVector(length, Fs);
-                double[] result = new double[length];
+                var length = result.Count();
+                var Fs = proj.cardConfig.chSmplRate;
 
-                for (int i = 0; i < length; i++)
-                {
-                    result[i] = (double)wynik.Rows[i][datacolumn.ColumnName];
-                }
+                var timevector = usefulFunctions.getTimeVector(length, Fs);
 
-
-                ctrlAcceptResult okno = new ctrlAcceptResult();
+                var okno = new ctrlAcceptResult();
                 okno.setPlot(timevector, result);
                 okno.ShowDialog();
 
                 if (okno.accepted)
                 {
-                    MeasurementResult pomiar = new MeasurementResult();
+                    var pomiar = new MeasurementResult();
                     pomiar.wynik_pomiaru = result;
                     pomiar.godzina_pomiaru = DateTime.Now;
-                    pomiar.nazwaPunktu = proj.punktyPomiarowe.getNameFromChannel(datacolumn.ColumnName);
-                    pomiar.kanal = datacolumn.ColumnName;
+                    pomiar.nazwaPunktu = proj.punktyPomiarowe.getNameFromChannel(channelName);
+                    pomiar.kanal = channelName;
                     pomiar.Fs = Fs;
-                    pomiar.metoda = proj.measConfig.measMethod;
-                    pomiar.nazwa = pomiar.nazwaPunktu + " " + pomiar.godzina_pomiaru.ToShortDateString() + " " + pomiar.godzina_pomiaru.ToShortTimeString();
+                    pomiar.metoda = measConfig.measMethod;
+                    pomiar.nazwa = pomiar.nazwaPunktu + " " + pomiar.godzina_pomiaru.ToShortDateString() + " " +
+                                   pomiar.godzina_pomiaru.ToShortTimeString();
                     pomiar.fstart = proj.measConfig.fmin;
                     pomiar.fstop = proj.measConfig.fmax;
                     pomiar.calculateDefWindow();
@@ -112,46 +129,25 @@ namespace RoomMeasureNI
             }
         }
 
-        private DataTable calculateImpulseResp()
+        private double[] calculateImpulseResp(double[] inputData)
         {
-            DataTable wynik = dane[0].Copy();
+            // Initialize variables
+            int length = (int)(cardConfig.chSmplRate * (measConfig.breakLength/*));//*/ + measConfig.measLength));
+            double[] response = new double[length];
 
-            if (proj.measConfig.measMethod == measurementMethods.Sweep_sine)
+            //Calculate impulse repsponses
+            if (measConfig.measMethod == MeasurementMethods.SweepSine)
             {
-                Complex[] outputFFT = usefulFunctions.double2Complex(output);
-                Fourier.Forward(outputFFT,FourierOptions.Matlab);
-
-                //zero all elements in finall result table
-                foreach (DataColumn datacolumn in wynik.Columns)
-                {
-                    for (int i = 0; i < datacolumn.Table.Rows.Count; i++)
-                    {
-                        wynik.Rows[i][datacolumn.ColumnName] = 0;
-                    }
-                }
-
-                var tasks = new List<Task>();
-
-                //calculate all impulse responses
-                foreach (DataTable table in dane)
-                {
-                    for (int i=0; i<table.Columns.Count;i++)
-                    {
-                        int index = i;
-                        tasks.Add(Task.Factory.StartNew(() => mtCalculateResponse(index, table, wynik, outputFFT)));
-                    }
-                }
-                Task.WaitAll(tasks.ToArray());
-
+                mtCalculateResponse(measConfig.averages, inputData, response, measConfig.processMethod);
             }
 
-            return wynik;
+            //Return response
+            return response;
         }
 
         private void preprocess()
         {
-            dane.Clear();
-            if (proj.measConfig.fmax == 0) { proj.measConfig.fmax = proj.cardConfig.chSmplRate / 2; }
+            if (measConfig.fmax == 0) measConfig.fmax = cardConfig.chSmplRate / 2;
         }
 
         internal double getLength()
@@ -159,28 +155,33 @@ namespace RoomMeasureNI
             return proj.measConfig.measLength * proj.measConfig.averages;
         }
 
-        private void mtCalculateResponse(int column, DataTable table, DataTable wynik, Complex[] outputFFT)
+        protected void mtCalculateResponse(int averages, double[] input, double[] target, PostProcessMethods processing)
         {
+            /// Use for testing
+            //input = output;
 
-            double[] result = table.Rows.Cast<DataRow>().Select(row => (double)row[column]).ToArray();
+            //if (processing == PostProcessMethods.FilterInput)
+            //{
+            //    //Filter input signal
+            //    input = Butterworth.filterResult(measConfig.fmax, measConfig.fmin, input, cardConfig.chSmplRate, 12);
+            //}
 
-            Complex[] resultFFT = usefulFunctions.double2Complex(result);
-            Fourier.Forward(resultFFT, FourierOptions.Matlab);
+            // Impulse response calculation using linear convolution
+            int length = (int)(cardConfig.chSmplRate * (measConfig.breakLength/*));//*/ + measConfig.measLength));
+            double[] invsweep = FunctionGenerator.generateReverseSweep((int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate, measConfig.fmin, measConfig.fmax, (double)cardConfig.aoMax);
+            double[] result = Tools.fastConvolution(input, invsweep);
 
-            resultFFT = resultFFT.Zip(outputFFT, (x, y) => x / y).ToArray();
+            var responseList = result.Split(length);
 
-            Fourier.Inverse(resultFFT, FourierOptions.Matlab);
-            result = usefulFunctions.complexReal2Double(resultFFT);
-
-            lock (thisLock)
+            foreach (var oneMeasurement in responseList.Skip(1).Take(responseList.Count() - 2))
             {
-                for (int i = 0; i < result.Length; i++)
+                double[] data = oneMeasurement.ToArray();
+                lock (thisLock)
                 {
-                    wynik.Rows[i][column] = (double)wynik.Rows[i][column] + result[i] / dane.Count;
+                    for (var i = 0; i < data.Length; i++)
+                        target[i] += data[i] / averages;
                 }
             }
         }
-
-
     }
 }
