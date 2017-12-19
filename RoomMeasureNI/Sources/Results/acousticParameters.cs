@@ -84,12 +84,13 @@ namespace RoomMeasureNI.Sources.Results
 
                     bool skip = false;
                     //iterate over frequencies for octave bank
-                    Parallel.ForEach((CenterFreqO[]) Enum.GetValues(typeof(CenterFreqO)), freq =>
+                    Parallel.ForEach((CenterFreqO[]) Enum.GetValues(typeof(CenterFreqO)), freq =>              
                     {                      
                         try
                         {
-                            double[] filteredResult;
-                            filteredResult = Butterworth.filterResult(FilterBank.Octave, freq, impulseResponse, Fs);
+                            double[] forwardFilt = Butterworth.filterResult(FilterBank.Octave, freq, impulseResponse, Fs);
+                            double[] backwardFilt = Butterworth.filterResult(FilterBank.Octave, freq, forwardFilt.Reverse().ToArray(), Fs);
+                            double[] filteredResult = backwardFilt.Reverse().ToArray();
 
                             double edt = 0;
                             double t20 = 0;
@@ -125,9 +126,9 @@ namespace RoomMeasureNI.Sources.Results
                             if (idx != -1)
                                 STI_input_array[idx] = filteredResult;
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Error in parameters calculation");
+                            MessageBox.Show("Error in parameters calculation \n " + ex.Message);
                             skip = true;
                         }
                     });
@@ -145,8 +146,9 @@ namespace RoomMeasureNI.Sources.Results
                     {
                         try
                         {
-                            double[] filteredResult;
-                            filteredResult = Butterworth.filterResult(FilterBank.Third_octave, freq, impulseResponse, Fs);
+                            double[] forwardFilt = Butterworth.filterResult(FilterBank.Third_octave, freq, impulseResponse, Fs);
+                            double[] backwardFilt = Butterworth.filterResult(FilterBank.Third_octave, freq, forwardFilt.Reverse().ToArray(), Fs);
+                            double[] filteredResult = backwardFilt.Reverse().ToArray();
 
                             var edt = EDT(Fs, maxIdx, filteredResult);
                             var t20 = T20(Fs, maxIdx, filteredResult);
@@ -170,9 +172,9 @@ namespace RoomMeasureNI.Sources.Results
                                     -1);
                             }
                         }
-                        catch
+                        catch(Exception ex)
                         {
-                            MessageBox.Show("Error in parameters calculation");
+                            MessageBox.Show("Error in parameters calculation \n " + ex.Message);
                             skip = true;
                         }
                     });
@@ -249,8 +251,8 @@ namespace RoomMeasureNI.Sources.Results
         /// <returns>Reverberation time</returns>
         private double RT(int Fs, int maxIdx, double[] impulse, int dbStart, int dbStop)
         {
-            var envelope = usefulFunctions.calculateEnvelopeFunction(impulse);
-            var schroeder = getSchroederCurve(envelope);
+           // var envelope = usefulFunctions.calculateEnvelopeFunction(impulse);
+            var schroeder = getSchroederCurve(impulse);
             var maxdb = schroeder[maxIdx];
 
             schroeder = Array.ConvertAll(schroeder, p => p - maxdb);
@@ -277,7 +279,14 @@ namespace RoomMeasureNI.Sources.Results
         /// <returns>C80 value</returns>
         private double C80(int Fs, int maxIdx, double[] impulse)
         {
-            return 10 * Math.Log10(getTimeRange(Fs, maxIdx, impulse, 0, 80) / getTimeRange(Fs, maxIdx, impulse, 80));
+            try
+            {
+                return 10 * Math.Log10(getTimeRange(Fs, maxIdx, impulse, 0, 80) / getTimeRange(Fs, maxIdx, impulse, 80));
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
         /// <summary>
@@ -289,7 +298,14 @@ namespace RoomMeasureNI.Sources.Results
         /// <returns>Returns C50 value</returns>
         private double C50(int Fs, int maxIdx, double[] impulse)
         {
-            return 10 * Math.Log10(getTimeRange(Fs, maxIdx, impulse, 0, 50) / getTimeRange(Fs, maxIdx, impulse, 50));
+            try
+            {
+                return 10 * Math.Log10(getTimeRange(Fs, maxIdx, impulse, 0, 50) / getTimeRange(Fs, maxIdx, impulse, 50));
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
         /// <summary>

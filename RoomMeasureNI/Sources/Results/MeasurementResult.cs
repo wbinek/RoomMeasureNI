@@ -102,7 +102,10 @@ namespace RoomMeasureNI.Sources.Results
         {
             if (bank == FilterBank.None)
                 return getResult();
-            return Butterworth.filterResult(bank, freq, getWindowedSignal(), Fs);
+
+            double[] forwardFilt = Butterworth.filterResult(bank, freq, getWindowedSignal(), Fs);
+            double[] backwardFilt = Butterworth.filterResult(bank, freq, forwardFilt.Reverse().ToArray(), Fs);
+            return backwardFilt.Reverse().ToArray();
         }
 
         public void calculateDefaultParams(bool add = false)
@@ -132,10 +135,11 @@ namespace RoomMeasureNI.Sources.Results
             if (SaveDialog.ShowDialog() == DialogResult.OK)
             {
                 path = SaveDialog.FileName;
-                var format = new WaveFormat(Fs, 24, 1);
+                WaveFormat format = WaveFormat.CreateIeeeFloatWaveFormat(Fs, 1);
                 var writer = new WaveFileWriter(path, format);
+                float maxS = (float) wynik_pomiaru.Select(x => Math.Abs(x)).Max();
 
-                var responseFloat = wynik_pomiaru.Select(s => (float) s / 10).ToArray();
+                var responseFloat = wynik_pomiaru.Select(s => (float) s / maxS).ToArray();
                 writer.WriteSamples(responseFloat, 0, responseFloat.Length);
                 writer.Close();
             }
