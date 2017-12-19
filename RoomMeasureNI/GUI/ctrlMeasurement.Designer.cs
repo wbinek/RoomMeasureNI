@@ -1,4 +1,6 @@
-﻿namespace RoomMeasureNI.GUI
+﻿using RoomMeasureNI.GUI.subMeasurement;
+
+namespace RoomMeasureNI.GUI
 {
     partial class ctrlMeasurement
     {
@@ -37,12 +39,12 @@
             this.tabUstPomiaru = new System.Windows.Forms.TabControl();
             this.tabPunktyPomiarowe = new System.Windows.Forms.TabPage();
             this.splitRysPkt = new System.Windows.Forms.SplitContainer();
-            this.imgPanel1 = new RoomMeasureNI.GUI.imgPanel();
-            this.ctrlPunktyPom = new RoomMeasureNI.GUI.ctrlPunktyPom();
+            this.imgPanel1 = new RoomMeasureNI.GUI.subMeasurement.imgPanel();
+            this.ctrlPunktyPom = new ctrlPunktyPom();
             this.tabMeasurementMethod = new System.Windows.Forms.TabPage();
-            this.ctrlMeasureConfig1 = new RoomMeasureNI.GUI.ctrlMeasureConfig();
+            this.ctrlMeasureConfig1 = new ctrlMeasureConfig();
             this.tabUstawieniaKarty = new System.Windows.Forms.TabPage();
-            this.ctrlCardConfig1 = new RoomMeasureNI.GUI.ctrlCardConfig();
+            this.ctrlCardConfig1 = new ctrlCardConfig();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel.SuspendLayout();
             this.tabUstPomiaru.SuspendLayout();

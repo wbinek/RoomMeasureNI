@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq;
 
-
-namespace RoomMeasureNI
+namespace RoomMeasureNI.Sources.Results
 {
-    public enum windowType { Prostokatne, Tukey}
+    public enum windowType
+    {
+        Prostokatne,
+        Tukey
+    }
 
     [Serializable]
     public class processsingWindow
@@ -35,7 +38,7 @@ namespace RoomMeasureNI
         {
             throw new NotImplementedException();
         }
-        
+
         public double[] getWindowShort()
         {
             switch (type)
@@ -51,27 +54,23 @@ namespace RoomMeasureNI
 
         public double[] getRectWindow(int signalLength)
         {
-            double[] rectWindow = new double[signalLength];
-            for(int i=0;i<windowLength;i++){
-                rectWindow[i + windowStart] = 1;
-            }
+            var rectWindow = new double[signalLength];
+            for (var i = 0; i < windowLength; i++) rectWindow[i + windowStart] = 1;
             return rectWindow;
         }
 
         public double[] getRectWindowShort()
         {
-            double[] rectWindow = new double[windowLength];
-            for (int i = 0; i < windowLength; i++)
-            {
+            var rectWindow = new double[windowLength];
+            for (var i = 0; i < windowLength; i++)
                 rectWindow[i] = 1;
-            }
             return rectWindow;
         }
 
         public double[] getWindowedSignal(double[] signal)
         {
-            double[] window = getWindowShort();
-            double[] cutSignal = signal.Skip(windowStart).Take(windowLength).ToArray();
+            var window = getWindowShort();
+            var cutSignal = signal.Skip(windowStart).Take(windowLength).ToArray();
 
             cutSignal.Zip(window, (a, b) => a * b);
             return cutSignal;

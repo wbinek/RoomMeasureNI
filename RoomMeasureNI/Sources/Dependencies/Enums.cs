@@ -1,4 +1,3 @@
-﻿namespace RoomMeasureNI
+﻿namespace RoomMeasureNI.Sources.Dependencies
 {
-    public enum measurementMethods { Rejestracja_impulsu, Sweep_sine };
 }

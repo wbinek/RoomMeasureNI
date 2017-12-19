@@ -1,4 +1,4 @@
-﻿namespace RoomMeasureNI
+﻿namespace RoomMeasureNI.GUI
 {
     partial class main_window
     {

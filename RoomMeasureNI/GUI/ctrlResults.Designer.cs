@@ -1,4 +1,8 @@
-﻿namespace RoomMeasureNI.GUI
+﻿using RoomMeasureNI.GUI.shared;
+using RoomMeasureNI.GUI.subResults;
+using RoomMeasureNI.Sources.Project;
+
+namespace RoomMeasureNI.GUI
 {
     partial class ctrlResults
     {
@@ -58,7 +62,7 @@
             this.fstopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.godzinapomiaruDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nazwaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ctrlMainPlotPanel1 = new RoomMeasureNI.GUI.ctrlMainPlotPanel();
+            this.ctrlMainPlotPanel1 = new ctrlMainPlotPanel();
             this.ctrlCharts1 = new RoomMeasureNI.GUI.subResults.ctrlCharts();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.projektBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -385,7 +389,7 @@
             // 
             // projektBindingSource
             // 
-            this.projektBindingSource.DataSource = typeof(RoomMeasureNI.Project);
+            this.projektBindingSource.DataSource = typeof(Project);
             // 
             // dataGridViewTextBoxColumn2
             // 

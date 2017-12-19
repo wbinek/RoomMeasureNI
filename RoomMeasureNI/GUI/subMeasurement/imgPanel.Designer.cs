@@ -1,4 +1,4 @@
-﻿namespace RoomMeasureNI.GUI
+﻿namespace RoomMeasureNI.GUI.subMeasurement
 {
     partial class imgPanel
     {

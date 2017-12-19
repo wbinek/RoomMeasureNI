@@ -1,4 +1,6 @@
-﻿namespace RoomMeasureNI.GUI
+﻿using RoomMeasureNI.GUI.shared;
+
+namespace RoomMeasureNI.GUI.subResults
 {
     partial class ctrlMainPlotPanel
     {
@@ -45,7 +47,7 @@
             this.comboFilter = new System.Windows.Forms.ComboBox();
             this.comboChart = new System.Windows.Forms.ComboBox();
             this.comboYScale = new System.Windows.Forms.ComboBox();
-            this.ctrlPlotImpulse = new RoomMeasureNI.ctrlPlotPanel();
+            this.ctrlPlotImpulse = new ctrlPlotPanel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();

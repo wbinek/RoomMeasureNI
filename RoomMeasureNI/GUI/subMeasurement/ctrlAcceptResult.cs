@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace RoomMeasureNI
+namespace RoomMeasureNI.GUI.subMeasurement
 {
     public partial class ctrlAcceptResult : Form
     {
-        public bool accepted = false;
+        public bool accepted;
+
         public ctrlAcceptResult()
         {
             InitializeComponent();
@@ -19,12 +20,12 @@ namespace RoomMeasureNI
         private void butAccept_Click(object sender, EventArgs e)
         {
             accepted = true;
-            this.Close();
+            Close();
         }
 
         private void butDrop_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

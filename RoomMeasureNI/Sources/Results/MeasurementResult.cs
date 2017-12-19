@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using RoomMeasureNI.Sources.ButterworthFilterDesign;
-using NAudio.Wave;
 using System.Windows.Forms;
+using NAudio.Wave;
+using RoomMeasureNI.Sources.Dependencies;
+using RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign;
+using RoomMeasureNI.Sources.Measurement;
 
-namespace RoomMeasureNI
+namespace RoomMeasureNI.Sources.Results
 {
     [Serializable]
     public class MeasurementResult
     {
+        public MeasurementResult()
+        {
+            okno = new processsingWindow();
+            parameters = new List<acousticParameters>();
+        }
+
         public double[] wynik_pomiaru { get; set; }
         public processsingWindow okno { get; set; }
         public List<acousticParameters> parameters { get; set; }
@@ -19,38 +26,28 @@ namespace RoomMeasureNI
         public int Fs { get; set; }
         public string nazwaPunktu { get; set; }
 
-        public measurementMethods metoda { get; set; }
+        public MeasurementMethods metoda { get; set; }
         public int fstart { get; set; }
         public int fstop { get; set; }
 
         public DateTime godzina_pomiaru { get; set; }
         public string nazwa { get; set; }
 
-        public MeasurementResult()
-        {
-            okno = new processsingWindow();
-            parameters = new List<acousticParameters>();
-        }
-
         public void calculateDefWindow()
         {
-            double preGap = 0.1;
+            var preGap = 0.1;
             double windowLength = 1;
-            
-            double maxVal=wynik_pomiaru.Select(x => Math.Abs(x)).Max();
-            int maxIdx = Array.FindIndex(wynik_pomiaru, item => Math.Abs(item) == maxVal);
-            int startGap = (int)(Fs * preGap);
-            
-            if(startGap>maxIdx){
-                startGap=maxIdx;
-            }
+
+            var maxVal = wynik_pomiaru.Select(x => Math.Abs(x)).Max();
+            var maxIdx = Array.FindIndex(wynik_pomiaru, item => Math.Abs(item) == maxVal);
+            var startGap = (int) (Fs * preGap);
+
+            if (startGap > maxIdx) startGap = maxIdx;
             okno.windowStart = maxIdx - startGap;
 
-            int windowLengthSmpl = (int)((windowLength + preGap) * Fs);
+            var windowLengthSmpl = (int) ((windowLength + preGap) * Fs);
             if (windowLengthSmpl + okno.windowStart > wynik_pomiaru.Length)
-            {
                 windowLengthSmpl = wynik_pomiaru.Length - okno.windowStart;
-            }
 
             okno.windowLength = windowLengthSmpl;
             okno.type = windowType.Prostokatne;
@@ -64,36 +61,36 @@ namespace RoomMeasureNI
         public double[] getWindow(double scale = 1)
         {
             //double max = wynik_pomiaru.Max();
-            double[] window = okno.getWindow(wynik_pomiaru.Length);
+            var window = okno.getWindow(wynik_pomiaru.Length);
 
-            int i = 0;
-            Array.ForEach(window, (x) => { window[i++] = x * scale; });
+            var i = 0;
+            Array.ForEach(window, x => { window[i++] = x * scale; });
             return window;
         }
 
         public void setWindowStart(double windowStart)
         {
-            okno.windowStart = (int)(windowStart * Fs);
+            okno.windowStart = (int) (windowStart * Fs);
         }
 
         public void setWindowLength(double windowLength)
         {
-            okno.windowLength = (int)(windowLength * Fs);
+            okno.windowLength = (int) (windowLength * Fs);
         }
 
         public double getWindowLength()
         {
-            return (double)okno.windowLength / Fs;
+            return (double) okno.windowLength / Fs;
         }
 
         public double getWindowStart()
         {
-            return (double)okno.windowStart / Fs;
+            return (double) okno.windowStart / Fs;
         }
 
         public double[] getResultdB()
         {
-            return Array.ConvertAll(wynik_pomiaru, smpl => 20*Math.Log10(Math.Abs(smpl)/2e-5));
+            return Array.ConvertAll(wynik_pomiaru, smpl => 20 * Math.Log10(Math.Abs(smpl) / 2e-5));
         }
 
         public double[] getResult()
@@ -104,27 +101,22 @@ namespace RoomMeasureNI
         public double[] getFilteredResult(FilterBank bank, Enum freq)
         {
             if (bank == FilterBank.None)
-            {
                 return getResult();
-            }
-            else
-            {
-                return Butterworth.filterResult(bank, freq, getWindowedSignal(),Fs);
-            }  
+            return Butterworth.filterResult(bank, freq, getWindowedSignal(), Fs);
         }
 
-        public void calculateDefaultParams(bool add=false)
+        public void calculateDefaultParams(bool add = false)
         {
             if (parameters.Count == 0 || add)
             {
-                acousticParameters newParamSetOkt = new acousticParameters();
-                acousticParameters newParamSetTr = new acousticParameters();
+                var newParamSetOkt = new acousticParameters();
+                var newParamSetTr = new acousticParameters();
 
-                newParamSetOkt.name = "Oktawy";
-                newParamSetOkt.calcParams(getWindowedSignal(), FilterBank.Octave,Fs);
+                newParamSetOkt.name = "Oktawy - " + DateTime.Now.ToString("HH:mm:ss");
+                newParamSetOkt.calcParams(getWindowedSignal(), FilterBank.Octave, Fs);
                 parameters.Add(newParamSetOkt);
 
-                newParamSetTr.name = "Tercje";
+                newParamSetTr.name = "Tercje - " + DateTime.Now.ToString("HH:mm:ss");
                 newParamSetTr.calcParams(getWindowedSignal(), FilterBank.Third_octave, Fs);
                 parameters.Add(newParamSetTr);
             }
@@ -134,72 +126,63 @@ namespace RoomMeasureNI
         {
             //Get File Path
             string path;
-            SaveFileDialog SaveDialog = new SaveFileDialog();
+            var SaveDialog = new SaveFileDialog();
             SaveDialog.Filter = "wav files (*.wav)|*.wav";
 
             if (SaveDialog.ShowDialog() == DialogResult.OK)
             {
                 path = SaveDialog.FileName;
-                WaveFormat format = new WaveFormat(Fs, 24, 1);
-                WaveFileWriter writer = new WaveFileWriter(path, format);
+                var format = new WaveFormat(Fs, 24, 1);
+                var writer = new WaveFileWriter(path, format);
 
-                float[] responseFloat = wynik_pomiaru.Select(s => (float)s/10).ToArray();
+                var responseFloat = wynik_pomiaru.Select(s => (float) s / 10).ToArray();
                 writer.WriteSamples(responseFloat, 0, responseFloat.Length);
                 writer.Close();
-            }           
+            }
         }
 
         public static MeasurementResult[] importResultFromWave()
         {
-
             //Get File Path
             string path;
-            OpenFileDialog OpenDialog = new OpenFileDialog();
+            var OpenDialog = new OpenFileDialog();
             OpenDialog.Filter = "wav files (*.wav)|*.wav";
 
             if (OpenDialog.ShowDialog() == DialogResult.OK)
             {
                 path = OpenDialog.FileName;
-                AudioFileReader reader = new AudioFileReader(path);
+                var reader = new AudioFileReader(path);
 
-                MeasurementResult[] MesResults = new MeasurementResult[reader.WaveFormat.Channels];
-                List<float>[] responses = new List<float>[reader.WaveFormat.Channels];
+                var MesResults = new MeasurementResult[reader.WaveFormat.Channels];
+                var responses = new List<float>[reader.WaveFormat.Channels];
 
-                for (int i=0; i < reader.WaveFormat.Channels; i++)
+                for (var i = 0; i < reader.WaveFormat.Channels; i++)
                 {
-                    MeasurementResult result = new MeasurementResult();
+                    var result = new MeasurementResult();
                     result.Fs = reader.WaveFormat.SampleRate;
                     result.nazwa = OpenDialog.SafeFileName + " channel " + i;
                     result.kanal = "imported";
                     result.nazwaPunktu = "imported";
                     result.fstart = 20;
-                    result.fstop = result.Fs/2;
+                    result.fstop = result.Fs / 2;
 
                     MesResults[i] = result;
                     responses[i] = new List<float>();
-
-
                 }
-              
-                float [] buffer = new float[reader.WaveFormat.Channels];
+
+                var buffer = new float[reader.WaveFormat.Channels];
                 while (reader.Read(buffer, 0, reader.WaveFormat.Channels) > 0)
-                {
-                    for(int i=0; i< reader.WaveFormat.Channels; i++)
-                    {
+                    for (var i = 0; i < reader.WaveFormat.Channels; i++)
                         responses[i].Add(buffer[i]);
-                    }
-                }
 
-                for (int i = 0; i < reader.WaveFormat.Channels; i++)
+                for (var i = 0; i < reader.WaveFormat.Channels; i++)
                 {
-                    MesResults[i].wynik_pomiaru = Array.ConvertAll(responses[i].ToArray(), x => (double)x);
+                    MesResults[i].wynik_pomiaru = Array.ConvertAll(responses[i].ToArray(), x => (double) x);
                     MesResults[i].calculateDefWindow();
                 }
                 return MesResults;
-            }else
-            {
-                return new MeasurementResult[0];
             }
+            return new MeasurementResult[0];
         }
     }
 }

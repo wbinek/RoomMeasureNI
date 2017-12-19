@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using RoomMeasureNI.Sources.Measurement;
+using RoomMeasureNI.Sources.Project;
 
-namespace RoomMeasureNI.GUI
+namespace RoomMeasureNI.GUI.subMeasurement
 {
     [Serializable]
     public partial class imgPanel : UserControl
     {
-        Project proj = Project.Instance;
-        ctrlMeasurement parent;
-        double ratio;
+        private readonly Project proj = Project.Instance;
+        private ctrlMeasurement parent;
+        private double ratio;
 
         public imgPanel()
         {
@@ -24,57 +26,52 @@ namespace RoomMeasureNI.GUI
 
         public Image ScaleImage(Image image, int maxWidth, int maxHeight)
         {
-            var ratioX = (double)maxWidth / image.Width;
-            var ratioY = (double)maxHeight / image.Height;
+            var ratioX = (double) maxWidth / image.Width;
+            var ratioY = (double) maxHeight / image.Height;
             ratio = Math.Min(ratioX, ratioY);
 
-            var newWidth = (int)(image.Width * ratio);
-            var newHeight = (int)(image.Height * ratio);
+            var newWidth = (int) (image.Width * ratio);
+            var newHeight = (int) (image.Height * ratio);
 
             var newImage = new Bitmap(newWidth, newHeight);
 
             using (var graphics = Graphics.FromImage(newImage))
+            {
                 graphics.DrawImage(image, 0, 0, newWidth, newHeight);
+            }
 
             return newImage;
         }
 
         private void wczytajObrazToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            var openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "jpeg|*.jpeg|bitmap|*.bmp|jpg|*.jpg|png|*.png";
             openFileDialog1.Title = "Load an image file";
             openFileDialog1.ShowDialog();
 
             if (openFileDialog1.FileName != "")
-            {
                 proj.drawingSchema = Image.FromFile(openFileDialog1.FileName, true);
-            }
-            this.Refresh();
+            Refresh();
         }
 
         private void imgPanel_Paint(object sender, PaintEventArgs e)
         {
             if (proj.drawingSchema != null)
             {
-                e.Graphics.DrawImage(ScaleImage(proj.drawingSchema, this.Width, this.Height), new Point(0, 0));
+                e.Graphics.DrawImage(ScaleImage(proj.drawingSchema, Width, Height), new Point(0, 0));
 
-                Pen pedzel_green=new Pen(Color.Green);
+                var pedzel_green = new Pen(Color.Green);
                 pedzel_green.Width = 2;
-                Pen pedzel_red = new Pen(Color.Red);
+                var pedzel_red = new Pen(Color.Red);
                 pedzel_red.Width = 2;
 
-                foreach (MeasurementPoint pkt in proj.punktyPomiarowe.listaPunktow)
-                {
+                foreach (var pkt in proj.punktyPomiarowe.listaPunktow)
                     if (pkt.Aktywny)
-                    {
-                        e.Graphics.DrawEllipse(pedzel_green, (int)(pkt.X * ratio - 5), (int)(pkt.Y * ratio - 5), 10, 10);
-                    }
+                        e.Graphics.DrawEllipse(pedzel_green, (int) (pkt.X * ratio - 5), (int) (pkt.Y * ratio - 5), 10,
+                            10);
                     else
-                    {
-                        e.Graphics.DrawEllipse(pedzel_red, (int)(pkt.X * ratio - 5), (int)(pkt.Y * ratio - 5), 10, 10);
-                    }
-                }
+                        e.Graphics.DrawEllipse(pedzel_red, (int) (pkt.X * ratio - 5), (int) (pkt.Y * ratio - 5), 10, 10);
             }
         }
 
@@ -82,20 +79,25 @@ namespace RoomMeasureNI.GUI
         {
             if (proj.drawingSchema != null)
             {
-                MouseEventArgs me = (MouseEventArgs)e;
-                Point coordinates = me.Location;
+                var me = e;
+                var coordinates = me.Location;
 
-                coordinates.X = (int)(coordinates.X / ratio);
-                coordinates.Y = (int)(coordinates.Y / ratio);
+                coordinates.X = (int) (coordinates.X / ratio);
+                coordinates.Y = (int) (coordinates.Y / ratio);
 
-                MeasurementPoint ppom = new MeasurementPoint();
+                var ppom = new MeasurementPoint();
                 ppom.X = coordinates.X;
                 ppom.Y = coordinates.Y;
-                ppom.Nazwa = "Punkt " + coordinates.X.ToString() + coordinates.Y.ToString() ;
+                ppom.Nazwa = "Punkt " + coordinates.X + coordinates.Y;
                 ppom.Aktywny = false;
-                try { ppom.Kanal = proj.cardConfig.chConfig[0].chName; }
-                catch (ArgumentOutOfRangeException) { }
-                
+                try
+                {
+                    ppom.Kanal = proj.cardConfig.chConfig[0].chName;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                }
+
 
                 proj.punktyPomiarowe.listaPunktow.Add(ppom);
                 parent.Odswiez();

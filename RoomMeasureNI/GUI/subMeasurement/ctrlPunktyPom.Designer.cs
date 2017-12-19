@@ -1,4 +1,6 @@
-﻿namespace RoomMeasureNI.GUI
+﻿using RoomMeasureNI.Sources.Project;
+
+namespace RoomMeasureNI.GUI.subMeasurement
 {
     partial class ctrlPunktyPom
     {
@@ -75,7 +77,7 @@
             // 
             // projektBindingSource
             // 
-            this.projektBindingSource.DataSource = typeof(RoomMeasureNI.Project);
+            this.projektBindingSource.DataSource = typeof(Project);
             // 
             // listaPunktowBindingSource
             // 

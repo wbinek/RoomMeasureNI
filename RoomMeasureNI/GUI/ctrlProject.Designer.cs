@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableProjektInfo = new System.Windows.Forms.TableLayoutPanel();
             this.textAdres = new System.Windows.Forms.TextBox();
             this.textZleceniodawca = new System.Windows.Forms.TextBox();
@@ -37,7 +38,9 @@
             this.lblAdres = new System.Windows.Forms.Label();
             this.lblOpis = new System.Windows.Forms.Label();
             this.textOpis = new System.Windows.Forms.TextBox();
+            this.projectBasicInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableProjektInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.projectBasicInfoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tableProjektInfo
@@ -71,6 +74,7 @@
             // 
             // textAdres
             // 
+            this.textAdres.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.projectBasicInfoBindingSource, "projectAdress", true));
             this.textAdres.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textAdres.Location = new System.Drawing.Point(174, 92);
             this.textAdres.Margin = new System.Windows.Forms.Padding(6);
@@ -81,6 +85,7 @@
             // 
             // textZleceniodawca
             // 
+            this.textZleceniodawca.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.projectBasicInfoBindingSource, "projectClient", true));
             this.textZleceniodawca.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textZleceniodawca.Location = new System.Drawing.Point(174, 49);
             this.textZleceniodawca.Margin = new System.Windows.Forms.Padding(6);
@@ -102,6 +107,7 @@
             // 
             // textNazwa
             // 
+            this.textNazwa.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.projectBasicInfoBindingSource, "projectName", true));
             this.textNazwa.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textNazwa.Location = new System.Drawing.Point(174, 6);
             this.textNazwa.Margin = new System.Windows.Forms.Padding(6);
@@ -145,6 +151,7 @@
             // 
             // textOpis
             // 
+            this.textOpis.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.projectBasicInfoBindingSource, "projectDescription", true));
             this.textOpis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textOpis.Location = new System.Drawing.Point(174, 142);
             this.textOpis.Margin = new System.Windows.Forms.Padding(6);
@@ -153,6 +160,10 @@
             this.textOpis.Size = new System.Drawing.Size(522, 487);
             this.textOpis.TabIndex = 4;
             this.textOpis.TextChanged += new System.EventHandler(this.textOpis_TextChanged);
+            // 
+            // projectBasicInfoBindingSource
+            // 
+            this.projectBasicInfoBindingSource.DataSource = typeof(RoomMeasureNI.Sources.Project.ProjectBasicInfo);
             // 
             // ctrlProject
             // 
@@ -164,6 +175,7 @@
             this.Size = new System.Drawing.Size(702, 635);
             this.tableProjektInfo.ResumeLayout(false);
             this.tableProjektInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.projectBasicInfoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,5 +192,6 @@
         private System.Windows.Forms.Label lblOpis;
         private System.Windows.Forms.TextBox textNazwa;
         private System.Windows.Forms.TextBox textOpis;
+        private System.Windows.Forms.BindingSource projectBasicInfoBindingSource;
     }
 }

@@ -1,43 +1,45 @@
 ﻿using System;
 using System.Windows.Forms;
 using NationalInstruments.DAQmx;
+using RoomMeasureNI.Sources.Project;
 
-namespace RoomMeasureNI.GUI
+namespace RoomMeasureNI.GUI.subMeasurement
 {
     public partial class ctrlCardConfig : UserControl
     {
-        Project proj = Project.Instance;
+        private readonly Project proj = Project.Instance;
+
         public ctrlCardConfig()
         {
             InitializeComponent();
-            this.projektBindingSource.DataSource = proj;    //wiąże tabelę z plikiem projektu
+            projektBindingSource.DataSource = proj; //wiąże tabelę z plikiem projektu
 
-            inputTerminalComboBox.DataSource = Enum.GetValues(typeof (AITerminalConfiguration));
+            inputTerminalComboBox.DataSource = Enum.GetValues(typeof(AITerminalConfiguration));
             excitationComboBox.DataSource = Enum.GetValues(typeof(AIExcitationSource));
 
             Odswiez();
         }
+
         public void Odswiez()
         {
-            this.projektBindingSource.ResetBindings(false);
-            this.channelConfigBindingSource.ResetBindings(false);
+            projektBindingSource.ResetBindings(false);
+            channelConfigBindingSource.ResetBindings(false);
 
             comboTimingRate.SelectedItem = proj.cardConfig.chSmplRate.ToString();
             comboSamplesToRead.SelectedItem = proj.cardConfig.chSmplToRead.ToString();
-            maximumPressureNumeric.Value = (decimal)proj.cardConfig.chMaxPress;
-            currentNumeric.Value = (decimal)proj.cardConfig.chIEPEVal;
+            maximumPressureNumeric.Value = (decimal) proj.cardConfig.chMaxPress;
+            currentNumeric.Value = (decimal) proj.cardConfig.chIEPEVal;
             inputTerminalComboBox.SelectedItem = proj.cardConfig.terminalConfig;
             excitationComboBox.SelectedItem = proj.cardConfig.excitationSource;
-            outputChannelComboBox.SelectedItem = proj.cardConfig.aoChannelSellected;
+            outputChannelComboBox.SelectedItem = proj.cardConfig.aoChannelSelected;
             outputMaxValNumeric.Value = proj.cardConfig.aoMax;
             outputMinValNumeric.Value = proj.cardConfig.aoMin;
-           
         }
 
         //.........................EVENT HANDLERS................................................
         private void comboTimingRate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            proj.cardConfig.chSmplRate =int.Parse(comboTimingRate.SelectedItem.ToString());
+            proj.cardConfig.chSmplRate = int.Parse(comboTimingRate.SelectedItem.ToString());
         }
 
         private void comboSamplesToRead_SelectedIndexChanged(object sender, EventArgs e)
@@ -47,27 +49,27 @@ namespace RoomMeasureNI.GUI
 
         private void maximumPressureNumeric_ValueChanged(object sender, EventArgs e)
         {
-            proj.cardConfig.chMaxPress = (double)maximumPressureNumeric.Value;
+            proj.cardConfig.chMaxPress = (double) maximumPressureNumeric.Value;
         }
 
         private void inputTerminalComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            proj.cardConfig.terminalConfig = (AITerminalConfiguration)inputTerminalComboBox.SelectedItem;
+            proj.cardConfig.terminalConfig = (AITerminalConfiguration) inputTerminalComboBox.SelectedItem;
         }
 
         private void excitationComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            proj.cardConfig.excitationSource = (AIExcitationSource)excitationComboBox.SelectedItem;
+            proj.cardConfig.excitationSource = (AIExcitationSource) excitationComboBox.SelectedItem;
         }
 
         private void currentNumeric_ValueChanged(object sender, EventArgs e)
         {
-            proj.cardConfig.chIEPEVal = (double)currentNumeric.Value;
+            proj.cardConfig.chIEPEVal = (double) currentNumeric.Value;
         }
 
         private void outputChannelComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            proj.cardConfig.aoChannelSellected = outputChannelComboBox.SelectedItem.ToString();
+            proj.cardConfig.aoChannelSelected = outputChannelComboBox.SelectedItem.ToString();
         }
 
         private void outputMaxValNumeric_ValueChanged(object sender, EventArgs e)

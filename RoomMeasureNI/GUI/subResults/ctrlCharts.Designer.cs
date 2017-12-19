@@ -1,4 +1,7 @@
-﻿namespace RoomMeasureNI.GUI.subResults
+﻿using RoomMeasureNI.GUI.shared;
+using RoomMeasureNI.Sources.Results;
+
+namespace RoomMeasureNI.GUI.subResults
 {
     partial class ctrlCharts
     {
@@ -37,7 +40,7 @@
             this.checkedListParametersToPlot = new System.Windows.Forms.CheckedListBox();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.measurementResultBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ctrlPlotPanel1 = new RoomMeasureNI.ctrlPlotPanel();
+            this.ctrlPlotPanel1 = new RoomMeasureNI.GUI.shared.ctrlPlotPanel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -100,6 +103,7 @@
             this.dataGridViewResultsSets.RowHeadersVisible = false;
             this.dataGridViewResultsSets.Size = new System.Drawing.Size(261, 234);
             this.dataGridViewResultsSets.TabIndex = 0;
+            this.dataGridViewResultsSets.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.onRefreshPlots);
             // 
             // checkboxPlot
             // 
@@ -126,7 +130,7 @@
             this.checkedListParametersToPlot.Name = "checkedListParametersToPlot";
             this.checkedListParametersToPlot.Size = new System.Drawing.Size(251, 234);
             this.checkedListParametersToPlot.TabIndex = 0;
-            this.checkedListParametersToPlot.SelectedIndexChanged += new System.EventHandler(this.checkedListParametersToPlot_SelectedIndexChanged);
+            this.checkedListParametersToPlot.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.onRefreshPlots);
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -137,7 +141,7 @@
             // 
             // measurementResultBindingSource
             // 
-            this.measurementResultBindingSource.DataSource = typeof(RoomMeasureNI.MeasurementResult);
+            this.measurementResultBindingSource.DataSource = typeof(RoomMeasureNI.Sources.Results.MeasurementResult);
             // 
             // ctrlPlotPanel1
             // 

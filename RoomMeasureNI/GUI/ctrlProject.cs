@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
+using RoomMeasureNI.Sources.Project;
 
 namespace RoomMeasureNI.GUI
 {
     public partial class ctrlProject : UserControl
     {
-        private Project proj = Project.Instance;
+        private readonly Project proj = Project.Instance;
+
         public ctrlProject()
         {
             InitializeComponent();
@@ -38,10 +40,10 @@ namespace RoomMeasureNI.GUI
         //Refresh - called when project changed (ex. loaded)
         public void Odswiez()
         {
-            this.textNazwa.Text = proj.info.projectName;
-            this.textZleceniodawca.Text = proj.info.projectClient;
-            this.textAdres.Text = proj.info.projectAdress;
-            this.textOpis.Text = proj.info.projectDescription;
+            textNazwa.Text = proj.info.projectName;
+            textZleceniodawca.Text = proj.info.projectClient;
+            textAdres.Text = proj.info.projectAdress;
+            textOpis.Text = proj.info.projectDescription;
         }
     }
 }

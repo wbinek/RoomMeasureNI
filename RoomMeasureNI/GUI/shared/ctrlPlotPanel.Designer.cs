@@ -1,4 +1,4 @@
-﻿namespace RoomMeasureNI
+﻿namespace RoomMeasureNI.GUI.shared
 {
     partial class ctrlPlotPanel
     {

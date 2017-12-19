@@ -1,4 +1,4 @@
-﻿namespace RoomMeasureNI.GUI
+﻿namespace RoomMeasureNI.GUI.subMeasurement
 {
     partial class ctrlMeasureConfig
     {
@@ -62,7 +62,7 @@
             "15",
             "30"});
             this.comboMeasLength.Location = new System.Drawing.Point(624, 37);
-            this.comboMeasLength.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboMeasLength.Margin = new System.Windows.Forms.Padding(6);
             this.comboMeasLength.Name = "comboMeasLength";
             this.comboMeasLength.Size = new System.Drawing.Size(218, 33);
             this.comboMeasLength.TabIndex = 1;
@@ -77,9 +77,9 @@
             this.groupBox1.Controls.Add(this.comboMeasMethod);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(874, 96);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
@@ -119,11 +119,8 @@
             // 
             this.comboMeasMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboMeasMethod.FormattingEnabled = true;
-            this.comboMeasMethod.Items.AddRange(new object[] {
-            "Rejestracja impulsu",
-            "Sweep sine"});
             this.comboMeasMethod.Location = new System.Drawing.Point(196, 37);
-            this.comboMeasMethod.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboMeasMethod.Margin = new System.Windows.Forms.Padding(6);
             this.comboMeasMethod.Name = "comboMeasMethod";
             this.comboMeasMethod.Size = new System.Drawing.Size(218, 33);
             this.comboMeasMethod.TabIndex = 0;
@@ -140,11 +137,10 @@
             this.groupMethod.Controls.Add(this.label4);
             this.groupMethod.Controls.Add(this.comboAverages);
             this.groupMethod.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupMethod.Enabled = false;
             this.groupMethod.Location = new System.Drawing.Point(0, 96);
-            this.groupMethod.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupMethod.Margin = new System.Windows.Forms.Padding(6);
             this.groupMethod.Name = "groupMethod";
-            this.groupMethod.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupMethod.Padding = new System.Windows.Forms.Padding(6);
             this.groupMethod.Size = new System.Drawing.Size(874, 610);
             this.groupMethod.TabIndex = 3;
             this.groupMethod.TabStop = false;
@@ -171,7 +167,7 @@
             "16000",
             "8000"});
             this.comboFmax.Location = new System.Drawing.Point(624, 131);
-            this.comboFmax.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboFmax.Margin = new System.Windows.Forms.Padding(6);
             this.comboFmax.Name = "comboFmax";
             this.comboFmax.Size = new System.Drawing.Size(218, 33);
             this.comboFmax.TabIndex = 0;
@@ -197,7 +193,7 @@
             "40",
             "80"});
             this.comboFmin.Location = new System.Drawing.Point(196, 131);
-            this.comboFmin.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboFmin.Margin = new System.Windows.Forms.Padding(6);
             this.comboFmin.Name = "comboFmin";
             this.comboFmin.Size = new System.Drawing.Size(218, 33);
             this.comboFmin.TabIndex = 0;
@@ -220,7 +216,7 @@
             this.comboGenerator.Items.AddRange(new object[] {
             "Sweep wykładniczy"});
             this.comboGenerator.Location = new System.Drawing.Point(196, 210);
-            this.comboGenerator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboGenerator.Margin = new System.Windows.Forms.Padding(6);
             this.comboGenerator.Name = "comboGenerator";
             this.comboGenerator.Size = new System.Drawing.Size(218, 33);
             this.comboGenerator.TabIndex = 0;
@@ -247,7 +243,7 @@
             "5",
             "6"});
             this.comboAverages.Location = new System.Drawing.Point(196, 56);
-            this.comboAverages.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboAverages.Margin = new System.Windows.Forms.Padding(6);
             this.comboAverages.Name = "comboAverages";
             this.comboAverages.Size = new System.Drawing.Size(218, 33);
             this.comboAverages.TabIndex = 0;
@@ -260,7 +256,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.groupMethod);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "ctrlMeasureConfig";
             this.Size = new System.Drawing.Size(874, 706);
             this.groupBox1.ResumeLayout(false);

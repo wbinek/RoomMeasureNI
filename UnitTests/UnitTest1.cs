@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using RoomMeasureNI.Sources.ButterworthFilterDesign;
 using System.Numerics;
+using RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign;
 
 namespace UnitTests
 {

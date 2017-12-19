@@ -1,4 +1,6 @@
-﻿namespace RoomMeasureNI
+﻿using RoomMeasureNI.GUI.shared;
+
+namespace RoomMeasureNI.GUI.subMeasurement
 {
     partial class ctrlAcceptResult
     {
@@ -31,7 +33,7 @@
             this.butAccept = new System.Windows.Forms.Button();
             this.butDrop = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ctrlPlotPanel1 = new RoomMeasureNI.ctrlPlotPanel();
+            this.ctrlPlotPanel1 = new ctrlPlotPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RoomMeasureNI
+namespace RoomMeasureNI.Sources.Project
 {
     [Serializable]
     public class ProjectBasicInfo

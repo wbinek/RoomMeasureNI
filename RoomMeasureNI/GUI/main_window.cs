@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
+using RoomMeasureNI.Sources.Project;
 
-namespace RoomMeasureNI
+namespace RoomMeasureNI.GUI
 {
     public partial class main_window : Form
     {
-        private Project proj = Project.Instance;
+        private readonly Project proj = Project.Instance;
+
         public main_window()
         {
             InitializeComponent();
@@ -26,11 +28,12 @@ namespace RoomMeasureNI
             proj.loadFile();
             Odswiez();
         }
+
         private void Odswiez()
         {
-            this.ctrlProjekt1.Odswiez();
-            this.ctrlPomiar1.Odswiez();
-            this.ctrlResults1.Odswiez();
+            ctrlProjekt1.Odswiez();
+            ctrlPomiar1.Odswiez();
+            ctrlResults1.Odswiez();
         }
 
         private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
