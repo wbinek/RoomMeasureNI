@@ -94,7 +94,7 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
         {
             var filter = new Biquad[0];
             double gain = 1;
-            bandPassBank(Fs, bank, freq, 3, ref filter, ref gain);
+            bandPassBank(Fs, bank, freq, 4, ref filter, ref gain);
 
             var x = new double[filter.Count()][];
             var y = new double[filter.Count()][];
