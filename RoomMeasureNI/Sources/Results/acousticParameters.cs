@@ -11,6 +11,7 @@ namespace RoomMeasureNI.Sources.Results
     /// <summary>
     ///     Enum containing list of acoustic parameters to calculate
     /// </summary>
+    [Serializable]
     internal enum acousticParams
     {
         EDT,
@@ -35,7 +36,6 @@ namespace RoomMeasureNI.Sources.Results
         public acousticParameters()
         {
             parameters = new DataTable();
-            parameters.Columns.Add("freqEnum", typeof(Enum));
             parameters.Columns.Add("freqidx", typeof(int));
             parameters.Columns.Add("Frequency", typeof(string));
             parameters.Columns.Add("EDT", typeof(double));
@@ -111,7 +111,6 @@ namespace RoomMeasureNI.Sources.Results
                             lock (lockMe)
                             {
                                 parameters.Rows.Add(
-                                    freq,
                                     (int)freq,
                                     freq.GetDescription(),
                                     edt,
@@ -160,7 +159,6 @@ namespace RoomMeasureNI.Sources.Results
                             lock (lockMe)
                             {
                                 parameters.Rows.Add(
-                                    freq,
                                     (int)freq,
                                     freq.GetDescription(),
                                     edt,
@@ -577,7 +575,6 @@ namespace RoomMeasureNI.Sources.Results
             var t30 = ((double) row500["T30"] + (double) row1000["T30"]) / 2;
 
             parameters.Rows.Add(
-                null,
                 100,
                 "Średnia",
                 edt,

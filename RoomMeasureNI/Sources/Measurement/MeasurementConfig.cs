@@ -2,6 +2,7 @@
 
 namespace RoomMeasureNI.Sources.Measurement
 {
+    [Serializable]
     public enum MeasurementMethods
     {
         SweepSine,
@@ -9,6 +10,7 @@ namespace RoomMeasureNI.Sources.Measurement
         Calibrate,
     }
 
+    [Serializable]
     public enum PostProcessMethods
     {
         NoProcessing,
