@@ -36,6 +36,8 @@ namespace RoomMeasureNI.GUI
         private void butStop_Click(object sender, EventArgs e)
         {
             measExec.stopMeasurement();
+            timer1.Stop();
+            progressBar.Value = 0;
         }
 
         private void Form1_Load(double time)

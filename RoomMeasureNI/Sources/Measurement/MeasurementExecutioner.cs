@@ -152,7 +152,7 @@ namespace RoomMeasureNI.Sources.Measurement
 
         internal double getLength()
         {
-            return proj.measConfig.measLength * proj.measConfig.averages;
+            return (proj.measConfig.measLength + measConfig.breakLength) * proj.measConfig.averages;
         }
 
         protected void mtCalculateResponse(int averages, double[] input, double[] target, PostProcessMethods processing)

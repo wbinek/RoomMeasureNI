@@ -35,6 +35,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboMeasMethod = new System.Windows.Forms.ComboBox();
             this.groupMethod = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBreakLength = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.comboFmax = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -128,6 +130,8 @@
             // 
             // groupMethod
             // 
+            this.groupMethod.Controls.Add(this.label8);
+            this.groupMethod.Controls.Add(this.comboBreakLength);
             this.groupMethod.Controls.Add(this.label6);
             this.groupMethod.Controls.Add(this.comboFmax);
             this.groupMethod.Controls.Add(this.label5);
@@ -145,6 +149,35 @@
             this.groupMethod.TabIndex = 3;
             this.groupMethod.TabStop = false;
             this.groupMethod.Text = "Ustawienia metody";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(436, 59);
+            this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(177, 25);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Długość przerwy:";
+            // 
+            // comboBreakLength
+            // 
+            this.comboBreakLength.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBreakLength.FormattingEnabled = true;
+            this.comboBreakLength.Items.AddRange(new object[] {
+            "0",
+            "0,5",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.comboBreakLength.Location = new System.Drawing.Point(624, 56);
+            this.comboBreakLength.Margin = new System.Windows.Forms.Padding(6);
+            this.comboBreakLength.Name = "comboBreakLength";
+            this.comboBreakLength.Size = new System.Drawing.Size(218, 33);
+            this.comboBreakLength.TabIndex = 0;
+            this.comboBreakLength.SelectionChangeCommitted += new System.EventHandler(this.comboBreakLength_SelectionChangeCommitted);
             // 
             // label6
             // 
@@ -284,5 +317,7 @@
         private System.Windows.Forms.ComboBox comboAverages;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboGenerator;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboBreakLength;
     }
 }

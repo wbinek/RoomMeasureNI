@@ -24,6 +24,7 @@ namespace RoomMeasureNI.GUI.subMeasurement
             comboMeasMethod.SelectedIndex = (int) proj.measConfig.measMethod;
             comboAverages.SelectedItem = proj.measConfig.averages.ToString();
             comboFmin.SelectedItem = proj.measConfig.fmin.ToString();
+            comboBreakLength.SelectedItem = proj.measConfig.breakLength.ToString();
             if (proj.measConfig.fmax == 0) comboFmax.SelectedItem = "Fs/2";
             else comboFmax.SelectedItem = proj.measConfig.fmax.ToString();
             comboGenerator.SelectedIndex = (int) proj.measConfig.genMethod;
@@ -71,6 +72,11 @@ namespace RoomMeasureNI.GUI.subMeasurement
                 proj.measConfig.fmax = 0;
             else
                 proj.measConfig.fmax = int.Parse(comboFmax.SelectedItem.ToString());
+        }
+
+        private void comboBreakLength_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            proj.measConfig.breakLength = int.Parse(comboBreakLength.SelectedItem.ToString());
         }
     }
 }
