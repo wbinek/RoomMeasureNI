@@ -47,7 +47,7 @@ namespace RoomMeasureNI.Sources.Results
             parameters.Columns.Add("STI", typeof(double));
 
             parameters.Columns[0].ColumnMapping = MappingType.Hidden;
-            parameters.Columns[1].ColumnMapping = MappingType.Hidden;
+            //parameters.Columns[1].ColumnMapping = MappingType.Hidden;
 
             nc_curve = NC_Curves.NC25;
             speaker = Speaker.mezczyzna;
@@ -66,8 +66,8 @@ namespace RoomMeasureNI.Sources.Results
         internal void calcParams(double[] impulseResponse, FilterBank filter, int Fs)
         {
             //find maximum
-            var maxVal = impulseResponse.Select(x => Math.Abs(x)).Max();
-            var maxIdx = Array.FindIndex(impulseResponse, item => Math.Abs(item) == maxVal);
+            var maxValGlobal = impulseResponse.Select(x => Math.Abs(x)).Max();
+            var maxIdxGlobal = Array.FindIndex(impulseResponse, item => Math.Abs(item) == maxValGlobal);
 
 
             //switch selecting filter bank
@@ -91,6 +91,9 @@ namespace RoomMeasureNI.Sources.Results
                             double[] forwardFilt = Butterworth.filterResult(FilterBank.Octave, freq, impulseResponse, Fs);
                             double[] backwardFilt = Butterworth.filterResult(FilterBank.Octave, freq, forwardFilt.Reverse().ToArray(), Fs);
                             double[] filteredResult = backwardFilt.Reverse().ToArray();
+
+                            var maxVal = filteredResult.Select(x => Math.Abs(x)).Max();
+                            var maxIdx = Array.FindIndex(filteredResult, item => Math.Abs(item) == maxVal);
 
                             double edt = 0;
                             double t20 = 0;
@@ -133,7 +136,7 @@ namespace RoomMeasureNI.Sources.Results
                     });
                     if (skip)
                         break;
-                    AverageParameters(Fs, maxIdx, STI_input_array);
+                    AverageParameters(Fs, maxIdxGlobal, STI_input_array);
                     //end case
                     break;
 
@@ -148,6 +151,9 @@ namespace RoomMeasureNI.Sources.Results
                             double[] forwardFilt = Butterworth.filterResult(FilterBank.Third_octave, freq, impulseResponse, Fs);
                             double[] backwardFilt = Butterworth.filterResult(FilterBank.Third_octave, freq, forwardFilt.Reverse().ToArray(), Fs);
                             double[] filteredResult = backwardFilt.Reverse().ToArray();
+
+                            var maxVal = filteredResult.Select(x => Math.Abs(x)).Max();
+                            var maxIdx = Array.FindIndex(filteredResult, item => Math.Abs(item) == maxVal);
 
                             var edt = EDT(Fs, maxIdx, filteredResult);
                             var t20 = T20(Fs, maxIdx, filteredResult);
@@ -249,7 +255,7 @@ namespace RoomMeasureNI.Sources.Results
         /// <returns>Reverberation time</returns>
         private double RT(int Fs, int maxIdx, double[] impulse, int dbStart, int dbStop)
         {
-           // var envelope = usefulFunctions.calculateEnvelopeFunction(impulse);
+            //var envelope = usefulFunctions.calculateEnvelopeFunction(impulse);
             var schroeder = getSchroederCurve(impulse);
             var maxdb = schroeder[maxIdx];
 
