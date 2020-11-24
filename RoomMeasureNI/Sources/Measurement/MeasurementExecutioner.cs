@@ -165,42 +165,48 @@ namespace RoomMeasureNI.Sources.Measurement
             //    //Filter input signal
             //    input = Butterworth.filterResult(measConfig.fmax, measConfig.fmin, input, cardConfig.chSmplRate, 12);
             //}
-
-            // Impulse response calculation using linear convolution
-            //int length = (int)(cardConfig.chSmplRate * (measConfig.breakLength/*));//*/ + measConfig.measLength));
-            //double[] invsweep = FunctionGenerator.generateReverseSweep((int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate, measConfig.fmin, measConfig.fmax, (double)cardConfig.aoMax);
-            //double[] result = Tools.fastConvolution(input, invsweep);
-            //double[] response = new double[length];
-
-            //var responseList = result.Split(length);
-
-            //foreach (var oneMeasurement in responseList.Skip(1).Take(responseList.Count() - 2))
-            //{
-            //    double[] data = oneMeasurement.ToArray();
-            //    lock (thisLock)
-            //    {
-            //        for (var i = 0; i < data.Length; i++)
-            //            response[i] += data[i] / averages;
-            //    }
-            //}
-
-            // Impulse resoinse calculation using fft division with pre convolution averaging
             int length = (int)(cardConfig.chSmplRate * (measConfig.breakLength/*));//*/ + measConfig.measLength));
-            var inputList = input.Split(length);
-            
-            double[] averagedResponse = new double[length];
+            double[] response = new double[length];
 
-            foreach (var oneMeasurement in inputList.Skip(1).Take(averagedResponse.Count() - 2))
-            {
-                double[] data = oneMeasurement.ToArray();
-                lock (thisLock)
+            var mode = 0;
+            if (mode == 0)
                 {
-                    for (var i = 0; i < data.Length; i++)
-                        averagedResponse[i] += data[i] / averages;
-                }
-            }
+                // Impulse response calculation using linear convolution
+                
+                double[] invsweep = FunctionGenerator.generateReverseSweep((int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate, measConfig.fmin, measConfig.fmax, (double)cardConfig.aoMax);
+                var inputList = input.Split(length);
+                double[] averagedResponse = new double[length];
 
-            double[] response = Tools.fastDeConvolution(averagedResponse, output);
+                foreach (var oneMeasurement in inputList.Skip(1).Take(inputList.Count() - 2))
+                {
+                    double[] data = oneMeasurement.ToArray();
+                    lock (thisLock)
+                    {
+                        for (var i = 0; i < data.Length; i++)
+                            averagedResponse[i] += data[i] / averages;
+                    }
+                }
+
+                response = Tools.fastConvolution(averagedResponse, invsweep);
+            }
+            else if (mode == 1)
+            {
+                // Impulse resoinse calculation using fft division with pre convolution averaging
+                var inputList = input.Split(length);
+                double[] averagedResponse = new double[length];
+
+                foreach (var oneMeasurement in inputList.Skip(1).Take(averagedResponse.Count() - 2))
+                {
+                    double[] data = oneMeasurement.ToArray();
+                    lock (thisLock)
+                    {
+                        for (var i = 0; i < data.Length; i++)
+                            averagedResponse[i] += data[i] / averages;
+                    }
+                }
+
+                response = Tools.fastDeConvolution(averagedResponse, output);
+            }
             return response;
         }
     }
