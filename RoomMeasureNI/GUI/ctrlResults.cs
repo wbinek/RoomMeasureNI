@@ -1,9 +1,9 @@
-﻿using System;
+﻿using RoomMeasureNI.Sources.Project;
+using RoomMeasureNI.Sources.Results;
+using System;
 using System.Collections;
 using System.Data;
 using System.Windows.Forms;
-using RoomMeasureNI.Sources.Project;
-using RoomMeasureNI.Sources.Results;
 
 namespace RoomMeasureNI.GUI
 {
@@ -41,7 +41,7 @@ namespace RoomMeasureNI.GUI
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            currentMeasurement = (MeasurementResult) dataGridViewMesurements.Rows[e.RowIndex].DataBoundItem;
+            currentMeasurement = (MeasurementResult)dataGridViewMesurements.Rows[e.RowIndex].DataBoundItem;
             currentMeasurement.calculateDefaultParams();
             //measResultsBindingSource.DataSource = currentMeasurement;
             ctrlCharts1.setResult(currentMeasurement);
@@ -67,7 +67,7 @@ namespace RoomMeasureNI.GUI
         {
             dataGridParamSetData.DataSource = "null";
             dataGridParamSetData.DataSource =
-                ((acousticParameters) dataGridResults.Rows[e.RowIndex].DataBoundItem).parameters;
+                ((acousticParameters)dataGridResults.Rows[e.RowIndex].DataBoundItem).parameters;
             dataGridParamSetData.DefaultCellStyle.Format = "N2";
             //dataGridParamSetData.Sort(dataGridParamSetData.Columns["freqidx"], ListSortDirection.Ascending);
             //dataGridParamSetData.Columns[0].DefaultCellStyle.Format  ="#";
@@ -78,11 +78,11 @@ namespace RoomMeasureNI.GUI
         {
             if (e.Shift && e.KeyCode == Keys.Insert || e.Control && e.KeyCode == Keys.V)
             {
-                char[] rowSplitter = {'\r', '\n'};
-                char[] columnSplitter = {'\t'};
+                char[] rowSplitter = { '\r', '\n' };
+                char[] columnSplitter = { '\t' };
                 //get the text from clipboard
                 var dataInClipboard = Clipboard.GetDataObject();
-                var stringInClipboard = (string) dataInClipboard.GetData(DataFormats.Text);
+                var stringInClipboard = (string)dataInClipboard.GetData(DataFormats.Text);
                 //split it into lines
                 var rowsInClipboard = stringInClipboard.Split(rowSplitter, StringSplitOptions.RemoveEmptyEntries);
                 //get the row and column of selected cell in grid
@@ -90,7 +90,7 @@ namespace RoomMeasureNI.GUI
                 var c = dataGridParamSetData.SelectedCells[0].ColumnIndex;
                 //add rows into grid to fit clipboard lines
                 if (dataGridParamSetData.Rows.Count < r + rowsInClipboard.Length)
-                    ((DataTable) dataGridParamSetData.DataSource).Rows.Add(r + rowsInClipboard.Length -
+                    ((DataTable)dataGridParamSetData.DataSource).Rows.Add(r + rowsInClipboard.Length -
                                                                            dataGridParamSetData.Rows.Count);
                 // loop through the lines, split them into cells and place the values in the corresponding cell.
                 for (var iRow = 0; iRow < rowsInClipboard.Length; iRow++)
@@ -105,14 +105,13 @@ namespace RoomMeasureNI.GUI
             }
         }
 
-
         ///////////////////////////////////////Context menu//////////////////////////////////////////////////////////////
         private void calculateDefaultParamsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IList rows = dataGridViewMesurements.SelectedCells;
 
             foreach (var row in rows)
-                ((MeasurementResult) dataGridViewMesurements.Rows[((DataGridViewCell) row).RowIndex].DataBoundItem)
+                ((MeasurementResult)dataGridViewMesurements.Rows[((DataGridViewCell)row).RowIndex].DataBoundItem)
                     .calculateDefaultParams(true);
             Odswiez();
         }
@@ -122,7 +121,7 @@ namespace RoomMeasureNI.GUI
             IList rows = dataGridViewMesurements.SelectedCells;
 
             foreach (var row in rows)
-                ((MeasurementResult) dataGridViewMesurements.Rows[((DataGridViewCell) row).RowIndex].DataBoundItem)
+                ((MeasurementResult)dataGridViewMesurements.Rows[((DataGridViewCell)row).RowIndex].DataBoundItem)
                     .exportResultAsWave();
         }
 
@@ -149,6 +148,15 @@ namespace RoomMeasureNI.GUI
         public MeasurementResult getCurrentMeasurement()
         {
             return currentMeasurement;
+        }
+
+        private void saveImpulseAs44100WavToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IList rows = dataGridViewMesurements.SelectedCells;
+
+            foreach (var row in rows)
+                ((MeasurementResult)dataGridViewMesurements.Rows[((DataGridViewCell)row).RowIndex].DataBoundItem)
+                    .exportResultAsWave44100();
         }
     }
 }

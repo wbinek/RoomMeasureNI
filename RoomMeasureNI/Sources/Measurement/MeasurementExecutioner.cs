@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Numerics;
-using System.Threading.Tasks;
-using MathNet.Numerics.IntegralTransforms;
-using RoomMeasureNI.GUI.subMeasurement;
+﻿using RoomMeasureNI.GUI.subMeasurement;
 using RoomMeasureNI.Sources.Dependencies;
 using RoomMeasureNI.Sources.Results;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RoomMeasureNI.Sources.Measurement
 {
@@ -40,6 +36,7 @@ namespace RoomMeasureNI.Sources.Measurement
                 case MeasurementMethods.SweepSine:
                     postprocess(dane, channelNames);
                     break;
+
                 case MeasurementMethods.ImpulseRecording:
                     showAcceptanceWindow(dane, channelNames);
                     break;
@@ -67,11 +64,13 @@ namespace RoomMeasureNI.Sources.Measurement
                                             (int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate,
                                             measConfig.fmin, measConfig.fmax, (int)measConfig.breakLength * cardConfig.chSmplRate, measConfig.averages + 1);
                     break;
+
                 case MeasurementMethods.SweepSine:
                     output = FunctionGenerator.generateByEnum(measConfig.genMethod,
                         (int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate,
                         measConfig.fmin, measConfig.fmax, (int)measConfig.breakLength * cardConfig.chSmplRate, measConfig.averages + 1);
                     break;
+
                 case MeasurementMethods.ImpulseRecording:
                     output = FunctionGenerator.generateByEnum(generatorMethods.Silence,
                         (int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate,
@@ -86,7 +85,8 @@ namespace RoomMeasureNI.Sources.Measurement
         private void postprocess(List<double[]> dane, List<string> channelNames)
         {
             List<double[]> impulseResponses = new List<double[]>();
-            foreach (double[] response in dane) {
+            foreach (double[] response in dane)
+            {
                 impulseResponses.Add(calculateImpulseResp(response));
             }
 
@@ -95,7 +95,7 @@ namespace RoomMeasureNI.Sources.Measurement
 
         private void showAcceptanceWindow(List<double[]> impulseResponses, List<string> channelNames)
         {
-            for(int i=0;i<impulseResponses.Count();i++)
+            for (int i = 0; i < impulseResponses.Count(); i++)
             {
                 double[] result = impulseResponses[i];
                 string channelName = channelNames[i];
@@ -138,7 +138,7 @@ namespace RoomMeasureNI.Sources.Measurement
             //Calculate impulse repsponses
             if (measConfig.measMethod == MeasurementMethods.SweepSine)
             {
-                mtCalculateResponse(measConfig.averages, inputData, response, measConfig.processMethod);
+                response = mtCalculateResponse(measConfig.averages, inputData, measConfig.processMethod);
             }
 
             //Return response
@@ -155,10 +155,10 @@ namespace RoomMeasureNI.Sources.Measurement
             return (proj.measConfig.measLength + measConfig.breakLength) * proj.measConfig.averages;
         }
 
-        protected void mtCalculateResponse(int averages, double[] input, double[] target, PostProcessMethods processing)
+        protected double[] mtCalculateResponse(int averages, double[] input, PostProcessMethods processing)
         {
             /// Use for testing
-            //input = output;
+            input = output;
 
             //if (processing == PostProcessMethods.FilterInput)
             //{
@@ -167,21 +167,41 @@ namespace RoomMeasureNI.Sources.Measurement
             //}
 
             // Impulse response calculation using linear convolution
+            //int length = (int)(cardConfig.chSmplRate * (measConfig.breakLength/*));//*/ + measConfig.measLength));
+            //double[] invsweep = FunctionGenerator.generateReverseSweep((int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate, measConfig.fmin, measConfig.fmax, (double)cardConfig.aoMax);
+            //double[] result = Tools.fastConvolution(input, invsweep);
+            //double[] response = new double[length];
+
+            //var responseList = result.Split(length);
+
+            //foreach (var oneMeasurement in responseList.Skip(1).Take(responseList.Count() - 2))
+            //{
+            //    double[] data = oneMeasurement.ToArray();
+            //    lock (thisLock)
+            //    {
+            //        for (var i = 0; i < data.Length; i++)
+            //            response[i] += data[i] / averages;
+            //    }
+            //}
+
+            // Impulse resoinse calculation using fft division with pre convolution averaging
             int length = (int)(cardConfig.chSmplRate * (measConfig.breakLength/*));//*/ + measConfig.measLength));
-            double[] invsweep = FunctionGenerator.generateReverseSweep((int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate, measConfig.fmin, measConfig.fmax, (double)cardConfig.aoMax);
-            double[] result = Tools.fastConvolution(input, invsweep);
+            var inputList = input.Split(length);
+            
+            double[] averagedResponse = new double[length];
 
-            var responseList = result.Split(length);
-
-            foreach (var oneMeasurement in responseList.Skip(1).Take(responseList.Count() - 2))
+            foreach (var oneMeasurement in inputList.Skip(1).Take(averagedResponse.Count() - 2))
             {
                 double[] data = oneMeasurement.ToArray();
                 lock (thisLock)
                 {
                     for (var i = 0; i < data.Length; i++)
-                        target[i] += data[i] / averages;
+                        averagedResponse[i] += data[i] / averages;
                 }
             }
+
+            double[] response = Tools.fastDeConvolution(averagedResponse, output);
+            return response;
         }
     }
 }

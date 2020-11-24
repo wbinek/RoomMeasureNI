@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
-using RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign;
 
 namespace UnitTests
 {
@@ -93,7 +93,7 @@ namespace UnitTests
             Complex[] baseline_poles = new Complex[8];
 
             // Butterworth butter;
-           List<Complex> tempPoleStorage = Butterworth.prototypeAnalogLowPass(filterOrder);
+            List<Complex> tempPoleStorage = Butterworth.prototypeAnalogLowPass(filterOrder);
 
             // copy tmppole into poles
             poles = tempPoleStorage;

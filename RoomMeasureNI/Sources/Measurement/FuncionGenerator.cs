@@ -39,7 +39,6 @@ namespace RoomMeasureNI.Sources.Measurement
             return new double[length];
         }
 
-
         public static double[] generateExpSweep(int length, int Fs, int minFreq, int maxFreq)
         {
             var time = Tools.getTimeVector(length, Fs);
@@ -94,9 +93,11 @@ namespace RoomMeasureNI.Sources.Measurement
                 case generatorMethods.SineWave:
                     signal = generateSin(length, Fs, F1);
                     break;
+
                 case generatorMethods.ExponentialSweep:
                     signal = generateExpSweep(length, Fs, F1, optionalF2);
                     break;
+
                 case generatorMethods.Silence:
                     signal = generateSilence(length);
                     break;

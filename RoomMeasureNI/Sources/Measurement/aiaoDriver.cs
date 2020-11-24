@@ -1,12 +1,10 @@
-﻿using System;
+﻿using NationalInstruments;
+using NationalInstruments.DAQmx;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Windows;
 using System.Windows.Forms;
-using NationalInstruments;
-using NationalInstruments.DAQmx;
 
 namespace RoomMeasureNI.Sources.Measurement
 {
@@ -72,7 +70,6 @@ namespace RoomMeasureNI.Sources.Measurement
                             (double)cardConfig.aoMax,
                             AOVoltageUnits.Volts);
 
-
                         // Configure the timing parameters
                         inputTask.Timing.ConfigureSampleClock("", cardConfig.chSmplRate,
                             SampleClockActiveEdge.Rising, SampleQuantityMode.ContinuousSamples);
@@ -109,7 +106,7 @@ namespace RoomMeasureNI.Sources.Measurement
                         soundReader = new AnalogMultiChannelReader(inputTask.Stream);
                         soundCallback = SoundCallback;
 
-                        // Use SynchronizeCallbacks to specify that the object 
+                        // Use SynchronizeCallbacks to specify that the object
                         // marshals callbacks across threads appropriately.
                         soundReader.SynchronizeCallbacks = true;
                         soundReader.BeginReadWaveform(cardConfig.chSmplToRead,
@@ -138,7 +135,6 @@ namespace RoomMeasureNI.Sources.Measurement
 
                     // Plot your data here
                     dataToDataTable(data, ref dataTable);
-
 
                     if (cycle != no_cycles)
                     {
@@ -241,7 +237,7 @@ namespace RoomMeasureNI.Sources.Measurement
         public List<string> getChannelNames()
         {
             List<string> channelNames = new List<string>();
-            foreach(DataColumn col in dataTable.Columns)
+            foreach (DataColumn col in dataTable.Columns)
             {
                 channelNames.Add(col.ColumnName);
             }

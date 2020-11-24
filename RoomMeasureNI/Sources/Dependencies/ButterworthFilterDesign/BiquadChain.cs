@@ -12,11 +12,9 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
         // Fourth order section variables
         private double xn3, xn4;
 
-
         private BiquadChain()
         {
         }
-
 
         private BiquadChain(int count)
         {
@@ -41,7 +39,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             allocate(count);
         }
 
-
         private void reset()
         {
             _xn1 = 0;
@@ -58,7 +55,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
                 _yn4[i] = 0;
             }
         }
-
 
         private void processBiquad(float input, float output, int stride, int count, Biquad[] coeffs)
         {
@@ -87,13 +83,12 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
                 _xn1 = xn;
 
                 // Store result and stride
-                output = (float) yn[numFilters - 1];
+                output = (float)yn[numFilters - 1];
 
                 input += stride;
                 output += stride;
             }
         }
-
 
         private void processFourthOrderSections(float input, float output, int stride, int count, Biquad[] coeffs)
         {
@@ -143,7 +138,7 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
                 _xn1 = xn;
 
                 // Store result and stride
-                output = (float) yn[numFilters - 1];
+                output = (float)yn[numFilters - 1];
 
                 input += stride;
                 output += stride;

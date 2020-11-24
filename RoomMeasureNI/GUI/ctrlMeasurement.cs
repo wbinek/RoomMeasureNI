@@ -1,6 +1,6 @@
-﻿using System;
+﻿using RoomMeasureNI.Sources.Measurement;
+using System;
 using System.Windows.Forms;
-using RoomMeasureNI.Sources.Measurement;
 
 namespace RoomMeasureNI.GUI
 {
@@ -25,7 +25,6 @@ namespace RoomMeasureNI.GUI
             ctrlMeasureConfig1.refresh();
         }
 
-
         private void butStart_Click(object sender, EventArgs e)
         {
             progressBar.Value = 0;
@@ -42,7 +41,7 @@ namespace RoomMeasureNI.GUI
 
         private void Form1_Load(double time)
         {
-            progressBar.Maximum = (int) (time * 10);
+            progressBar.Maximum = (int)(time * 10);
             timer1.Interval = 100; //0.1 second
             timer1.Start();
         }

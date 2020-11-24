@@ -1,6 +1,6 @@
-﻿using System;
+﻿using RoomMeasureNI.Sources.Project;
+using System;
 using System.Windows.Forms;
-using RoomMeasureNI.Sources.Project;
 
 namespace RoomMeasureNI.GUI
 {
@@ -12,7 +12,6 @@ namespace RoomMeasureNI.GUI
         {
             InitializeComponent();
         }
-
 
         //...............Metody........................
 

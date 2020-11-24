@@ -1,7 +1,7 @@
-﻿using System;
-using System.Windows.Forms;
-using NationalInstruments.DAQmx;
+﻿using NationalInstruments.DAQmx;
 using RoomMeasureNI.Sources.Project;
+using System;
+using System.Windows.Forms;
 
 namespace RoomMeasureNI.GUI.subMeasurement
 {
@@ -27,8 +27,8 @@ namespace RoomMeasureNI.GUI.subMeasurement
 
             comboTimingRate.SelectedItem = proj.cardConfig.chSmplRate.ToString();
             comboSamplesToRead.SelectedItem = proj.cardConfig.chSmplToRead.ToString();
-            maximumPressureNumeric.Value = (decimal) proj.cardConfig.chMaxPress;
-            currentNumeric.Value = (decimal) proj.cardConfig.chIEPEVal;
+            maximumPressureNumeric.Value = (decimal)proj.cardConfig.chMaxPress;
+            currentNumeric.Value = (decimal)proj.cardConfig.chIEPEVal;
             inputTerminalComboBox.SelectedItem = proj.cardConfig.terminalConfig;
             excitationComboBox.SelectedItem = proj.cardConfig.excitationSource;
             outputChannelComboBox.SelectedItem = proj.cardConfig.aoChannelSelected;
@@ -49,22 +49,22 @@ namespace RoomMeasureNI.GUI.subMeasurement
 
         private void maximumPressureNumeric_ValueChanged(object sender, EventArgs e)
         {
-            proj.cardConfig.chMaxPress = (double) maximumPressureNumeric.Value;
+            proj.cardConfig.chMaxPress = (double)maximumPressureNumeric.Value;
         }
 
         private void inputTerminalComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            proj.cardConfig.terminalConfig = (AITerminalConfiguration) inputTerminalComboBox.SelectedItem;
+            proj.cardConfig.terminalConfig = (AITerminalConfiguration)inputTerminalComboBox.SelectedItem;
         }
 
         private void excitationComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            proj.cardConfig.excitationSource = (AIExcitationSource) excitationComboBox.SelectedItem;
+            proj.cardConfig.excitationSource = (AIExcitationSource)excitationComboBox.SelectedItem;
         }
 
         private void currentNumeric_ValueChanged(object sender, EventArgs e)
         {
-            proj.cardConfig.chIEPEVal = (double) currentNumeric.Value;
+            proj.cardConfig.chIEPEVal = (double)currentNumeric.Value;
         }
 
         private void outputChannelComboBox_SelectionChangeCommitted(object sender, EventArgs e)

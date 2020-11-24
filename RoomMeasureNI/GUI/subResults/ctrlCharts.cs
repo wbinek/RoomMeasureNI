@@ -1,7 +1,6 @@
-﻿using System;
-using System.Threading;
+﻿using RoomMeasureNI.Sources.Results;
+using System;
 using System.Windows.Forms;
-using RoomMeasureNI.Sources.Results;
 
 namespace RoomMeasureNI.GUI.subResults
 {
@@ -26,7 +25,7 @@ namespace RoomMeasureNI.GUI.subResults
         private void onRefreshPlots(object sender, EventArgs e)
         {
             ctrlPlotPanel1.Reset();
-            if(this.IsHandleCreated) // Fixes error on window creation
+            if (this.IsHandleCreated) // Fixes error on window creation
                 this.BeginInvoke(new MethodInvoker(RefreshPlot), null);
         }
 

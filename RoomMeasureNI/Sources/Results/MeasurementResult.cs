@@ -1,11 +1,10 @@
-﻿using System;
+﻿using NAudio.Wave;
+using RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign;
+using RoomMeasureNI.Sources.Measurement;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using NAudio.Wave;
-using RoomMeasureNI.Sources.Dependencies;
-using RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign;
-using RoomMeasureNI.Sources.Measurement;
 
 namespace RoomMeasureNI.Sources.Results
 {
@@ -40,12 +39,12 @@ namespace RoomMeasureNI.Sources.Results
 
             var maxVal = wynik_pomiaru.Select(x => Math.Abs(x)).Max();
             var maxIdx = Array.FindIndex(wynik_pomiaru, item => Math.Abs(item) == maxVal);
-            var startGap = (int) (Fs * preGap);
+            var startGap = (int)(Fs * preGap);
 
             if (startGap > maxIdx) startGap = maxIdx;
             okno.windowStart = maxIdx - startGap;
 
-            var windowLengthSmpl = (int) ((windowLength + preGap) * Fs);
+            var windowLengthSmpl = (int)((windowLength + preGap) * Fs);
             if (windowLengthSmpl + okno.windowStart > wynik_pomiaru.Length)
                 windowLengthSmpl = wynik_pomiaru.Length - okno.windowStart;
 
@@ -70,22 +69,22 @@ namespace RoomMeasureNI.Sources.Results
 
         public void setWindowStart(double windowStart)
         {
-            okno.windowStart = (int) (windowStart * Fs);
+            okno.windowStart = (int)(windowStart * Fs);
         }
 
         public void setWindowLength(double windowLength)
         {
-            okno.windowLength = (int) (windowLength * Fs);
+            okno.windowLength = (int)(windowLength * Fs);
         }
 
         public double getWindowLength()
         {
-            return (double) okno.windowLength / Fs;
+            return (double)okno.windowLength / Fs;
         }
 
         public double getWindowStart()
         {
-            return (double) okno.windowStart / Fs;
+            return (double)okno.windowStart / Fs;
         }
 
         public double[] getResultdB()
@@ -137,11 +136,37 @@ namespace RoomMeasureNI.Sources.Results
                 path = SaveDialog.FileName;
                 WaveFormat format = WaveFormat.CreateIeeeFloatWaveFormat(Fs, 1);
                 var writer = new WaveFileWriter(path, format);
-                float maxS = (float) wynik_pomiaru.Select(x => Math.Abs(x)).Max();
+                float maxS = (float)(wynik_pomiaru.Select(x => Math.Abs(x)).Max()*1.43);
 
-                var responseFloat = wynik_pomiaru.Select(s => (float) s / maxS).ToArray();
+                var responseFloat = wynik_pomiaru.Select(s => (float)s / maxS).ToArray();
                 writer.WriteSamples(responseFloat, 0, responseFloat.Length);
                 writer.Close();
+            }
+        }
+
+        public void exportResultAsWave44100()
+        {
+            //Get File Path
+            string path;
+            var SaveDialog = new SaveFileDialog();
+            SaveDialog.Filter = "wav files (*.wav)|*.wav";
+
+            if (SaveDialog.ShowDialog() == DialogResult.OK)
+            {
+                path = SaveDialog.FileName;
+                float maxS = (float)(wynik_pomiaru.Select(x => Math.Abs(x)).Max()*1.43);
+                var responseFloat = wynik_pomiaru.Select(s => (float)s / maxS).ToArray();
+                WaveFormat formatold = WaveFormat.CreateIeeeFloatWaveFormat(Fs, 1);
+
+                byte[] byteStream = new byte[responseFloat.Length*4];
+                Buffer.BlockCopy(responseFloat, 0, byteStream, 0, byteStream.Length);
+                var rawWaveProvider = new RawSourceWaveStream(new System.IO.MemoryStream(byteStream), formatold);
+
+                WaveFormat formatnew = WaveFormat.CreateIeeeFloatWaveFormat(44100, 1);
+                var resampler = new MediaFoundationResampler(rawWaveProvider, formatnew);
+                resampler.ResamplerQuality = 60;
+
+                WaveFileWriter.CreateWaveFile(path, resampler);
             }
         }
 
@@ -181,7 +206,7 @@ namespace RoomMeasureNI.Sources.Results
 
                 for (var i = 0; i < reader.WaveFormat.Channels; i++)
                 {
-                    MesResults[i].wynik_pomiaru = Array.ConvertAll(responses[i].ToArray(), x => (double) x);
+                    MesResults[i].wynik_pomiaru = Array.ConvertAll(responses[i].ToArray(), x => (double)x);
                     MesResults[i].calculateDefWindow();
                 }
                 return MesResults;

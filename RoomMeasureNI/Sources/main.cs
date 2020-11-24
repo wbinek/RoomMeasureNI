@@ -1,6 +1,6 @@
-﻿using System;
+﻿using RoomMeasureNI.GUI;
+using System;
 using System.Windows.Forms;
-using RoomMeasureNI.GUI;
 
 namespace RoomMeasureNI.Sources
 {

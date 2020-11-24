@@ -1,8 +1,7 @@
-﻿using System;
-using System.Windows.Forms;
-using RoomMeasureNI.Sources.Dependencies;
-using RoomMeasureNI.Sources.Measurement;
+﻿using RoomMeasureNI.Sources.Measurement;
 using RoomMeasureNI.Sources.Project;
+using System;
+using System.Windows.Forms;
 
 namespace RoomMeasureNI.GUI.subMeasurement
 {
@@ -21,14 +20,14 @@ namespace RoomMeasureNI.GUI.subMeasurement
         public void refresh()
         {
             comboMeasLength.SelectedItem = proj.measConfig.measLength.ToString();
-            comboMeasMethod.SelectedIndex = (int) proj.measConfig.measMethod;
+            comboMeasMethod.SelectedIndex = (int)proj.measConfig.measMethod;
             comboAverages.SelectedItem = proj.measConfig.averages.ToString();
             comboFmin.SelectedItem = proj.measConfig.fmin.ToString();
             comboBreakLength.SelectedItem = proj.measConfig.breakLength.ToString();
             if (proj.measConfig.fmax == 0) comboFmax.SelectedItem = "Fs/2";
             else comboFmax.SelectedItem = proj.measConfig.fmax.ToString();
-            comboGenerator.SelectedIndex = (int) proj.measConfig.genMethod;
-            if ((MeasurementMethods)comboMeasMethod.SelectedItem == MeasurementMethods.ImpulseRecording 
+            comboGenerator.SelectedIndex = (int)proj.measConfig.genMethod;
+            if ((MeasurementMethods)comboMeasMethod.SelectedItem == MeasurementMethods.ImpulseRecording
                 || (MeasurementMethods)comboMeasMethod.SelectedItem == MeasurementMethods.Calibrate) groupMethod.Enabled = false;
             else groupMethod.Enabled = true;
         }
@@ -40,7 +39,7 @@ namespace RoomMeasureNI.GUI.subMeasurement
 
         private void comboMeasMethod_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            proj.measConfig.measMethod = (MeasurementMethods) comboMeasMethod.SelectedIndex;
+            proj.measConfig.measMethod = (MeasurementMethods)comboMeasMethod.SelectedIndex;
 
             if ((MeasurementMethods)comboMeasMethod.SelectedItem == MeasurementMethods.ImpulseRecording || (MeasurementMethods)comboMeasMethod.SelectedItem == MeasurementMethods.Calibrate)
             {

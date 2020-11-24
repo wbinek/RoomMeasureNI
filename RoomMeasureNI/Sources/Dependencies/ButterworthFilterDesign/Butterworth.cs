@@ -71,7 +71,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
         Third_octave
     }
 
-
     public static class Butterworth
     {
         // Internal state used during computation of coefficients
@@ -145,10 +144,12 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
                 case FilterBank.Octave:
                     omega = Math.Sqrt(2);
                     break;
+
                 case FilterBank.Third_octave:
                     omega = 1.02676;
                     //filterOrder += -4;
                     break;
+
                 case FilterBank.None:
                     return false;
             }
@@ -168,7 +169,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             return coefficients(FILTER_TYPE.kHiPass, fs, f1, f2, filterOrder, ref coeffs, ref overallGain);
         }
 
-
         public static bool bandPass(double fs, double f1, double f2, int filterOrder,
             ref Biquad[] coeffs, double overallGain)
         {
@@ -186,90 +186,127 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             switch (type)
             {
                 case FilterBank.Octave:
-                    switch ((CenterFreqO) freq)
+                    switch ((CenterFreqO)freq)
                     {
                         case CenterFreqO.f31:
                             return 31.25;
+
                         case CenterFreqO.f63:
                             return 62.5;
+
                         case CenterFreqO.f125:
                             return 125;
+
                         case CenterFreqO.f250:
                             return 250;
+
                         case CenterFreqO.f500:
                             return 500;
+
                         case CenterFreqO.f1000:
                             return 1000;
+
                         case CenterFreqO.f2000:
                             return 2000;
+
                         case CenterFreqO.f4000:
                             return 4000;
+
                         case CenterFreqO.f8000:
                             return 8000;
+
                         case CenterFreqO.f16000:
                             return 16000;
                     }
                     break;
 
                 case FilterBank.Third_octave:
-                    switch ((CenterFreqTO) freq)
+                    switch ((CenterFreqTO)freq)
                     {
                         case CenterFreqTO.f25:
                             return 24.803;
+
                         case CenterFreqTO.f31:
                             return 31.25;
+
                         case CenterFreqTO.f40:
                             return 39.373;
+
                         case CenterFreqTO.f50:
                             return 49.606;
+
                         case CenterFreqTO.f63:
                             return 62.5;
+
                         case CenterFreqTO.f80:
                             return 78.745;
+
                         case CenterFreqTO.f100:
                             return 99.213;
+
                         case CenterFreqTO.f125:
                             return 125;
+
                         case CenterFreqTO.f160:
                             return 157.49;
+
                         case CenterFreqTO.f200:
                             return 198.43;
+
                         case CenterFreqTO.f250:
                             return 250;
+
                         case CenterFreqTO.f315:
                             return 314.98;
+
                         case CenterFreqTO.f400:
                             return 396.85;
+
                         case CenterFreqTO.f500:
                             return 500;
+
                         case CenterFreqTO.f630:
                             return 629.96;
+
                         case CenterFreqTO.f800:
                             return 793.7;
+
                         case CenterFreqTO.f1000:
                             return 1000;
+
                         case CenterFreqTO.f1250:
                             return 1259.9;
+
                         case CenterFreqTO.f1600:
                             return 1587.4;
+
                         case CenterFreqTO.f2000:
                             return 2000;
+
                         case CenterFreqTO.f2500:
                             return 2519.8;
+
                         case CenterFreqTO.f3150:
                             return 3174.8;
+
                         case CenterFreqTO.f4000:
                             return 4000;
+
                         case CenterFreqTO.f5000:
                             return 5039.7;
+
                         case CenterFreqTO.f6300:
                             return 6349.6;
+
                         case CenterFreqTO.f8000:
                             return 8000;
+
                         case CenterFreqTO.f10000:
                             return 10079;
+
                         case CenterFreqTO.f12500:
                             return 12699;
+
                         case CenterFreqTO.f16000:
                             return 16000;
                     }
@@ -301,7 +338,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             return poles;
         }
 
-
         //******************************************************************************
         // Generate Butterworth coefficients, the main public method
         //
@@ -326,13 +362,11 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             Wc = 0; // Omega cutoff = passband edge freq
             bw = 0;
 
-
             //******************************************************************************
             // Prewarp
 
             f1 = 2 * Math.Tan(Math.PI * f1 / fs);
             f2 = 2 * Math.Tan(Math.PI * f2 / fs);
-
 
             //******************************************************************************
             // Design basic S-plane poles-only analogue LP prototype
@@ -348,11 +382,9 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
                 index++;
             }
 
-
             numPoles = tempPoles.Count();
             numZeros = 0; // butterworth LP prototype has no zeros.
             gain = 1.0; // always 1 for the butterworth prototype lowpass.
-
 
             //******************************************************************************
             // Convert prototype to target filter type (LP/HP/BP/BS) - S-plane
@@ -392,7 +424,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
                     return false;
             }
 
-
             //******************************************************************************
             // SANITY CHECK: Ensure poles are in the left half of the S-plane
             for (var i = 0; i < numPoles; i++)
@@ -400,26 +431,24 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
                 {
 #if LOG_OUTPUT
 				        cerr << "[Butterworth Filter Design] Error: poles must be in the left half plane" << endl;
-			        #endif
+#endif
                     return false;
                 }
-
 
             //******************************************************************************
             // Map zeros & poles from S-plane to Z-plane
 
             nba = 0;
-            ba = new double[2 * new[] {numPoles, numZeros}.Max() + 5];
+            ba = new double[2 * new[] { numPoles, numZeros }.Max() + 5];
             preBLTgain = gain;
 
             if (!s2Z())
             {
 #if LOG_OUTPUT
 			        cerr << "[Butterworth Filter Design] Error: s2Z failed" << endl << endl;
-		        #endif
+#endif
                 return false;
             }
-
 
             //******************************************************************************
             // Split up Z-plane poles and zeros into SOS
@@ -428,7 +457,7 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             {
 #if LOG_OUTPUT
 			        cerr << "[Butterworth Filter Design] Error: zp2SOS failed" << endl << endl;
-		        #endif
+#endif
                 return false;
             }
 
@@ -436,7 +465,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             if (filter == FILTER_TYPE.kLoPass || filter == FILTER_TYPE.kBandPass)
                 ba[0] = preBLTgain * (preBLTgain / gain); // 2nd term is how much BLT boosts,
             else if (filter == FILTER_TYPE.kHiPass || filter == FILTER_TYPE.kBandStop) ba[0] = 1 / ba[0];
-
 
             //******************************************************************************
             // Init biquad chain with coefficients from SOS
@@ -475,11 +503,10 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
 				         << ba[4 * i + 3] << " "
 				         << ba[4 * i + 4] << endl;
 		        }
-	        #endif
+#endif
 
             return true;
         }
-
 
         //******************************************************************************
         // High-Order Equalizer Filters: Low-Shelf, High-Shelf & Parametric Boost-Cut
@@ -602,7 +629,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             return true;
         }
 
-
         //******************************************************************************
         //
         // Z = (2 + S) / (2 - S) is the S-plane to Z-plane bilinear transform
@@ -620,7 +646,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             // return the gain
             return (two - s).Magnitude;
         }
-
 
         //******************************************************************************
         //
@@ -641,7 +666,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             return true;
         }
 
-
         //******************************************************************************
         //
         // Convert filter poles and zeros to second-order sections
@@ -652,7 +676,7 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
 
         private static bool zp2SOS()
         {
-            var filterOrder = new[] {numPoles, numZeros}.Max();
+            var filterOrder = new[] { numPoles, numZeros }.Max();
             var zerosTempVec = new Complex[filterOrder];
             var polesTempVec = new Complex[filterOrder];
 
@@ -694,7 +718,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             return true;
         }
 
-
         //******************************************************************************
         // Convert analog lowpass prototype poles to lowpass
         //******************************************************************************
@@ -709,7 +732,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             for (var i = 0; i < numPoles; i++)
                 poles[i] = Wc * poles[i];
         }
-
 
         //******************************************************************************
         // Convert lowpass poles & zeros to highpass
@@ -742,7 +764,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             for (var i = 0; i < numZeros; i++)
                 zeros[i] = new Complex(0, 0);
         }
-
 
         //******************************************************************************
         // Convert lowpass poles to bandpass
@@ -793,7 +814,6 @@ namespace RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign
             }
             numPoles = tempPoles.Count;
         }
-
 
         //******************************************************************************
         // Convert lowpass poles to bandstop

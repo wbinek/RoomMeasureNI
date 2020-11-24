@@ -1,8 +1,8 @@
-﻿using System;
+﻿using MathNet.Numerics.IntegralTransforms;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
-using MathNet.Numerics.IntegralTransforms;
 
 namespace RoomMeasureNI.Sources.Dependencies
 {
@@ -19,13 +19,12 @@ namespace RoomMeasureNI.Sources.Dependencies
             return attribute == null ? value.ToString() : attribute.Description;
         }
 
-
         public static double[] getTimeVector(int length, int Fs)
         {
             var time = new double[length];
 
             for (var i = 0; i < length; i++)
-                time[i] = i * (1 / (double) Fs);
+                time[i] = i * (1 / (double)Fs);
             return time;
         }
 
@@ -67,7 +66,7 @@ namespace RoomMeasureNI.Sources.Dependencies
 
         public static Complex[] double2Complex(double[] data)
         {
-            return Array.ConvertAll(data, item => (Complex) item);
+            return Array.ConvertAll(data, item => (Complex)item);
         }
 
         public static double[] complexReal2Double(Complex[] data)
@@ -83,7 +82,7 @@ namespace RoomMeasureNI.Sources.Dependencies
         public static Complex[] MatlabHilbert(double[] xr)
         {
             var x = (from sample in xr select new Complex(sample, 0)).ToArray();
-            Fourier.BluesteinForward(x, FourierOptions.Default);
+            Fourier.Forward(x, FourierOptions.Default);
             var h = new double[x.Length];
             var fftLengthIsOdd = (x.Length | 1) == 1;
             if (fftLengthIsOdd)
@@ -98,7 +97,7 @@ namespace RoomMeasureNI.Sources.Dependencies
                 for (var i = 1; i < xr.Length / 2; i++) h[i] = 2;
             }
             for (var i = 0; i < x.Length; i++) x[i] *= h[i];
-            Fourier.BluesteinInverse(x, FourierOptions.Default);
+            Fourier.Inverse(x, FourierOptions.Default);
             return x;
         }
 

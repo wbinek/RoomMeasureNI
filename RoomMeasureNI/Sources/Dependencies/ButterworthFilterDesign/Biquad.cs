@@ -3,6 +3,7 @@
     public class Biquad
     {
         public double a3, a4, b3, b4; // fourth order section variables
+
         // Coefficients are public, as client classes and test harnesses need direct access.
         // Special accessors to better encapsulate data, would be less readable,
         // so skipping for pedagogical reasons. Another idea would be to make this a struct.
@@ -23,7 +24,6 @@
             a3 = -A3 / A0;
             a4 = -A4 / A0;
         }
-
 
         public void DF2TBiquad(double B0, double B1, double B2,
             double A0, double A1, double A2)

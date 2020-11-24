@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Forms;
-using OxyPlot;
+﻿using OxyPlot;
 using RoomMeasureNI.Sources.Dependencies;
 using RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign;
 using RoomMeasureNI.Sources.Results;
+using System;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace RoomMeasureNI.GUI.subResults
 {
@@ -29,8 +29,8 @@ namespace RoomMeasureNI.GUI.subResults
 
         public void setWindowParams()
         {
-            numericWindowStart.Value = (decimal) result.getWindowStart();
-            numericWindowLength.Value = (decimal) result.getWindowLength();
+            numericWindowStart.Value = (decimal)result.getWindowStart();
+            numericWindowLength.Value = (decimal)result.getWindowLength();
         }
 
         ///////////////////////////////////////Tab Ogólne/////////////////////////////////////////////////////////////////
@@ -44,37 +44,37 @@ namespace RoomMeasureNI.GUI.subResults
 
             double[] data;
 
-            if ((chartType) comboChart.SelectedItem == chartType.Czas)
-                data = result.getFilteredResult((FilterBank) comboFilter.SelectedItem,
-                    (Enum) comboFrequency.SelectedItem);
+            if ((chartType)comboChart.SelectedItem == chartType.Czas)
+                data = result.getFilteredResult((FilterBank)comboFilter.SelectedItem,
+                    (Enum)comboFrequency.SelectedItem);
             else
                 data = result.getWindowedSignal();
 
-            switch ((chartType) comboChart.SelectedItem)
+            switch ((chartType)comboChart.SelectedItem)
             {
                 case chartType.Czas:
-                    if ((yAxis) comboYScale.SelectedItem == yAxis.Logarytmiczna)
+                    if ((yAxis)comboYScale.SelectedItem == yAxis.Logarytmiczna)
                     {
                         data = usefulFunctions.getResultdB(data);
                         ctrlPlotImpulse.setData(usefulFunctions.getTimeVector(data.Length, result.Fs), data);
-                        ctrlPlotImpulse.setYlimits((int) data.Max() - 70, (int) data.Max() + 5);
+                        ctrlPlotImpulse.setYlimits((int)data.Max() - 70, (int)data.Max() + 5);
                     }
                     else
                     {
                         ctrlPlotImpulse.setData(usefulFunctions.getTimeVector(data.Length, result.Fs), data);
                     }
-                    if ((FilterBank) comboFilter.SelectedItem == FilterBank.None)
+                    if ((FilterBank)comboFilter.SelectedItem == FilterBank.None)
                         ctrlPlotImpulse.addSeries(
                             usefulFunctions.getTimeVector(result.wynik_pomiaru.Length, result.Fs),
                             result.getWindow(data.Max()), null, LineStyle.Dash);
                     break;
 
                 case chartType.Czestotliwosc:
-                    if ((yAxis) comboYScale.SelectedItem == yAxis.Logarytmiczna)
+                    if ((yAxis)comboYScale.SelectedItem == yAxis.Logarytmiczna)
                     {
                         data = usefulFunctions.getSpectrumdB(data, result.Fs);
                         ctrlPlotImpulse.setData(usefulFunctions.getFreqVector(data.Length, result.Fs), data);
-                        ctrlPlotImpulse.setYlimits((int) data.Max() - 70, (int) data.Max() + 5);
+                        ctrlPlotImpulse.setYlimits((int)data.Max() - 70, (int)data.Max() + 5);
                     }
                     else
                     {
@@ -103,7 +103,7 @@ namespace RoomMeasureNI.GUI.subResults
         {
             if (result != null)
             {
-                result.setWindowStart((double) numericWindowStart.Value);
+                result.setWindowStart((double)numericWindowStart.Value);
                 updateChart();
             }
         }
@@ -112,22 +112,24 @@ namespace RoomMeasureNI.GUI.subResults
         {
             if (result != null)
             {
-                result.setWindowLength((double) numericWindowLength.Value);
+                result.setWindowLength((double)numericWindowLength.Value);
                 updateChart();
             }
         }
 
         private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch ((FilterBank) comboFilter.SelectedItem)
+            switch ((FilterBank)comboFilter.SelectedItem)
             {
                 case FilterBank.None:
                     comboFrequency.Enabled = false;
                     break;
+
                 case FilterBank.Octave:
                     comboFrequency.Enabled = true;
                     comboFrequency.DataSource = Enum.GetValues(typeof(CenterFreqO));
                     break;
+
                 case FilterBank.Third_octave:
                     comboFrequency.Enabled = true;
                     comboFrequency.DataSource = Enum.GetValues(typeof(CenterFreqTO));

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
-using OxyPlot;
+﻿using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using OxyPlot.WindowsForms;
 using RoomMeasureNI.Sources.Dependencies;
 using RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace RoomMeasureNI.GUI.shared
 {
@@ -45,7 +45,7 @@ namespace RoomMeasureNI.GUI.shared
 
             for (var i = 0; i < input.Rows.Count; i++)
             {
-                var XYpoint = new DataPoint((double) input.Rows[i][x_name], (double) input.Rows[i][y_name]);
+                var XYpoint = new DataPoint((double)input.Rows[i][x_name], (double)input.Rows[i][y_name]);
                 data.Points.Add(XYpoint);
             }
             myModel.Series.Add(data);

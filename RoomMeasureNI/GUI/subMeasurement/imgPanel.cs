@@ -1,8 +1,8 @@
-﻿using System;
+﻿using RoomMeasureNI.Sources.Measurement;
+using RoomMeasureNI.Sources.Project;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using RoomMeasureNI.Sources.Measurement;
-using RoomMeasureNI.Sources.Project;
 
 namespace RoomMeasureNI.GUI.subMeasurement
 {
@@ -23,15 +23,14 @@ namespace RoomMeasureNI.GUI.subMeasurement
             parent = _parent;
         }
 
-
         public Image ScaleImage(Image image, int maxWidth, int maxHeight)
         {
-            var ratioX = (double) maxWidth / image.Width;
-            var ratioY = (double) maxHeight / image.Height;
+            var ratioX = (double)maxWidth / image.Width;
+            var ratioY = (double)maxHeight / image.Height;
             ratio = Math.Min(ratioX, ratioY);
 
-            var newWidth = (int) (image.Width * ratio);
-            var newHeight = (int) (image.Height * ratio);
+            var newWidth = (int)(image.Width * ratio);
+            var newHeight = (int)(image.Height * ratio);
 
             var newImage = new Bitmap(newWidth, newHeight);
 
@@ -68,10 +67,10 @@ namespace RoomMeasureNI.GUI.subMeasurement
 
                 foreach (var pkt in proj.punktyPomiarowe.listaPunktow)
                     if (pkt.Aktywny)
-                        e.Graphics.DrawEllipse(pedzel_green, (int) (pkt.X * ratio - 5), (int) (pkt.Y * ratio - 5), 10,
+                        e.Graphics.DrawEllipse(pedzel_green, (int)(pkt.X * ratio - 5), (int)(pkt.Y * ratio - 5), 10,
                             10);
                     else
-                        e.Graphics.DrawEllipse(pedzel_red, (int) (pkt.X * ratio - 5), (int) (pkt.Y * ratio - 5), 10, 10);
+                        e.Graphics.DrawEllipse(pedzel_red, (int)(pkt.X * ratio - 5), (int)(pkt.Y * ratio - 5), 10, 10);
             }
         }
 
@@ -82,8 +81,8 @@ namespace RoomMeasureNI.GUI.subMeasurement
                 var me = e;
                 var coordinates = me.Location;
 
-                coordinates.X = (int) (coordinates.X / ratio);
-                coordinates.Y = (int) (coordinates.Y / ratio);
+                coordinates.X = (int)(coordinates.X / ratio);
+                coordinates.Y = (int)(coordinates.Y / ratio);
 
                 var ppom = new MeasurementPoint();
                 ppom.X = coordinates.X;
@@ -97,7 +96,6 @@ namespace RoomMeasureNI.GUI.subMeasurement
                 catch (ArgumentOutOfRangeException)
                 {
                 }
-
 
                 proj.punktyPomiarowe.listaPunktow.Add(ppom);
                 parent.Odswiez();

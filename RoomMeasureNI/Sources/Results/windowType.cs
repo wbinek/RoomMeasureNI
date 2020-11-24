@@ -22,8 +22,10 @@ namespace RoomMeasureNI.Sources.Results
             {
                 case windowType.Prostokatne:
                     return getRectWindow(signalLength);
+
                 case windowType.Tukey:
                     return getTukeyWindow(signalLength);
+
                 default:
                     return getRectWindowShort();
             }
@@ -45,8 +47,10 @@ namespace RoomMeasureNI.Sources.Results
             {
                 case windowType.Prostokatne:
                     return getRectWindowShort();
+
                 case windowType.Tukey:
                     return getTukeyWindowShort();
+
                 default:
                     return getRectWindowShort();
             }

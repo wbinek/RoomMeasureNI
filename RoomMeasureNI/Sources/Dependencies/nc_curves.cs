@@ -42,35 +42,46 @@
             new[] {0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-
         public static int[] get_nc(NC_Curves idx)
         {
             switch (idx)
             {
                 case NC_Curves.NC15:
                     return NC_data[0];
+
                 case NC_Curves.NC20:
                     return NC_data[1];
+
                 case NC_Curves.NC25:
                     return NC_data[2];
+
                 case NC_Curves.NC30:
                     return NC_data[3];
+
                 case NC_Curves.NC35:
                     return NC_data[4];
+
                 case NC_Curves.NC40:
                     return NC_data[5];
+
                 case NC_Curves.NC45:
                     return NC_data[6];
+
                 case NC_Curves.NC50:
                     return NC_data[7];
+
                 case NC_Curves.NC55:
                     return NC_data[8];
+
                 case NC_Curves.NC60:
                     return NC_data[9];
+
                 case NC_Curves.NC65:
                     return NC_data[10];
+
                 case NC_Curves.NC70:
                     return NC_data[11];
+
                 default:
                     return NC_data[12];
             }

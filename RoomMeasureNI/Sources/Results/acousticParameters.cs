@@ -1,10 +1,10 @@
-﻿using System;
+﻿using RoomMeasureNI.Sources.Dependencies;
+using RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign;
+using System;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using RoomMeasureNI.Sources.Dependencies;
-using RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign;
 
 namespace RoomMeasureNI.Sources.Results
 {
@@ -51,7 +51,7 @@ namespace RoomMeasureNI.Sources.Results
 
             nc_curve = NC_Curves.NC25;
             speaker = Speaker.mezczyzna;
-            parameters.PrimaryKey = new[] {parameters.Columns["Frequency"]};
+            parameters.PrimaryKey = new[] { parameters.Columns["Frequency"] };
         }
 
         public DataTable parameters { get; set; } //Table containing acoustics parameters
@@ -69,7 +69,6 @@ namespace RoomMeasureNI.Sources.Results
             var maxValGlobal = impulseResponse.Select(x => Math.Abs(x)).Max();
             var maxIdxGlobal = Array.FindIndex(impulseResponse, item => Math.Abs(item) == maxValGlobal);
 
-
             //switch selecting filter bank
             switch (filter)
             {
@@ -84,56 +83,56 @@ namespace RoomMeasureNI.Sources.Results
 
                     bool skip = false;
                     //iterate over frequencies for octave bank
-                    Parallel.ForEach((CenterFreqO[]) Enum.GetValues(typeof(CenterFreqO)), freq =>              
-                    {                      
-                        try
-                        {
-                            double[] forwardFilt = Butterworth.filterResult(FilterBank.Octave, freq, impulseResponse, Fs);
-                            double[] backwardFilt = Butterworth.filterResult(FilterBank.Octave, freq, forwardFilt.Reverse().ToArray(), Fs);
-                            double[] filteredResult = backwardFilt.Reverse().ToArray();
+                    Parallel.ForEach((CenterFreqO[])Enum.GetValues(typeof(CenterFreqO)), freq =>
+                   {
+                       try
+                       {
+                           double[] forwardFilt = Butterworth.filterResult(FilterBank.Octave, freq, impulseResponse, Fs);
+                           double[] backwardFilt = Butterworth.filterResult(FilterBank.Octave, freq, forwardFilt.Reverse().ToArray(), Fs);
+                           double[] filteredResult = backwardFilt.Reverse().ToArray();
 
-                            var maxVal = filteredResult.Select(x => Math.Abs(x)).Max();
-                            var maxIdx = Array.FindIndex(filteredResult, item => Math.Abs(item) == maxVal);
+                           var maxVal = filteredResult.Select(x => Math.Abs(x)).Max();
+                           var maxIdx = Array.FindIndex(filteredResult, item => Math.Abs(item) == maxVal);
 
-                            double edt = 0;
-                            double t20 = 0;
-                            double t30 = 0;
-                            double c50 = 0;
-                            double c80 = 0;
-                            double d50 = 0;
+                           double edt = 0;
+                           double t20 = 0;
+                           double t30 = 0;
+                           double c50 = 0;
+                           double c80 = 0;
+                           double d50 = 0;
 
-                            if (!double.IsNaN(filteredResult[0]))
-                            {
-                                edt = EDT(Fs, maxIdx, filteredResult);
-                                t20 = T20(Fs, maxIdx, filteredResult);
-                                t30 = T30(Fs, maxIdx, filteredResult);
-                                c50 = C50(Fs, maxIdx, filteredResult);
-                                c80 = C80(Fs, maxIdx, filteredResult);
-                                d50 = D50(Fs, maxIdx, filteredResult);
-                            }
-                            lock (lockMe)
-                            {
-                                parameters.Rows.Add(
-                                    (int)freq,
-                                    freq.GetDescription(),
-                                    edt,
-                                    t20,
-                                    t30,
-                                    c50,
-                                    c80,
-                                    d50,
-                                    -1);
-                            }
-                            var idx = Array.IndexOf(freqSTI, freq);
-                            if (idx != -1)
-                                STI_input_array[idx] = filteredResult;
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error in parameters calculation \n " + ex.Message);
-                            skip = true;
-                        }
-                    });
+                           if (!double.IsNaN(filteredResult[0]))
+                           {
+                               edt = EDT(Fs, maxIdx, filteredResult);
+                               t20 = T20(Fs, maxIdx, filteredResult);
+                               t30 = T30(Fs, maxIdx, filteredResult);
+                               c50 = C50(Fs, maxIdx, filteredResult);
+                               c80 = C80(Fs, maxIdx, filteredResult);
+                               d50 = D50(Fs, maxIdx, filteredResult);
+                           }
+                           lock (lockMe)
+                           {
+                               parameters.Rows.Add(
+                                   (int)freq,
+                                   freq.GetDescription(),
+                                   edt,
+                                   t20,
+                                   t30,
+                                   c50,
+                                   c80,
+                                   d50,
+                                   -1);
+                           }
+                           var idx = Array.IndexOf(freqSTI, freq);
+                           if (idx != -1)
+                               STI_input_array[idx] = filteredResult;
+                       }
+                       catch (Exception ex)
+                       {
+                           MessageBox.Show("Error in parameters calculation \n " + ex.Message);
+                           skip = true;
+                       }
+                   });
                     if (skip)
                         break;
                     AverageParameters(Fs, maxIdxGlobal, STI_input_array);
@@ -144,44 +143,44 @@ namespace RoomMeasureNI.Sources.Results
 
                     skip = false;
                     //iterate over frequencies for octave bank
-                    Parallel.ForEach((CenterFreqTO[]) Enum.GetValues(typeof(CenterFreqTO)), freq =>
-                    {
-                        try
-                        {
-                            double[] forwardFilt = Butterworth.filterResult(FilterBank.Third_octave, freq, impulseResponse, Fs);
-                            double[] backwardFilt = Butterworth.filterResult(FilterBank.Third_octave, freq, forwardFilt.Reverse().ToArray(), Fs);
-                            double[] filteredResult = backwardFilt.Reverse().ToArray();
+                    Parallel.ForEach((CenterFreqTO[])Enum.GetValues(typeof(CenterFreqTO)), freq =>
+                   {
+                       try
+                       {
+                           double[] forwardFilt = Butterworth.filterResult(FilterBank.Third_octave, freq, impulseResponse, Fs);
+                           double[] backwardFilt = Butterworth.filterResult(FilterBank.Third_octave, freq, forwardFilt.Reverse().ToArray(), Fs);
+                           double[] filteredResult = backwardFilt.Reverse().ToArray();
 
-                            var maxVal = filteredResult.Select(x => Math.Abs(x)).Max();
-                            var maxIdx = Array.FindIndex(filteredResult, item => Math.Abs(item) == maxVal);
+                           var maxVal = filteredResult.Select(x => Math.Abs(x)).Max();
+                           var maxIdx = Array.FindIndex(filteredResult, item => Math.Abs(item) == maxVal);
 
-                            var edt = EDT(Fs, maxIdx, filteredResult);
-                            var t20 = T20(Fs, maxIdx, filteredResult);
-                            var t30 = T30(Fs, maxIdx, filteredResult);
-                            var c50 = C50(Fs, maxIdx, filteredResult);
-                            var c80 = C80(Fs, maxIdx, filteredResult);
-                            var d50 = D50(Fs, maxIdx, filteredResult);
+                           var edt = EDT(Fs, maxIdx, filteredResult);
+                           var t20 = T20(Fs, maxIdx, filteredResult);
+                           var t30 = T30(Fs, maxIdx, filteredResult);
+                           var c50 = C50(Fs, maxIdx, filteredResult);
+                           var c80 = C80(Fs, maxIdx, filteredResult);
+                           var d50 = D50(Fs, maxIdx, filteredResult);
 
-                            lock (lockMe)
-                            {
-                                parameters.Rows.Add(
-                                    (int)freq,
-                                    freq.GetDescription(),
-                                    edt,
-                                    t20,
-                                    t30,
-                                    c50,
-                                    c80,
-                                    d50,
-                                    -1);
-                            }
-                        }
-                        catch(Exception ex)
-                        {
-                            MessageBox.Show("Error in parameters calculation \n " + ex.Message);
-                            skip = true;
-                        }
-                    });
+                           lock (lockMe)
+                           {
+                               parameters.Rows.Add(
+                                   (int)freq,
+                                   freq.GetDescription(),
+                                   edt,
+                                   t20,
+                                   t30,
+                                   c50,
+                                   c80,
+                                   d50,
+                                   -1);
+                           }
+                       }
+                       catch (Exception ex)
+                       {
+                           MessageBox.Show("Error in parameters calculation \n " + ex.Message);
+                           skip = true;
+                       }
+                   });
                     if (skip)
                         break;
 
@@ -207,12 +206,12 @@ namespace RoomMeasureNI.Sources.Results
         private double getTimeRange(int Fs, int maxIdx, double[] impulse, int from = 0, int to = 0)
         {
             if (from != 0)
-                from = (int) (from * 0.001 * Fs);
+                from = (int)(from * 0.001 * Fs);
 
             if (to == 0)
                 to = impulse.Count() - maxIdx - from;
             else
-                to = (int) (to * 0.001 * Fs);
+                to = (int)(to * 0.001 * Fs);
 
             if (to + maxIdx + from > impulse.Count())
             {
@@ -385,8 +384,7 @@ namespace RoomMeasureNI.Sources.Results
                 db_level[i] = 10 * Math.Log10(getTimeRange(Fs, maxIdx, inputData[i]) / Math.Pow(2e-5, 2));
 
             var NC = nc_curves.get_nc(NC_curve);
-            double[] fm = {0.63, 0.8, 1.0, 1.25, 1.6, 2.0, 2.5, 3.15, 4.0, 5.0, 6.3, 8.0, 10.0, 12.5};
-
+            double[] fm = { 0.63, 0.8, 1.0, 1.25, 1.6, 2.0, 2.5, 3.15, 4.0, 5.0, 6.3, 8.0, 10.0, 12.5 };
 
             ////////////////////////////////////////////////////////////////////////
             //calc SNR
@@ -406,20 +404,20 @@ namespace RoomMeasureNI.Sources.Results
             double mkf_den = 0;
 
             for (var m = 0; m < 14; m++)
-            for (var k = 0; k < 7; k++)
-            {
-                for (var t = 0; t < timeTable.Count(); t++)
+                for (var k = 0; k < 7; k++)
                 {
-                    mkf_re += Math.Pow(inputData[k][t], 2) * Math.Cos(2 * Math.PI * fm[m] * timeTable[t]);
-                    mkf_im += Math.Pow(inputData[k][t], 2) * Math.Sin(2 * Math.PI * fm[m] * timeTable[t]);
-                    mkf_den += Math.Pow(inputData[k][t], 2);
+                    for (var t = 0; t < timeTable.Count(); t++)
+                    {
+                        mkf_re += Math.Pow(inputData[k][t], 2) * Math.Cos(2 * Math.PI * fm[m] * timeTable[t]);
+                        mkf_im += Math.Pow(inputData[k][t], 2) * Math.Sin(2 * Math.PI * fm[m] * timeTable[t]);
+                        mkf_den += Math.Pow(inputData[k][t], 2);
+                    }
+                    var mkf_num = Math.Sqrt(Math.Pow(mkf_re, 2) + Math.Pow(mkf_im, 2));
+                    mkf[m, k] = mkf_num / mkf_den / (1 + Math.Pow(10, -SNR[k] / 10));
+                    mkf_re = 0;
+                    mkf_im = 0;
+                    mkf_den = 0;
                 }
-                var mkf_num = Math.Sqrt(Math.Pow(mkf_re, 2) + Math.Pow(mkf_im, 2));
-                mkf[m, k] = mkf_num / mkf_den / (1 + Math.Pow(10, -SNR[k] / 10));
-                mkf_re = 0;
-                mkf_im = 0;
-                mkf_den = 0;
-            }
 
             ////////////////////////////////////////////////////////////////////////
             //Iamk - intensity correction calculation
@@ -432,16 +430,16 @@ namespace RoomMeasureNI.Sources.Results
             Ik[0] = Math.Pow(10, lvl_SNR[0] / 10);
 
             for (var m = 0; m < 14; m++)
-            for (var k = 1; k < 7; k++)
-            {
-                Ik[k] = Math.Pow(10, lvl_SNR[k] / 10);
-                if (lvl_SNR[k] < 63) amdb[k] = 0.5 * lvl_SNR[k] - 65;
-                else if (lvl_SNR[k] < 67) amdb[k] = 1.8 * lvl_SNR[k] - 146.9;
-                else if (lvl_SNR[k] < 100) amdb[k] = 0.5 * lvl_SNR[k] - 59.8;
-                else amdb[k] = -10;
-                amf[k] = Math.Pow(10, amdb[k] / 10);
-                Iamk[k] = Ik[k - 1] * amf[k];
-            }
+                for (var k = 1; k < 7; k++)
+                {
+                    Ik[k] = Math.Pow(10, lvl_SNR[k] / 10);
+                    if (lvl_SNR[k] < 63) amdb[k] = 0.5 * lvl_SNR[k] - 65;
+                    else if (lvl_SNR[k] < 67) amdb[k] = 1.8 * lvl_SNR[k] - 146.9;
+                    else if (lvl_SNR[k] < 100) amdb[k] = 0.5 * lvl_SNR[k] - 59.8;
+                    else amdb[k] = -10;
+                    amf[k] = Math.Pow(10, amdb[k] / 10);
+                    Iamk[k] = Ik[k - 1] * amf[k];
+                }
 
             ////////////////////////////////////////////////////////////////////////
             //Irtk - intensity reception treshold
@@ -462,7 +460,7 @@ namespace RoomMeasureNI.Sources.Results
             var mkf_ = new double[14, 7];
 
             for (var m = 0; m < 14; m++)
-            for (var k = 0; k < 7; k++) mkf_[m, k] = mkf[m, k] * Ik[k] / (Ik[k] + Iamk[k] + Irtk[k]);
+                for (var k = 0; k < 7; k++) mkf_[m, k] = mkf[m, k] * Ik[k] / (Ik[k] + Iamk[k] + Irtk[k]);
 
             ////////////////////////////////////////////////////////////////////////
             //SNReff - corrected SNR computation
@@ -470,12 +468,12 @@ namespace RoomMeasureNI.Sources.Results
             var SNReff = new double[14, 7];
 
             for (var m = 0; m < 14; m++)
-            for (var k = 0; k < 7; k++)
-            {
-                SNReff[m, k] = 10 * Math.Log10(mkf_[m, k] / (1 - mkf_[m, k]));
-                if (SNReff[m, k] > 15) SNReff[m, k] = 15;
-                else if (SNReff[m, k] < -15) SNReff[m, k] = -15;
-            }
+                for (var k = 0; k < 7; k++)
+                {
+                    SNReff[m, k] = 10 * Math.Log10(mkf_[m, k] / (1 - mkf_[m, k]));
+                    if (SNReff[m, k] > 15) SNReff[m, k] = 15;
+                    else if (SNReff[m, k] < -15) SNReff[m, k] = -15;
+                }
 
             ////////////////////////////////////////////////////////////////////////
             //TIkf - corrected SNR computation
@@ -483,13 +481,12 @@ namespace RoomMeasureNI.Sources.Results
             var TIkf = new double[14, 7];
 
             for (var m = 0; m < 14; m++)
-            for (var k = 0; k < 7; k++)
-                TIkf[m, k] = (SNReff[m, k] + 15) / 30;
+                for (var k = 0; k < 7; k++)
+                    TIkf[m, k] = (SNReff[m, k] + 15) / 30;
 
             ////////////////////////////////////////////////////////////////////////
             //MTIk - Modulation transfer index
             var MTIk = new double[7];
-
 
             for (var k = 0; k < 7; k++)
             {
@@ -573,12 +570,14 @@ namespace RoomMeasureNI.Sources.Results
         {
             var row500 = parameters.Rows.Find(CenterFreqO.f500.GetDescription());
             var row1000 = parameters.Rows.Find(CenterFreqO.f1000.GetDescription());
-            var row2000 = parameters.Rows.Find(CenterFreqO.f2000.GetDescription());
 
             var sti = STI(Fs, maxIdx, STI_input_array, nc_curve, speaker);
-            var edt = ((double) row500["EDT"] + (double) row1000["EDT"]) / 2;
-            var t20 = ((double) row500["T20"] + (double) row1000["T20"]) / 2;
-            var t30 = ((double) row500["T30"] + (double) row1000["T30"]) / 2;
+            var edt = ((double)row500["EDT"] + (double)row1000["EDT"]) / 2;
+            var t20 = ((double)row500["T20"] + (double)row1000["T20"]) / 2;
+            var t30 = ((double)row500["T30"] + (double)row1000["T30"]) / 2;
+            var c50 = ((double)row500["C50"] + (double)row1000["C50"]) / 2;
+            var c80 = ((double)row500["C80"] + (double)row1000["C80"]) / 2;
+            var d50 = ((double)row500["D50"] + (double)row1000["D50"]) / 2;
 
             parameters.Rows.Add(
                 100,
@@ -586,9 +585,9 @@ namespace RoomMeasureNI.Sources.Results
                 edt,
                 t20,
                 t30,
-                -1,
-                -1,
-                -1,
+                c50,
+                c80,
+                d50,
                 sti);
         }
 
@@ -601,7 +600,7 @@ namespace RoomMeasureNI.Sources.Results
         {
             var param = new double[parameters.Rows.Count - 1];
             for (var i = 0; i < parameters.Rows.Count - 1; i++)
-                param[i] = (double) parameters.Rows[i][parameterName];
+                param[i] = (double)parameters.Rows[i][parameterName];
             return param;
         }
 
@@ -609,7 +608,7 @@ namespace RoomMeasureNI.Sources.Results
         {
             var param = new double[parameters.Rows.Count - 1];
             for (var i = 0; i < parameters.Rows.Count - 1; i++)
-                param[i] = (int) parameters.Rows[i]["freqidx"];
+                param[i] = (int)parameters.Rows[i]["freqidx"];
             return param;
         }
 
@@ -617,7 +616,7 @@ namespace RoomMeasureNI.Sources.Results
         {
             var param = new string[parameters.Rows.Count - 1];
             for (var i = 0; i < parameters.Rows.Count - 1; i++)
-                param[i] = (string) parameters.Rows[i]["Frequency"];
+                param[i] = (string)parameters.Rows[i]["Frequency"];
             return param;
         }
     }

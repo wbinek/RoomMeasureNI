@@ -1,15 +1,17 @@
-﻿using System;
+﻿using RoomMeasureNI.Sources.Measurement;
+using RoomMeasureNI.Sources.Results;
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
-using RoomMeasureNI.Sources.Measurement;
-using RoomMeasureNI.Sources.Results;
 
 namespace RoomMeasureNI.Sources.Project
 {
     [Serializable]
+    [DataObjectAttribute]
     public sealed class Project
     {
         private static Project m_oInstance;
@@ -22,7 +24,7 @@ namespace RoomMeasureNI.Sources.Project
         /// <summary>
         ///     Default constructor
         /// </summary>
-        private Project()
+        public Project()
         {
             punktyPomiarowe = new PunktyPomiarowe();
             measResults = new ObservableCollection<MeasurementResult>();
@@ -137,7 +139,7 @@ namespace RoomMeasureNI.Sources.Project
                 using (Stream stream = File.Open(path, FileMode.Open))
                 {
                     var binaryFormatter = new BinaryFormatter();
-                    proj = (Project) binaryFormatter.Deserialize(stream);
+                    proj = (Project)binaryFormatter.Deserialize(stream);
                     assign(proj);
                 }
         }
