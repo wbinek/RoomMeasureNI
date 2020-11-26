@@ -6,7 +6,7 @@ namespace RoomMeasureNI.GUI
 {
     public partial class ctrlMeasurement : UserControl
     {
-        private readonly MeasurementExecutioner measExec;
+        private MeasurementExecutioner measExec;
 
         public ctrlMeasurement()
         {
@@ -19,10 +19,11 @@ namespace RoomMeasureNI.GUI
 
         public void Odswiez()
         {
+            measExec = new MeasurementExecutioner();
             ctrlPunktyPom.Odswiez();
             imgPanel1.Refresh();
             ctrlCardConfig1.Odswiez();
-            ctrlMeasureConfig1.refresh();
+            ctrlMeasureConfig1.refresh();   
         }
 
         private void butStart_Click(object sender, EventArgs e)
@@ -53,6 +54,13 @@ namespace RoomMeasureNI.GUI
                 timer1.Stop();
             else
                 progressBar.Value += 1;
+        }
+
+        private void butTest_Click(object sender, EventArgs e)
+        {
+            progressBar.Value = 0;
+            Form1_Load(measExec.getLength());
+            measExec.startTest();
         }
     }
 }
