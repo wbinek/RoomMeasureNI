@@ -1,5 +1,8 @@
-﻿using RoomMeasureNI.GUI.subMeasurement;
+﻿using MathNet.Filtering;
+using MathNet.Filtering.FIR;
+using RoomMeasureNI.GUI.subMeasurement;
 using RoomMeasureNI.Sources.Dependencies;
+using RoomMeasureNI.Sources.Dependencies.ButterworthFilterDesign;
 using RoomMeasureNI.Sources.Results;
 using System;
 using System.Collections.Generic;
@@ -15,6 +18,7 @@ namespace RoomMeasureNI.Sources.Measurement
         private readonly aiaoDriver recorder;
         private readonly object thisLock = new object();
         private double[] output = new double[0];
+        private bool dropResult = false;
 
         public MeasurementExecutioner()
         {
@@ -30,21 +34,30 @@ namespace RoomMeasureNI.Sources.Measurement
             List<string> channelNames = recorder.getChannelNames();
 
             recorder.Dispose();
+            if (!dropResult)
+                switch (measConfig.measMethod)
+                {
+                    case MeasurementMethods.SweepSine:
+                        postprocess(dane, channelNames);
+                        break;
 
-            switch (measConfig.measMethod)
-            {
-                case MeasurementMethods.SweepSine:
-                    postprocess(dane, channelNames);
-                    break;
-
-                case MeasurementMethods.ImpulseRecording:
-                    showAcceptanceWindow(dane, channelNames);
-                    break;
-            }
+                    case MeasurementMethods.ImpulseRecording:
+                        showAcceptanceWindow(dane, channelNames);
+                        break;
+                }
         }
 
         public void startMeasurement()
         {
+            dropResult = false;
+            preprocess();
+            generateOutput();
+            recorder.startMeasurement(output, output.Length, cardConfig);
+        }
+
+        public void startTest()
+        {
+            dropResult = true;
             preprocess();
             generateOutput();
             recorder.startMeasurement(output, output.Length, cardConfig);
@@ -158,17 +171,26 @@ namespace RoomMeasureNI.Sources.Measurement
         protected double[] mtCalculateResponse(int averages, double[] input, PostProcessMethods processing)
         {
             /// Use for testing
-            input = output;
+            //input = output;
 
             //if (processing == PostProcessMethods.FilterInput)
             //{
             //    //Filter input signal
             //    input = Butterworth.filterResult(measConfig.fmax, measConfig.fmin, input, cardConfig.chSmplRate, 12);
             //}
-            int length = (int)(cardConfig.chSmplRate * (measConfig.breakLength/*));//*/ + measConfig.measLength));
+
+            //filter
+            double fc = measConfig.fmin; //cutoff frequency
+            var filter = OnlineFirFilter.CreateHighpass(ImpulseResponse.Finite, cardConfig.chSmplRate, fc,1001);
+
+            double[] yf1 = filter.ProcessSamples(input); //Lowpass
+            double[] yf2 = filter.ProcessSamples(yf1.Reverse().ToArray()); //Lowpass reversed
+            input = yf2.Reverse().ToArray(); //Zero-Phase
+
+            int length = (int)(cardConfig.chSmplRate * (measConfig.breakLength + measConfig.measLength));
             double[] response = new double[length];
 
-            var mode = 0;
+            var mode = 1;
             if (mode == 0)
                 {
                 // Impulse response calculation using linear convolution
@@ -187,15 +209,18 @@ namespace RoomMeasureNI.Sources.Measurement
                     }
                 }
 
-                response = Tools.fastConvolution(averagedResponse, invsweep);
+                float predelayMs = 10;
+                int predelaySampl = (int)(predelayMs * 0.001 * cardConfig.chSmplRate);
+                response = Tools.fastConvolution(averagedResponse, invsweep, 0);
             }
             else if (mode == 1)
             {
                 // Impulse resoinse calculation using fft division with pre convolution averaging
                 var inputList = input.Split(length);
+                var outputSingle = output.Split(length).First().ToArray();
                 double[] averagedResponse = new double[length];
 
-                foreach (var oneMeasurement in inputList.Skip(1).Take(averagedResponse.Count() - 2))
+                foreach (var oneMeasurement in inputList.Skip(1).Take(inputList.Count() - 2))
                 {
                     double[] data = oneMeasurement.ToArray();
                     lock (thisLock)
@@ -205,7 +230,17 @@ namespace RoomMeasureNI.Sources.Measurement
                     }
                 }
 
-                response = Tools.fastDeConvolution(averagedResponse, output);
+                //usefulFunctions.SaveArrayAsCSV<double>(input, "input.csv");
+                //usefulFunctions.SaveArrayAsCSV<double>(averagedResponse, "averaged_input.csv");
+                //usefulFunctions.SaveArrayAsCSV<double>(output, "generated_signal_full.csv");
+                //usefulFunctions.SaveArrayAsCSV<double>(outputList.First().ToArray(), "generated_signal_trimmed.csv");
+
+                //averagedResponse = usefulFunctions.ReadArrayFromCSV("averaged_input.csv");
+                //outputSingle = usefulFunctions.ReadArrayFromCSV("generated_signal_trimmed.csv");
+
+                float predelayMs = 10;
+                int predelaySampl = (int)(predelayMs * 0.001 * cardConfig.chSmplRate);
+                response = Tools.fastDeConvolution(averagedResponse, outputSingle, predelaySampl);
             }
             return response;
         }

@@ -1,6 +1,8 @@
 ﻿using MathNet.Numerics.IntegralTransforms;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 
@@ -8,6 +10,34 @@ namespace RoomMeasureNI.Sources.Dependencies
 {
     public static class usefulFunctions
     {
+
+        public static void SaveArrayAsCSV<T>(T[] arrayToSave, string fileName)
+        {
+            using (StreamWriter file = new StreamWriter(fileName))
+            {
+                foreach (T item in arrayToSave)
+                {
+                    file.Write(item + "\n");
+                }
+            }
+        }
+
+        public static double[] ReadArrayFromCSV(string fileName)
+        {
+            string line;
+            List<double> doubleList = new List<double>();
+
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                while ((line = reader.ReadLine()) != null)
+                {
+                    doubleList.Add(Convert.ToDouble(line));
+                }
+            }
+            double[] arrayToRead = doubleList.ToArray();
+            return arrayToRead;
+        }
+
         public static string GetDescription(this Enum value)
         {
             var field = value.GetType().GetField(value.ToString());

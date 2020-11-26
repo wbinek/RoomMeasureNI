@@ -196,7 +196,7 @@ namespace RoomMeasureNI.Sources.Measurement
             return envelope;
         }
 
-        public static double[] fastConvolution(double[] data, double[] filter)
+        public static double[] fastConvolution(double[] data, double[] filter, int predelay = 0)
         {
             int M = data.Length;
             int L = filter.Length;
@@ -220,34 +220,33 @@ namespace RoomMeasureNI.Sources.Measurement
             double[] yt = Tools.complexReal2Double(ytc);
 
             //return yt.Take(M).ToArray();
-            return yt.Skip(L - 1).ToArray();
+            return yt.Skip(L - 1 - predelay).Take(M).ToArray();
         }
 
-        public static double[] fastDeConvolution(double[] output, double[] input)
+        public static double[] fastDeConvolution(double[] signal, double[] reference, int predelay = 0)
         {
-            int M = output.Length;
-            int L = input.Length;
+            int M = signal.Length;
+            int L = reference.Length;
             int N = M + L - 1;
             //int next = (int) Math.Pow(2, Math.Ceiling(Math.Log(N) / Math.Log(2)));
 
-            double[] paddedOutput = new double[N];
-            double[] paddedInput = new double[N];
+            double[] paddedSignal = new double[N];
+            double[] paddedReference = new double[N];
 
-            Array.Copy(output, paddedOutput, output.Length);
-            Array.Copy(input, paddedInput, input.Length);
+            Array.Copy(signal, 0, paddedSignal, predelay, signal.Length);
+            Array.Copy(reference, paddedReference, reference.Length);
 
-            var X = Tools.double2Complex(paddedInput);
-            var Y = Tools.double2Complex(paddedOutput);
+            var X = Tools.double2Complex(paddedReference);
+            var Y = Tools.double2Complex(paddedSignal);
 
             Fourier.Forward(Y, FourierOptions.Matlab);
             Fourier.Forward(X, FourierOptions.Matlab);
 
-            var ytc = X.Zip(Y, (xs, ys) => xs / ys).ToArray();
+            var ytc = Y.Zip(X, (ys, xs) => ys / xs).ToArray();
             Fourier.Inverse(ytc, FourierOptions.Matlab);
             double[] yt = Tools.complexReal2Double(ytc);
 
             return yt.Take(M).ToArray();
-            //return yt.Skip(L - 1).ToArray();
         }
 
         /// <summary>
