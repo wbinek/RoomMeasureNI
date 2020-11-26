@@ -154,9 +154,19 @@ namespace RoomMeasureNI.GUI
         {
             IList rows = dataGridViewMesurements.SelectedCells;
 
-            foreach (var row in rows)
-                ((MeasurementResult)dataGridViewMesurements.Rows[((DataGridViewCell)row).RowIndex].DataBoundItem)
+            foreach (DataGridViewCell row in rows)
+                ((MeasurementResult)dataGridViewMesurements.Rows[row.RowIndex].DataBoundItem)
                     .exportResultAsWave44100();
+        }
+
+        private void confirmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IList rows = dataGridViewMesurements.SelectedCells;
+
+            foreach (DataGridViewCell row in rows)
+            {
+                dataGridViewMesurements.Rows.Remove(row.OwningRow);
+            }   
         }
     }
 }

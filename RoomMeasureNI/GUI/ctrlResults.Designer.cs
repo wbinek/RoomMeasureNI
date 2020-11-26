@@ -40,6 +40,7 @@ namespace RoomMeasureNI.GUI
             this.calculateDefaultParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.averageSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveImpulseAsWavToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveImpulseAs44100WavToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadImpulseFromWavToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.confirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +68,6 @@ namespace RoomMeasureNI.GUI
             this.fstopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.godzinapomiaruDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nazwaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.saveImpulseAs44100WavToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -172,6 +172,13 @@ namespace RoomMeasureNI.GUI
             this.saveImpulseAsWavToolStripMenuItem.Text = "Save impulse as wav";
             this.saveImpulseAsWavToolStripMenuItem.Click += new System.EventHandler(this.saveImpulseAsWavToolStripMenuItem_Click);
             // 
+            // saveImpulseAs44100WavToolStripMenuItem
+            // 
+            this.saveImpulseAs44100WavToolStripMenuItem.Name = "saveImpulseAs44100WavToolStripMenuItem";
+            this.saveImpulseAs44100WavToolStripMenuItem.Size = new System.Drawing.Size(336, 36);
+            this.saveImpulseAs44100WavToolStripMenuItem.Text = "Save impulse as 44100 wav";
+            this.saveImpulseAs44100WavToolStripMenuItem.Click += new System.EventHandler(this.saveImpulseAs44100WavToolStripMenuItem_Click);
+            // 
             // loadImpulseFromWavToolStripMenuItem
             // 
             this.loadImpulseFromWavToolStripMenuItem.Name = "loadImpulseFromWavToolStripMenuItem";
@@ -190,8 +197,9 @@ namespace RoomMeasureNI.GUI
             // confirmToolStripMenuItem
             // 
             this.confirmToolStripMenuItem.Name = "confirmToolStripMenuItem";
-            this.confirmToolStripMenuItem.Size = new System.Drawing.Size(205, 40);
+            this.confirmToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
             this.confirmToolStripMenuItem.Text = "Confirm";
+            this.confirmToolStripMenuItem.Click += new System.EventHandler(this.confirmToolStripMenuItem_Click);
             // 
             // measResultsBindingSource
             // 
@@ -243,7 +251,7 @@ namespace RoomMeasureNI.GUI
             this.tabResultsCharts.Margin = new System.Windows.Forms.Padding(6);
             this.tabResultsCharts.Name = "tabResultsCharts";
             this.tabResultsCharts.Padding = new System.Windows.Forms.Padding(6);
-            this.tabResultsCharts.Size = new System.Drawing.Size(538, 923);
+            this.tabResultsCharts.Size = new System.Drawing.Size(539, 923);
             this.tabResultsCharts.TabIndex = 1;
             this.tabResultsCharts.Text = "Wykresy";
             this.tabResultsCharts.UseVisualStyleBackColor = true;
@@ -253,7 +261,7 @@ namespace RoomMeasureNI.GUI
             this.ctrlCharts1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctrlCharts1.Location = new System.Drawing.Point(6, 6);
             this.ctrlCharts1.Name = "ctrlCharts1";
-            this.ctrlCharts1.Size = new System.Drawing.Size(526, 911);
+            this.ctrlCharts1.Size = new System.Drawing.Size(527, 911);
             this.ctrlCharts1.TabIndex = 0;
             // 
             // tabResultsTables
@@ -262,7 +270,7 @@ namespace RoomMeasureNI.GUI
             this.tabResultsTables.Location = new System.Drawing.Point(4, 33);
             this.tabResultsTables.Margin = new System.Windows.Forms.Padding(6);
             this.tabResultsTables.Name = "tabResultsTables";
-            this.tabResultsTables.Size = new System.Drawing.Size(538, 923);
+            this.tabResultsTables.Size = new System.Drawing.Size(539, 923);
             this.tabResultsTables.TabIndex = 2;
             this.tabResultsTables.Text = "Tabele";
             this.tabResultsTables.UseVisualStyleBackColor = true;
@@ -282,7 +290,7 @@ namespace RoomMeasureNI.GUI
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.dataGridResults);
-            this.splitContainer4.Size = new System.Drawing.Size(538, 923);
+            this.splitContainer4.Size = new System.Drawing.Size(539, 923);
             this.splitContainer4.SplitterDistance = 651;
             this.splitContainer4.SplitterWidth = 8;
             this.splitContainer4.TabIndex = 0;
@@ -298,7 +306,7 @@ namespace RoomMeasureNI.GUI
             this.dataGridParamSetData.Name = "dataGridParamSetData";
             this.dataGridParamSetData.RowHeadersVisible = false;
             this.dataGridParamSetData.RowHeadersWidth = 72;
-            this.dataGridParamSetData.Size = new System.Drawing.Size(538, 651);
+            this.dataGridParamSetData.Size = new System.Drawing.Size(539, 651);
             this.dataGridParamSetData.TabIndex = 0;
             this.dataGridParamSetData.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dataGridParamSetData_KeyUp);
             // 
@@ -318,7 +326,7 @@ namespace RoomMeasureNI.GUI
             this.dataGridResults.RowHeadersVisible = false;
             this.dataGridResults.RowHeadersWidth = 72;
             this.dataGridResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridResults.Size = new System.Drawing.Size(538, 264);
+            this.dataGridResults.Size = new System.Drawing.Size(539, 264);
             this.dataGridResults.TabIndex = 1;
             this.dataGridResults.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellContentClick);
             // 
@@ -341,7 +349,7 @@ namespace RoomMeasureNI.GUI
             this.tabInfo.Margin = new System.Windows.Forms.Padding(6);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.Padding = new System.Windows.Forms.Padding(6);
-            this.tabInfo.Size = new System.Drawing.Size(538, 923);
+            this.tabInfo.Size = new System.Drawing.Size(539, 923);
             this.tabInfo.TabIndex = 3;
             this.tabInfo.Text = "Informacje";
             this.tabInfo.UseVisualStyleBackColor = true;
@@ -425,13 +433,6 @@ namespace RoomMeasureNI.GUI
             this.nazwaDataGridViewTextBoxColumn1.MinimumWidth = 9;
             this.nazwaDataGridViewTextBoxColumn1.Name = "nazwaDataGridViewTextBoxColumn1";
             this.nazwaDataGridViewTextBoxColumn1.Width = 175;
-            // 
-            // saveImpulseAs44100WavToolStripMenuItem
-            // 
-            this.saveImpulseAs44100WavToolStripMenuItem.Name = "saveImpulseAs44100WavToolStripMenuItem";
-            this.saveImpulseAs44100WavToolStripMenuItem.Size = new System.Drawing.Size(336, 36);
-            this.saveImpulseAs44100WavToolStripMenuItem.Text = "Save impulse as 44100 wav";
-            this.saveImpulseAs44100WavToolStripMenuItem.Click += new System.EventHandler(this.saveImpulseAs44100WavToolStripMenuItem_Click);
             // 
             // ctrlResults
             // 
