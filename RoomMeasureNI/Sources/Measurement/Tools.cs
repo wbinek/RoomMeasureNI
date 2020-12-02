@@ -69,13 +69,13 @@ namespace RoomMeasureNI.Sources.Measurement
             return attribute == null ? value.ToString() : attribute.Description;
         }
 
-        public static double getAverageLevel(double[] w)
+        public static double getIntegratedLevel(double[] w)
         {
             if (w != null)
             {
                 double psq = 0;
                 double len = w.Length;
-                Array.ForEach(w, x => psq += x * x / len);
+                Array.ForEach(w, x => psq += x * x);
                 return 10 * Math.Log10(psq / (4E-10));
             }
             return 0;
@@ -87,7 +87,20 @@ namespace RoomMeasureNI.Sources.Measurement
             return 10 * Math.Log10(maxVal * maxVal / 4e-10);
         }
 
-        public static double getTotalLevel(double[] w, int fs)
+        public static double getLeqLevel(double[] w, int fs)
+        {
+            if (w != null)
+            {
+                double psq = 0;
+                double len = w.Length;
+                double meas_time = len / fs;
+                Array.ForEach(w, x => psq += x * x / fs / meas_time);
+                return 10 * Math.Log10(psq / (4E-10));
+            }
+            return 0;
+        }
+
+        public static double getSELLevel(double[] w, int fs)
         {
             if (w != null)
             {

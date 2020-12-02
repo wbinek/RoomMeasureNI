@@ -87,7 +87,7 @@ namespace RoomMeasureNI.Sources.Measurement
                 case MeasurementMethods.ImpulseRecording:
                     output = FunctionGenerator.generateByEnum(generatorMethods.Silence,
                         (int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate,
-                        measConfig.fmin, measConfig.fmax, (int)measConfig.breakLength * cardConfig.chSmplRate, measConfig.averages + 1);
+                        measConfig.fmin, measConfig.fmax, 0, measConfig.averages);
                     break;
             }
 
@@ -120,6 +120,11 @@ namespace RoomMeasureNI.Sources.Measurement
 
                 var okno = new ctrlAcceptResult();
                 okno.setPlot(timevector, result);
+                okno.setLeq(Tools.getLeqLevel(result, Fs));
+                okno.setSEL(Tools.getSELLevel(result, Fs));
+                okno.setMaxSPL(Tools.getMaxLevel(result));
+                okno.setIntegratedSPL(Tools.getIntegratedLevel(result));
+
                 okno.ShowDialog();
 
                 if (okno.accepted)
@@ -181,7 +186,7 @@ namespace RoomMeasureNI.Sources.Measurement
 
             //filter
             double fc = measConfig.fmin; //cutoff frequency
-            var filter = OnlineFirFilter.CreateHighpass(ImpulseResponse.Finite, cardConfig.chSmplRate, fc,1001);
+            var filter = OnlineFirFilter.CreateHighpass(ImpulseResponse.Finite, cardConfig.chSmplRate, fc, 1001);
 
             double[] yf1 = filter.ProcessSamples(input); //Lowpass
             double[] yf2 = filter.ProcessSamples(yf1.Reverse().ToArray()); //Lowpass reversed
@@ -192,9 +197,9 @@ namespace RoomMeasureNI.Sources.Measurement
 
             var mode = 1;
             if (mode == 0)
-                {
+            {
                 // Impulse response calculation using linear convolution
-                
+
                 double[] invsweep = FunctionGenerator.generateReverseSweep((int)(cardConfig.chSmplRate * measConfig.measLength), cardConfig.chSmplRate, measConfig.fmin, measConfig.fmax, (double)cardConfig.aoMax);
                 var inputList = input.Split(length);
                 double[] averagedResponse = new double[length];
@@ -241,6 +246,7 @@ namespace RoomMeasureNI.Sources.Measurement
                 float predelayMs = 10;
                 int predelaySampl = (int)(predelayMs * 0.001 * cardConfig.chSmplRate);
                 response = Tools.fastDeConvolution(averagedResponse, outputSingle, predelaySampl);
+                //response = averagedResponse;
             }
             return response;
         }
