@@ -13,8 +13,8 @@ namespace RoomMeasureNI.GUI.subResults
         public ctrlCharts()
         {
             InitializeComponent();
-            checkedListParametersToPlot.DataSource = Enum.GetValues(typeof(acousticParams)); //throws exception, dont know why
             lastSelectedResults = new List<int>();
+            checkedListParametersToPlot.DataSource = Enum.GetValues(typeof(AcousticParams)); //throws exception, dont know why
         }
 
         public void refresh()
@@ -58,7 +58,7 @@ namespace RoomMeasureNI.GUI.subResults
 
         private void RefreshPlot()
         {
-            foreach (acousticParams param in checkedListParametersToPlot.CheckedItems)
+            foreach (AcousticParams param in checkedListParametersToPlot.CheckedItems)
                 foreach (DataGridViewRow row in dataGridViewResultsSets.Rows)
                     if (Convert.ToBoolean(row.Cells[0].Value))
                     {

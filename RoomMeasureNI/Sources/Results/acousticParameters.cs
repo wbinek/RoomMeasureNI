@@ -12,7 +12,7 @@ namespace RoomMeasureNI.Sources.Results
     ///     Enum containing list of acoustic parameters to calculate
     /// </summary>
     [Serializable]
-    internal enum acousticParams
+    internal enum AcousticParams
     {
         EDT,
         T20,
