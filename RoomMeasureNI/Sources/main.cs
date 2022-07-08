@@ -14,7 +14,13 @@ namespace RoomMeasureNI.Sources
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new main_window());
+            try
+            {
+                Application.Run(new main_window());
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
