@@ -41,6 +41,8 @@
             this.ctrlPomiar1 = new RoomMeasureNI.GUI.ctrlMeasurement();
             this.tabWyniki = new System.Windows.Forms.TabPage();
             this.ctrlResults1 = new RoomMeasureNI.GUI.ctrlResults();
+            this.toolStripMenuItemInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tabProjekt.SuspendLayout();
@@ -53,7 +55,8 @@
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.plikToolStripMenuItem});
+            this.plikToolStripMenuItem,
+            this.toolStripMenuItemInfo});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(11, 4, 0, 4);
@@ -178,6 +181,21 @@
             this.ctrlResults1.Size = new System.Drawing.Size(996, 963);
             this.ctrlResults1.TabIndex = 0;
             // 
+            // toolStripMenuItemInfo
+            // 
+            this.toolStripMenuItemInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.oProgramieToolStripMenuItem});
+            this.toolStripMenuItemInfo.Name = "toolStripMenuItemInfo";
+            this.toolStripMenuItemInfo.Size = new System.Drawing.Size(130, 34);
+            this.toolStripMenuItemInfo.Text = "Informacje";
+            // 
+            // oProgramieToolStripMenuItem
+            // 
+            this.oProgramieToolStripMenuItem.Name = "oProgramieToolStripMenuItem";
+            this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.oProgramieToolStripMenuItem.Text = "O programie";
+            this.oProgramieToolStripMenuItem.Click += new System.EventHandler(this.oProgramieToolStripMenuItem_Click);
+            // 
             // main_window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -216,5 +234,7 @@
         private GUI.ctrlMeasurement ctrlPomiar1;
         private System.Windows.Forms.ToolStripMenuItem zapiszJakoToolStripMenuItem;
         private GUI.ctrlResults ctrlResults1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemInfo;
+        private System.Windows.Forms.ToolStripMenuItem oProgramieToolStripMenuItem;
     }
 }

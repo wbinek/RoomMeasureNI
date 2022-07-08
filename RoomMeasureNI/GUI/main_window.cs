@@ -40,5 +40,15 @@ namespace RoomMeasureNI.GUI
         {
             refresh();
         }
+
+        private void oProgramieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string about_text = "RoomMeasureNI wersja 1.0.0 alpha \n\n" +
+                                "Aplikacja autorstwa Wojciecha Binka\n" +
+                                "Rozpowszechnianie programu bez wiedzy autora zabronione\n" +
+                                "©, 2022, Wojciech Binek.";
+
+            MessageBox.Show(about_text);
+        }
     }
 }
