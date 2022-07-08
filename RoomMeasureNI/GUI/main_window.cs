@@ -26,10 +26,10 @@ namespace RoomMeasureNI.GUI
         private void otwórzToolStripMenuItem_Click(object sender, EventArgs e)
         {
             proj.loadFile();
-            Odswiez();
+            refresh();
         }
 
-        private void Odswiez()
+        private void refresh()
         {
             ctrlProjekt1.Odswiez();
             ctrlPomiar1.Odswiez();
@@ -38,7 +38,7 @@ namespace RoomMeasureNI.GUI
 
         private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Odswiez();
+            refresh();
         }
     }
 }

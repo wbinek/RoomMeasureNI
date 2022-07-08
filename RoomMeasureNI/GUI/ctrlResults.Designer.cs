@@ -119,15 +119,16 @@ namespace RoomMeasureNI.GUI
             this.dataGridViewMesurements.ContextMenuStrip = this.contextMenuResults;
             this.dataGridViewMesurements.DataSource = this.measResultsBindingSource;
             this.dataGridViewMesurements.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewMesurements.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewMesurements.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewMesurements.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridViewMesurements.Name = "dataGridViewMesurements";
-            this.dataGridViewMesurements.ReadOnly = true;
             this.dataGridViewMesurements.RowHeadersVisible = false;
             this.dataGridViewMesurements.RowHeadersWidth = 72;
             this.dataGridViewMesurements.Size = new System.Drawing.Size(271, 960);
             this.dataGridViewMesurements.TabIndex = 0;
-            this.dataGridViewMesurements.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
+            this.dataGridViewMesurements.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
+            this.dataGridViewMesurements.KeyDown += new System.Windows.Forms.KeyEventHandler(this.editOnKeyDown);
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -136,7 +137,6 @@ namespace RoomMeasureNI.GUI
             this.dataGridViewTextBoxColumn2.HeaderText = "nazwa";
             this.dataGridViewTextBoxColumn2.MinimumWidth = 9;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // contextMenuResults
             // 
@@ -149,7 +149,7 @@ namespace RoomMeasureNI.GUI
             this.loadImpulseFromWavToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuResults.Name = "contextMenuStrip1";
-            this.contextMenuResults.Size = new System.Drawing.Size(337, 258);
+            this.contextMenuResults.Size = new System.Drawing.Size(337, 220);
             // 
             // calculateDefaultParamsToolStripMenuItem
             // 
@@ -197,7 +197,7 @@ namespace RoomMeasureNI.GUI
             // confirmToolStripMenuItem
             // 
             this.confirmToolStripMenuItem.Name = "confirmToolStripMenuItem";
-            this.confirmToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.confirmToolStripMenuItem.Size = new System.Drawing.Size(205, 40);
             this.confirmToolStripMenuItem.Text = "Confirm";
             this.confirmToolStripMenuItem.Click += new System.EventHandler(this.confirmToolStripMenuItem_Click);
             // 
@@ -312,23 +312,26 @@ namespace RoomMeasureNI.GUI
             // 
             // dataGridResults
             // 
+            this.dataGridResults.AllowUserToAddRows = false;
             this.dataGridResults.AutoGenerateColumns = false;
             this.dataGridResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1});
             this.dataGridResults.DataSource = this.parametersBindingSource;
             this.dataGridResults.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridResults.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
+            this.dataGridResults.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridResults.Location = new System.Drawing.Point(0, 0);
             this.dataGridResults.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridResults.MinimumSize = new System.Drawing.Size(0, 96);
+            this.dataGridResults.MultiSelect = false;
             this.dataGridResults.Name = "dataGridResults";
             this.dataGridResults.RowHeadersVisible = false;
             this.dataGridResults.RowHeadersWidth = 72;
             this.dataGridResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridResults.Size = new System.Drawing.Size(539, 264);
             this.dataGridResults.TabIndex = 1;
-            this.dataGridResults.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellContentClick);
+            this.dataGridResults.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridResults_CellContentClick);
+            this.dataGridResults.KeyDown += new System.Windows.Forms.KeyEventHandler(this.editOnKeyDown);
             // 
             // dataGridViewTextBoxColumn1
             // 

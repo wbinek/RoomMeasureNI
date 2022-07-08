@@ -50,13 +50,14 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.plikToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(12, 4, 0, 4);
-            this.menuStrip1.Size = new System.Drawing.Size(1108, 44);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(11, 4, 0, 4);
+            this.menuStrip1.Size = new System.Drawing.Size(1016, 42);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,34 +69,34 @@
             this.zapiszJakoToolStripMenuItem,
             this.zamknijToolStripMenuItem});
             this.plikToolStripMenuItem.Name = "plikToolStripMenuItem";
-            this.plikToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
+            this.plikToolStripMenuItem.Size = new System.Drawing.Size(63, 34);
             this.plikToolStripMenuItem.Text = "Plik";
             // 
             // otwórzToolStripMenuItem
             // 
             this.otwórzToolStripMenuItem.Name = "otwórzToolStripMenuItem";
-            this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(233, 38);
+            this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(234, 40);
             this.otwórzToolStripMenuItem.Text = "Otwórz";
             this.otwórzToolStripMenuItem.Click += new System.EventHandler(this.otwórzToolStripMenuItem_Click);
             // 
             // zapiszToolStripMenuItem
             // 
             this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
-            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(233, 38);
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(234, 40);
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
             // zapiszJakoToolStripMenuItem
             // 
             this.zapiszJakoToolStripMenuItem.Name = "zapiszJakoToolStripMenuItem";
-            this.zapiszJakoToolStripMenuItem.Size = new System.Drawing.Size(233, 38);
+            this.zapiszJakoToolStripMenuItem.Size = new System.Drawing.Size(234, 40);
             this.zapiszJakoToolStripMenuItem.Text = "Zapisz jako";
             this.zapiszJakoToolStripMenuItem.Click += new System.EventHandler(this.zapiszJakoToolStripMenuItem_Click);
             // 
             // zamknijToolStripMenuItem
             // 
             this.zamknijToolStripMenuItem.Name = "zamknijToolStripMenuItem";
-            this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(233, 38);
+            this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(234, 40);
             this.zamknijToolStripMenuItem.Text = "Zamknij";
             // 
             // tabMain
@@ -104,11 +105,11 @@
             this.tabMain.Controls.Add(this.tabPomiar);
             this.tabMain.Controls.Add(this.tabWyniki);
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabMain.Location = new System.Drawing.Point(0, 44);
-            this.tabMain.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabMain.Location = new System.Drawing.Point(0, 42);
+            this.tabMain.Margin = new System.Windows.Forms.Padding(6);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(1108, 1054);
+            this.tabMain.Size = new System.Drawing.Size(1016, 1012);
             this.tabMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabMain.TabIndex = 1;
             this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
@@ -116,11 +117,11 @@
             // tabProjekt
             // 
             this.tabProjekt.Controls.Add(this.ctrlProjekt1);
-            this.tabProjekt.Location = new System.Drawing.Point(8, 39);
-            this.tabProjekt.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabProjekt.Location = new System.Drawing.Point(4, 33);
+            this.tabProjekt.Margin = new System.Windows.Forms.Padding(6);
             this.tabProjekt.Name = "tabProjekt";
-            this.tabProjekt.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.tabProjekt.Size = new System.Drawing.Size(1092, 1007);
+            this.tabProjekt.Padding = new System.Windows.Forms.Padding(6);
+            this.tabProjekt.Size = new System.Drawing.Size(1008, 975);
             this.tabProjekt.TabIndex = 0;
             this.tabProjekt.Text = "Projekt";
             this.tabProjekt.UseVisualStyleBackColor = true;
@@ -129,19 +130,19 @@
             // 
             this.ctrlProjekt1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctrlProjekt1.Location = new System.Drawing.Point(6, 6);
-            this.ctrlProjekt1.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.ctrlProjekt1.Margin = new System.Windows.Forms.Padding(11, 12, 11, 12);
             this.ctrlProjekt1.Name = "ctrlProjekt1";
-            this.ctrlProjekt1.Size = new System.Drawing.Size(1080, 995);
+            this.ctrlProjekt1.Size = new System.Drawing.Size(996, 963);
             this.ctrlProjekt1.TabIndex = 0;
             // 
             // tabPomiar
             // 
             this.tabPomiar.Controls.Add(this.ctrlPomiar1);
-            this.tabPomiar.Location = new System.Drawing.Point(8, 39);
-            this.tabPomiar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabPomiar.Location = new System.Drawing.Point(4, 33);
+            this.tabPomiar.Margin = new System.Windows.Forms.Padding(6);
             this.tabPomiar.Name = "tabPomiar";
-            this.tabPomiar.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.tabPomiar.Size = new System.Drawing.Size(1092, 1005);
+            this.tabPomiar.Padding = new System.Windows.Forms.Padding(6);
+            this.tabPomiar.Size = new System.Drawing.Size(1008, 975);
             this.tabPomiar.TabIndex = 1;
             this.tabPomiar.Text = "Pomiar";
             this.tabPomiar.UseVisualStyleBackColor = true;
@@ -150,19 +151,19 @@
             // 
             this.ctrlPomiar1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctrlPomiar1.Location = new System.Drawing.Point(6, 6);
-            this.ctrlPomiar1.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.ctrlPomiar1.Margin = new System.Windows.Forms.Padding(11, 12, 11, 12);
             this.ctrlPomiar1.Name = "ctrlPomiar1";
-            this.ctrlPomiar1.Size = new System.Drawing.Size(1080, 993);
+            this.ctrlPomiar1.Size = new System.Drawing.Size(996, 963);
             this.ctrlPomiar1.TabIndex = 0;
             // 
             // tabWyniki
             // 
             this.tabWyniki.Controls.Add(this.ctrlResults1);
-            this.tabWyniki.Location = new System.Drawing.Point(8, 39);
-            this.tabWyniki.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabWyniki.Location = new System.Drawing.Point(4, 33);
+            this.tabWyniki.Margin = new System.Windows.Forms.Padding(6);
             this.tabWyniki.Name = "tabWyniki";
-            this.tabWyniki.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.tabWyniki.Size = new System.Drawing.Size(1092, 1007);
+            this.tabWyniki.Padding = new System.Windows.Forms.Padding(6);
+            this.tabWyniki.Size = new System.Drawing.Size(1008, 975);
             this.tabWyniki.TabIndex = 2;
             this.tabWyniki.Text = "Wyniki";
             this.tabWyniki.UseVisualStyleBackColor = true;
@@ -171,24 +172,24 @@
             // 
             this.ctrlResults1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctrlResults1.Location = new System.Drawing.Point(6, 6);
-            this.ctrlResults1.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
-            this.ctrlResults1.MinimumSize = new System.Drawing.Size(780, 1000);
+            this.ctrlResults1.Margin = new System.Windows.Forms.Padding(11, 12, 11, 12);
+            this.ctrlResults1.MinimumSize = new System.Drawing.Size(715, 960);
             this.ctrlResults1.Name = "ctrlResults1";
-            this.ctrlResults1.Size = new System.Drawing.Size(1080, 1000);
+            this.ctrlResults1.Size = new System.Drawing.Size(996, 963);
             this.ctrlResults1.TabIndex = 0;
             // 
             // main_window
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1108, 1098);
+            this.ClientSize = new System.Drawing.Size(1016, 1054);
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.MinimumSize = new System.Drawing.Size(1114, 1108);
+            this.Margin = new System.Windows.Forms.Padding(6);
+            this.MinimumSize = new System.Drawing.Size(1023, 1066);
             this.Name = "main_window";
-            this.Text = "main_window";
+            this.Text = "RoomMeasureNI";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabMain.ResumeLayout(false);

@@ -36,10 +36,10 @@ namespace RoomMeasureNI.GUI.subResults
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewResultsSets = new System.Windows.Forms.DataGridView();
             this.checkboxPlot = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.parametersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.checkedListParametersToPlot = new System.Windows.Forms.CheckedListBox();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parametersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.measurementResultBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.checkedListParametersToPlot = new System.Windows.Forms.CheckedListBox();
             this.ctrlPlotPanel1 = new RoomMeasureNI.GUI.shared.ctrlPlotPanel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
@@ -63,14 +63,14 @@ namespace RoomMeasureNI.GUI.subResults
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 246F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(532, 717);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 236F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(488, 688);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(6, 477);
+            this.splitContainer3.Location = new System.Drawing.Point(6, 458);
             this.splitContainer3.Margin = new System.Windows.Forms.Padding(6);
             this.splitContainer3.Name = "splitContainer3";
             // 
@@ -81,9 +81,9 @@ namespace RoomMeasureNI.GUI.subResults
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.checkedListParametersToPlot);
-            this.splitContainer3.Size = new System.Drawing.Size(520, 234);
-            this.splitContainer3.SplitterDistance = 261;
-            this.splitContainer3.SplitterWidth = 8;
+            this.splitContainer3.Size = new System.Drawing.Size(476, 224);
+            this.splitContainer3.SplitterDistance = 238;
+            this.splitContainer3.SplitterWidth = 7;
             this.splitContainer3.TabIndex = 1;
             // 
             // dataGridViewResultsSets
@@ -101,7 +101,8 @@ namespace RoomMeasureNI.GUI.subResults
             this.dataGridViewResultsSets.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridViewResultsSets.Name = "dataGridViewResultsSets";
             this.dataGridViewResultsSets.RowHeadersVisible = false;
-            this.dataGridViewResultsSets.Size = new System.Drawing.Size(261, 234);
+            this.dataGridViewResultsSets.RowHeadersWidth = 72;
+            this.dataGridViewResultsSets.Size = new System.Drawing.Size(238, 224);
             this.dataGridViewResultsSets.TabIndex = 0;
             this.dataGridViewResultsSets.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.onRefreshPlots);
             // 
@@ -114,34 +115,38 @@ namespace RoomMeasureNI.GUI.subResults
             this.checkboxPlot.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.checkboxPlot.Width = 21;
             // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "name";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 9;
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
             // parametersBindingSource
             // 
             this.parametersBindingSource.DataMember = "parameters";
             this.parametersBindingSource.DataSource = this.measurementResultBindingSource;
+            // 
+            // measurementResultBindingSource
+            // 
+            this.measurementResultBindingSource.DataSource = typeof(RoomMeasureNI.Sources.Results.MeasurementResult);
             // 
             // checkedListParametersToPlot
             // 
             this.checkedListParametersToPlot.BackColor = System.Drawing.SystemColors.Control;
             this.checkedListParametersToPlot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkedListParametersToPlot.FormattingEnabled = true;
+            this.checkedListParametersToPlot.Items.AddRange(new object[] {
+            "parameter1",
+            "parameter2"});
             this.checkedListParametersToPlot.Location = new System.Drawing.Point(0, 0);
             this.checkedListParametersToPlot.Margin = new System.Windows.Forms.Padding(6);
-            this.checkedListParametersToPlot.MinimumSize = new System.Drawing.Size(200, 4);
+            this.checkedListParametersToPlot.MinimumSize = new System.Drawing.Size(184, 4);
             this.checkedListParametersToPlot.Name = "checkedListParametersToPlot";
-            this.checkedListParametersToPlot.Size = new System.Drawing.Size(251, 234);
+            this.checkedListParametersToPlot.Size = new System.Drawing.Size(231, 224);
             this.checkedListParametersToPlot.TabIndex = 0;
             this.checkedListParametersToPlot.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.onRefreshPlots);
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // measurementResultBindingSource
-            // 
-            this.measurementResultBindingSource.DataSource = typeof(RoomMeasureNI.Sources.Results.MeasurementResult);
             // 
             // ctrlPlotPanel1
             // 
@@ -149,16 +154,16 @@ namespace RoomMeasureNI.GUI.subResults
             this.ctrlPlotPanel1.Location = new System.Drawing.Point(6, 6);
             this.ctrlPlotPanel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.ctrlPlotPanel1.Name = "ctrlPlotPanel1";
-            this.ctrlPlotPanel1.Size = new System.Drawing.Size(520, 459);
+            this.ctrlPlotPanel1.Size = new System.Drawing.Size(476, 440);
             this.ctrlPlotPanel1.TabIndex = 2;
             // 
             // ctrlCharts
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ctrlCharts";
-            this.Size = new System.Drawing.Size(532, 717);
+            this.Size = new System.Drawing.Size(488, 688);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);

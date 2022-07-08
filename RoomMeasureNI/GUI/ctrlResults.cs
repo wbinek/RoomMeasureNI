@@ -25,6 +25,8 @@ namespace RoomMeasureNI.GUI
         private readonly Project proj = Project.Instance;
         private MeasurementResult currentMeasurement;
 
+        private int lastClickedMeasurementIdx = 0;
+
         public ctrlResults()
         {
             InitializeComponent();
@@ -36,7 +38,7 @@ namespace RoomMeasureNI.GUI
             projektBindingSource.ResetBindings(false);
             measResultsBindingSource.ResetBindings(false);
             ctrlCharts1.refresh();
-            //ctrlPlotPanel1.setData();
+            ctrlMainPlotPanel1.updateChart();
         }
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -46,15 +48,26 @@ namespace RoomMeasureNI.GUI
             //measResultsBindingSource.DataSource = currentMeasurement;
             ctrlCharts1.setResult(currentMeasurement);
             ctrlMainPlotPanel1.setResult(currentMeasurement);
-
-            setData();
             ctrlMainPlotPanel1.setWindowParams();
-            Odswiez();
-        }
 
-        public void setData()
-        {
-            ctrlMainPlotPanel1.updateChart();
+            Odswiez();
+
+            // Run after refresh to prevent overwriting the data by the binding refresh
+            if (lastClickedMeasurementIdx <= dataGridResults.RowCount)
+            {
+                dataGridResults.Rows[dataGridResults.SelectedRows[0].Index].Selected = false;
+                dataGridResults.Rows[lastClickedMeasurementIdx].Selected = true;
+                dataGridResults.Refresh();
+                dataGridParamSetData.DataSource =
+                       ((acousticParameters)dataGridResults.Rows[lastClickedMeasurementIdx].DataBoundItem).parameters;
+            }
+            else
+            {
+                dataGridParamSetData.DataSource =
+                    ((acousticParameters)dataGridResults.Rows[0].DataBoundItem).parameters;
+
+            }
+
         }
 
         ///////////////////////////////////////Tab tabele///////////////////////////////////////////////////////////////
@@ -63,12 +76,13 @@ namespace RoomMeasureNI.GUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridResults_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridParamSetData.DataSource = "null";
+            //dataGridParamSetData.DataSource = "null";
             dataGridParamSetData.DataSource =
                 ((acousticParameters)dataGridResults.Rows[e.RowIndex].DataBoundItem).parameters;
             dataGridParamSetData.DefaultCellStyle.Format = "N2";
+            lastClickedMeasurementIdx = e.RowIndex;
             //dataGridParamSetData.Sort(dataGridParamSetData.Columns["freqidx"], ListSortDirection.Ascending);
             //dataGridParamSetData.Columns[0].DefaultCellStyle.Format  ="#";
             //dataGridParamSetData.Columns[1].DefaultCellStyle.Format = "N";
@@ -167,6 +181,29 @@ namespace RoomMeasureNI.GUI
             {
                 dataGridViewMesurements.Rows.Remove(row.OwningRow);
             }   
+        }
+
+        private void dataGridResults_SelectionChanged(object sender, EventArgs e)
+        {
+            //dataGridParamSetData.DataSource = "null";
+            //if (dataGridResults.SelectedRows == null) return;
+            //if (dataGridResults.SelectedRows.Count == 0) return;
+            //dataGridParamSetData.DataSource =
+            //    ((acousticParameters)dataGridResults.SelectedRows[0].DataBoundItem).parameters;
+            //dataGridParamSetData.DefaultCellStyle.Format = "N2";
+            //dataGridParamSetData.Sort(dataGridParamSetData.Columns["freqidx"], ListSortDirection.Ascending);
+            //dataGridParamSetData.Columns[0].DefaultCellStyle.Format  ="#";
+            //dataGridParamSetData.Columns[1].DefaultCellStyle.Format = "N";
+            return;
+        }
+
+        private void editOnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F2)
+            {
+                e.Handled = true;
+                dataGridViewMesurements.BeginEdit(true);
+            }
         }
     }
 }
