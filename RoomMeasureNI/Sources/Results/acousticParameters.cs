@@ -20,7 +20,8 @@ namespace RoomMeasureNI.Sources.Results
         C50,
         C80,
         D50,
-        STI
+        STI,
+        SPL
     }
 
     [Serializable]
@@ -45,6 +46,7 @@ namespace RoomMeasureNI.Sources.Results
             parameters.Columns.Add("C80", typeof(double));
             parameters.Columns.Add("D50", typeof(double));
             parameters.Columns.Add("STI", typeof(double));
+            parameters.Columns.Add("SPL", typeof(double));
 
             parameters.Columns[0].ColumnMapping = MappingType.Hidden;
             //parameters.Columns[1].ColumnMapping = MappingType.Hidden;
@@ -100,6 +102,7 @@ namespace RoomMeasureNI.Sources.Results
                            double c50 = 0;
                            double c80 = 0;
                            double d50 = 0;
+                           double spl = 0;
 
                            if (!double.IsNaN(filteredResult[0]))
                            {
@@ -109,6 +112,7 @@ namespace RoomMeasureNI.Sources.Results
                                c50 = C50(Fs, maxIdx, filteredResult);
                                c80 = C80(Fs, maxIdx, filteredResult);
                                d50 = D50(Fs, maxIdx, filteredResult);
+                               spl = SPL(Fs, maxIdx, filteredResult);
                            }
                            lock (lockMe)
                            {
@@ -121,7 +125,8 @@ namespace RoomMeasureNI.Sources.Results
                                    c50,
                                    c80,
                                    d50,
-                                   -1);
+                                   -1,
+                                   spl);
                            }
                            var idx = Array.IndexOf(freqSTI, freq);
                            if (idx != -1)
@@ -135,7 +140,8 @@ namespace RoomMeasureNI.Sources.Results
                    });
                     if (skip)
                         break;
-                    AverageParameters(Fs, maxIdxGlobal, STI_input_array);
+                    var totalSPL = SPL(Fs, 0, impulseResponse);
+                    AverageParameters(Fs, maxIdxGlobal, STI_input_array, totalSPL);
                     //end case
                     break;
 
@@ -160,6 +166,7 @@ namespace RoomMeasureNI.Sources.Results
                            var c50 = C50(Fs, maxIdx, filteredResult);
                            var c80 = C80(Fs, maxIdx, filteredResult);
                            var d50 = D50(Fs, maxIdx, filteredResult);
+                           var spl = SPL(Fs, maxIdx, filteredResult);
 
                            lock (lockMe)
                            {
@@ -172,7 +179,8 @@ namespace RoomMeasureNI.Sources.Results
                                    c50,
                                    c80,
                                    d50,
-                                   -1);
+                                   -1,
+                                   spl);
                            }
                        }
                        catch (Exception ex)
@@ -272,6 +280,26 @@ namespace RoomMeasureNI.Sources.Results
 
             return (-60 - b) / a;
         }
+
+        /// <summary>
+        ///     Calculates C80 parameter
+        /// </summary>
+        /// <param name="Fs">IR sampling rate</param>
+        /// <param name="maxIdx">IR max value index</param>
+        /// <param name="impulse">Array containing impulse response</param>
+        /// <returns>C80 value</returns>
+        private double SPL(int Fs, int maxIdx, double[] impulse)
+        {
+            try
+            {
+                return 10 * Math.Log10(getTimeRange(Fs, maxIdx, impulse) / 4e-10);
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
 
         /// <summary>
         ///     Calculates C80 parameter
@@ -566,7 +594,7 @@ namespace RoomMeasureNI.Sources.Results
         /// <param name="Fs">IR sampling rate</param>
         /// <param name="maxIdx">IR max value index</param>
         /// <param name="STI_input_array">Array of transmission indexes for STI calculation</param>
-        private void AverageParameters(int Fs, int maxIdx, double[][] STI_input_array)
+        private void AverageParameters(int Fs, int maxIdx, double[][] STI_input_array, double totalSPL)
         {
             var row500 = parameters.Rows.Find(CenterFreqO.f500.GetDescription());
             var row1000 = parameters.Rows.Find(CenterFreqO.f1000.GetDescription());
@@ -588,7 +616,8 @@ namespace RoomMeasureNI.Sources.Results
                 c50,
                 c80,
                 d50,
-                sti);
+                sti,
+                totalSPL);
         }
 
         /// <summary>

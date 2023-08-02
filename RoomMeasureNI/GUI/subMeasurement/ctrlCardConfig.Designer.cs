@@ -39,6 +39,9 @@ namespace RoomMeasureNI.GUI.subMeasurement
             this.channelConfigBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.projektBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.chNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chSensDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chConfigBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.channelParametersGroupBox = new System.Windows.Forms.GroupBox();
             this.currentNumeric = new System.Windows.Forms.NumericUpDown();
@@ -57,9 +60,6 @@ namespace RoomMeasureNI.GUI.subMeasurement
             this.outputMinValLabel = new System.Windows.Forms.Label();
             this.outputMaxValNumeric = new System.Windows.Forms.NumericUpDown();
             this.outputChanLabel = new System.Windows.Forms.Label();
-            this.chNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.chSensDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timingParametersGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.channelConfigBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.projektBindingSource)).BeginInit();
@@ -173,6 +173,33 @@ namespace RoomMeasureNI.GUI.subMeasurement
             this.dataGridView1.RowHeadersWidth = 72;
             this.dataGridView1.Size = new System.Drawing.Size(337, 680);
             this.dataGridView1.TabIndex = 3;
+            // 
+            // chNameDataGridViewTextBoxColumn
+            // 
+            this.chNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.chNameDataGridViewTextBoxColumn.DataPropertyName = "chName";
+            this.chNameDataGridViewTextBoxColumn.HeaderText = "Nazwa";
+            this.chNameDataGridViewTextBoxColumn.MinimumWidth = 70;
+            this.chNameDataGridViewTextBoxColumn.Name = "chNameDataGridViewTextBoxColumn";
+            this.chNameDataGridViewTextBoxColumn.Width = 113;
+            // 
+            // chActiveDataGridViewCheckBoxColumn
+            // 
+            this.chActiveDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.chActiveDataGridViewCheckBoxColumn.DataPropertyName = "chActive";
+            this.chActiveDataGridViewCheckBoxColumn.HeaderText = "Aktywny";
+            this.chActiveDataGridViewCheckBoxColumn.MinimumWidth = 40;
+            this.chActiveDataGridViewCheckBoxColumn.Name = "chActiveDataGridViewCheckBoxColumn";
+            this.chActiveDataGridViewCheckBoxColumn.Width = 92;
+            // 
+            // chSensDataGridViewTextBoxColumn
+            // 
+            this.chSensDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.chSensDataGridViewTextBoxColumn.DataPropertyName = "chSens";
+            this.chSensDataGridViewTextBoxColumn.HeaderText = "Czułość [mV/Pa]";
+            this.chSensDataGridViewTextBoxColumn.MinimumWidth = 9;
+            this.chSensDataGridViewTextBoxColumn.Name = "chSensDataGridViewTextBoxColumn";
+            this.chSensDataGridViewTextBoxColumn.Width = 185;
             // 
             // chConfigBindingSource
             // 
@@ -402,33 +429,6 @@ namespace RoomMeasureNI.GUI.subMeasurement
             this.outputChanLabel.Size = new System.Drawing.Size(176, 30);
             this.outputChanLabel.TabIndex = 0;
             this.outputChanLabel.Text = "Output Channel:";
-            // 
-            // chNameDataGridViewTextBoxColumn
-            // 
-            this.chNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.chNameDataGridViewTextBoxColumn.DataPropertyName = "chName";
-            this.chNameDataGridViewTextBoxColumn.HeaderText = "Nazwa";
-            this.chNameDataGridViewTextBoxColumn.MinimumWidth = 70;
-            this.chNameDataGridViewTextBoxColumn.Name = "chNameDataGridViewTextBoxColumn";
-            this.chNameDataGridViewTextBoxColumn.Width = 113;
-            // 
-            // chActiveDataGridViewCheckBoxColumn
-            // 
-            this.chActiveDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.chActiveDataGridViewCheckBoxColumn.DataPropertyName = "chActive";
-            this.chActiveDataGridViewCheckBoxColumn.HeaderText = "Aktywny";
-            this.chActiveDataGridViewCheckBoxColumn.MinimumWidth = 40;
-            this.chActiveDataGridViewCheckBoxColumn.Name = "chActiveDataGridViewCheckBoxColumn";
-            this.chActiveDataGridViewCheckBoxColumn.Width = 92;
-            // 
-            // chSensDataGridViewTextBoxColumn
-            // 
-            this.chSensDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.chSensDataGridViewTextBoxColumn.DataPropertyName = "chSens";
-            this.chSensDataGridViewTextBoxColumn.HeaderText = "Czułość [mV/Pa]";
-            this.chSensDataGridViewTextBoxColumn.MinimumWidth = 9;
-            this.chSensDataGridViewTextBoxColumn.Name = "chSensDataGridViewTextBoxColumn";
-            this.chSensDataGridViewTextBoxColumn.Width = 184;
             // 
             // ctrlCardConfig
             // 

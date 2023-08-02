@@ -20,6 +20,7 @@ namespace RoomMeasureNI.GUI.subResults
         public void refresh()
         {
             //measurementResultBindingSource.ResetBindings(false);
+            dataGridViewResultsSets.Refresh();
             RefreshPlot();
         }
 
@@ -37,7 +38,8 @@ namespace RoomMeasureNI.GUI.subResults
             if (dataGridViewResultsSets.RowCount >= lastSelectedResults.Count())
             {
                 foreach (var selRow in lastSelectedResults)
-                    dataGridViewResultsSets.Rows[selRow].Cells[0].Value = true;
+                    if (dataGridViewResultsSets.RowCount > selRow)
+                        dataGridViewResultsSets.Rows[selRow].Cells[0].Value = true;
             }
             else
             {
